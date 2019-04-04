@@ -37,13 +37,14 @@ services:
       - MOODLE_DB_PASSWORD=password
       - MOODLE_DB_PREFIX=
       - MOODLE_URL=http://localhost:8080
-      #= MOODLE_SITE_FULLNAME=
-      #= MOODLE_SITE_SHORTNAME=
-      #= MOODLE_SITE_LANG=
-      #= MOODLE_ADMIN_USER=
-      #= MOODLE_ADMIN_PASS=
-      #= MOODLE_ADMIN_EMAIL=
-      #= MOODLE_UPDATE=
+      #- MOODLE_SITE_FULLNAME=
+      #- MOODLE_SITE_SHORTNAME=
+      #- MOODLE_SITE_LANG=
+      #- MOODLE_ADMIN_USER=
+      #- MOODLE_ADMIN_PASS=
+      #- MOODLE_ADMIN_EMAIL=
+      #- MOODLE_UPDATE=
+      #- MOODLE_SSL_PROXY=false
 
 #  memcached:
 #    image: memcached:1.5-alpine
