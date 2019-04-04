@@ -912,26 +912,26 @@ $CFG->admin = 'admin';
 // Path to PHP CLI.
 // Probably something like /usr/bin/php. If you enter this, cron scripts can be
 // executed from admin web interface.
-// $CFG->pathtophp = '';
+$CFG->pathtophp = '/usr/local/bin/php';
 //
 // Path to du.
 // Probably something like /usr/bin/du. If you enter this, pages that display
 // directory contents will run much faster for directories with a lot of files.
-//      $CFG->pathtodu = '';
+$CFG->pathtodu = '/usr/bin/du';
 //
 // Path to aspell.
 // To use spell-checking within the editor, you MUST have aspell 0.50 or later
 // installed on your server, and you must specify the correct path to access the
 // aspell binary. On Unix/Linux systems, this path is usually /usr/bin/aspell,
 // but it might be something else.
-//      $CFG->aspellpath = '';
+$CFG->aspellpath = '/usr/bin/aspell';
 //
 // Path to dot.
 // Probably something like /usr/bin/dot. To be able to generate graphics from
 // DOT files, you must have installed the dot executable and point to it here.
 // Note that, for now, this only used by the profiling features
 // (Development->Profiling) built into Moodle.
-//      $CFG->pathtodot = '';
+$CFG->pathtodot = '/usr/bin/dot';
 //
 // Path to unoconv.
 // Probably something like /usr/bin/unoconv. Used as a fallback to convert between document formats.
