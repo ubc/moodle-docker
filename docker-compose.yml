@@ -31,11 +31,19 @@ services:
     environment:
       - MOODLE_DB_TYPE=mariadb
       - MOODLE_DB_HOST=db
-      - MOODLE_DB_PORT=
+      #- MOODLE_DB_PORT=
       - MOODLE_DB_NAME=moodle
       - MOODLE_DB_USER=moodle
       - MOODLE_DB_PASSWORD=password
       - MOODLE_DB_PREFIX=
       - MOODLE_URL=http://localhost:8080
+      #= MOODLE_SITE_FULLNAME=
+      #= MOODLE_SITE_SHORTNAME=
+      #= MOODLE_SITE_LANG=
+      #= MOODLE_ADMIN_USER=
+      #= MOODLE_ADMIN_PASS=
+      #= MOODLE_ADMIN_EMAIL=
+      #= MOODLE_UPDATE=
+
 #  memcached:
 #    image: memcached:1.5-alpine
