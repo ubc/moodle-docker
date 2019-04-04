@@ -10,9 +10,9 @@ RUN docker-php-ext-install -j$(nproc) pspell gd intl xml xmlrpc ldap zip soap mb
 RUN cd /var/www/html/
 RUN curl -L https://github.com/moodle/moodle/archive/v3.6.3.tar.gz | tar xz --strip=1
 
-RUN mkdir /moodledata
+RUN mkdir -p /moodledata /var/local/cache
 RUN chown -R www-data /moodledata
-RUN chmod -R 777 /moodledata
+RUN chmod -R 777 /moodledata /var/local/cache
 RUN chmod -R 0755 /var/www/html
 
 COPY config.php /var/www/html/

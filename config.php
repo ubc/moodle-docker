@@ -438,7 +438,7 @@ $CFG->sslproxy = filter_var(loadenv('MOODLE_SSL_PROXY', false), FILTER_VALIDATE_
 //
 //     $CFG->tempdir = '/var/www/moodle/temp';        // Directory MUST BE SHARED by all cluster nodes.
 //     $CFG->cachedir = '/var/www/moodle/cache';      // Directory MUST BE SHARED by all cluster nodes, locking required.
-//     $CFG->localcachedir = '/var/local/cache';      // Intended for local node caching.
+$CFG->localcachedir = '/var/local/cache';      // Intended for local node caching.
 //
 // It is possible to specify a different backup temp directory, use local fast filesystem
 // for normal web servers. Server clusters MUST use shared filesystem for backuptempdir!
