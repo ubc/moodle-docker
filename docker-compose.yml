@@ -4,9 +4,9 @@ services:
     image: mariadb:10.4
     environment:
       - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE:moodle
-      - MYSQL_USER:moodle
-      - MYSQL_PASSWORD:password
+      - MYSQL_DATABASE=moodle
+      - MYSQL_USER=moodle
+      - MYSQL_PASSWORD=password
     volumes:
       - ./.data/db:/var/lib/mysql
     ports:
@@ -29,13 +29,13 @@ services:
       # init script won't be able to move this file
       #- ./LocalSettings.php:/var/www/html/LocalSettings.php
     environment:
-      - MOODLE_DB_TYPE:mariadb
-      - MODDLE_DB_HOST:db
-      - MOODLE_DB_PORT:''
-      - MOODLE_DB_NAME:moodle
-      - MOODLE_DB_USER:moodle
-      - MOODLE_DB_PASSWORD:password
-      - MOODLE_DB_PREFIX:''
-      - MOODLE_URL:http://localhost:8080
-  memcached:
-    image: memcached:1.5-alpine
+      - MOODLE_DB_TYPE=mariadb
+      - MOODLE_DB_HOST=db
+      - MOODLE_DB_PORT=
+      - MOODLE_DB_NAME=moodle
+      - MOODLE_DB_USER=moodle
+      - MOODLE_DB_PASSWORD=password
+      - MOODLE_DB_PREFIX=
+      - MOODLE_URL=http://localhost:8080
+#  memcached:
+#    image: memcached:1.5-alpine
