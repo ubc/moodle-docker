@@ -49,7 +49,8 @@ services:
       - MOODLE_REDIS_PORT=6379
       - MOODLE_REDIS_DB=0
       #- MOODLE_REDIS_PREFIX=''
-
+      - MOODLE_DISABLE_UPDATE_AUTODEPLOY=true
+      #- MOODLE_DEBUG=true
   redis:
     image: redis:5.0-alpine
     volumes:
