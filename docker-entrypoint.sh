@@ -176,6 +176,24 @@ if [ ! -e "$MOODLE_SHARED/installed" -a ! -f "$MOODLE_SHARED/install.lock" ]; th
         --adminemail=$MOODLE_ADMIN_EMAIL \
         --fullname=$MOODLE_SITE_FULLNAME \
         --shortname=$MOODLE_SITE_SHORTNAME
+    if [ -n $MOODLE_SMTP_HOST ]; then
+        sudo -E -u www-data php admin/cli/cfg.php --name=smtphosts --set=$MOODLE_SMTP_HOST
+    fi
+    if [ -n $MOODLE_SMTP_USER ]; then
+        sudo -E -u www-data php admin/cli/cfg.php --name=smtpuser --set=$MOODLE_SMTP_USER
+    fi
+    if [ -n $MOODLE_SMTP_PASS ]; then
+        sudo -E -u www-data php admin/cli/cfg.php --name=smtppass --set=$MOODLE_SMTP_PASS
+    fi
+    if [ -n $MOODLE_SMTP_SECURITY ]; then
+        sudo -E -u www-data php admin/cli/cfg.php --name=smtpsecure --set=$MOODLE_SMTP_SECURITY
+    fi
+    if [ -n $MOODLE_SMTP_AUTH_TYPE ]; then
+        sudo -E -u www-data php admin/cli/cfg.php --name=smtpauthtype --set=$MOODLE_SMTP_AUTH_TYPE
+    fi
+    if [ -n $MOODLE_NOREPLY_ADDRESS ]; then
+        sudo -E -u www-data php admin/cli/cfg.php --name=noreplyaddress --set=$MOODLE_NOREPLY_ADDRESS
+    fi
 
     touch $MOODLE_SHARED/installed
     rm $MOODLE_SHARED/install.lock

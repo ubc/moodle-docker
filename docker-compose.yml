@@ -51,6 +51,12 @@ services:
       #- MOODLE_REDIS_PREFIX=''
       - MOODLE_DISABLE_UPDATE_AUTODEPLOY=true
       #- MOODLE_DEBUG=true
+      #- MOODLE_SMTP_HOST=example.com:465
+      #- MOODLE_SMTP_USER=test
+      #- MOODLE_SMTP_PASS=testpass
+      #- MOODLE_SMTP_SECURITY=ssl
+      #- MOODLE_SMTP_AUTH_TYPE=PLAIN
+      #- MOODLE_NOREPLY_ADDRESS=test@example.com
   redis:
     image: redis:5.0-alpine
     volumes:
