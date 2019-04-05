@@ -45,6 +45,14 @@ services:
       #- MOODLE_ADMIN_EMAIL=
       #- MOODLE_UPDATE=
       #- MOODLE_SSL_PROXY=false
+      - MOODLE_REDIS_HOST=redis
+      - MOODLE_REDIS_PORT=6379
+      - MOODLE_REDIS_DB=0
+      #- MOODLE_REDIS_PREFIX=''
 
-#  memcached:
-#    image: memcached:1.5-alpine
+  redis:
+    image: redis:5.0-alpine
+    volumes:
+      - ./.data/redis:/data
+    ports:
+      - 6379:6379
