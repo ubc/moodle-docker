@@ -84,6 +84,7 @@ while [ `/bin/nc -w 1 $MOODLE_DB_HOST $MOODLE_DB_PORT < /dev/null > /dev/null; e
     echo "Waiting for $MOODLE_DB_TYPE database to come up at $MOODLE_DB_HOST:$MOODLE_DB_PORT..."
     sleep 1
 done
+echo "Database is up and running."
 
 export MOODLE_DB_TYPE MOODLE_DB_HOST MOODLE_DB_USER MOODLE_DB_PASSWORD MOODLE_DB_NAME
 
@@ -112,6 +113,7 @@ cd /var/www/html
 
 : ${MOODLE_SHARED:=/moodledata}
 if [ ! -d "$MOODLE_SHARED" ]; then
+    echo "Created $MOODLE_SHARED directory."
     mkdir -p $MOODLE_SHARED
 fi
 #mkdir -p "$MOODLE_SHARED/images"
@@ -167,6 +169,7 @@ fi
 
 # Install database if installed file doesn't exist
 if [ ! -e "$MOODLE_SHARED/installed" -a ! -f "$MOODLE_SHARED/install.lock" ]; then
+    echo "Moodle database is not initialized. Initializing..."
     touch $MOODLE_SHARED/install.lock
     sudo -E -u www-data php admin/cli/install_database.php \
         --agree-license \
@@ -197,6 +200,7 @@ if [ ! -e "$MOODLE_SHARED/installed" -a ! -f "$MOODLE_SHARED/install.lock" ]; th
 
     touch $MOODLE_SHARED/installed
     rm $MOODLE_SHARED/install.lock
+    echo "Done."
 fi
 
 # Install extensions
@@ -215,11 +219,13 @@ fi
 # migrate the database if necessary on container startup. It also will
 # verify the database connection is working.
 if [ "$MOODLE_UPDATE" = 'true' -a ! -f "$MOODLE_SHARED/update.lock" ]; then
+    echo "Updating Moodle..."
     touch $MOODLE_SHARED/update.lock
     sudo -E -u www-data /usr/local/bin/php admin/cli/maintenance.php --enable
     sudo -E -u www-data /usr/local/bin/php admin/cli/upgrade.php
     sudo -E -u www-data /usr/local/bin/php admin/cli/maintenance.php --disable
     rm $MOODLE_SHARED/update.lock
+    echo "Done."
 fi
 
 exec "$@"
