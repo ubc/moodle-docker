@@ -67,12 +67,6 @@ RUN curl -L https://moodle.org/plugins/download.php/18171/enrol_autoenrol_moodle
     && unzip autoenrol.zip \
     && rm autoenrol.zip
 	
-RUN curl -L https://moodle.org/plugins/download.php/18171/enrol_autoenrol_moodle36_2018101902.zip -o /autoenrol.zip \
-    && cp /autoenrol.zip /var/www/html/enrol/ \
-    && cd /var/www/html/enrol \
-    && unzip autoenrol.zip \
-    && rm autoenrol.zip
-	
 # Incompatible with Moodle 3.6
 # RUN curl -L https://moodle.org/plugins/download.php/17251/format_buttons_moodle35_2018062700.zip -o /buttons.zip \
 #     && cp /buttons.zip /var/www/html/course/format/ \
