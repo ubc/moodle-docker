@@ -276,13 +276,13 @@ $CFG->admin = 'admin';
 //                                                        // for tuning php-memcached 3.0.x (PHP 7)
 //
 //   Redis session handler (requires redis server and redis extension):
-if (getenv('MOODLE_REDIS_HOST')) {
+if (getenv('REDIS_HOST')) {
     $CFG->session_handler_class = '\core\session\redis';
-    $CFG->session_redis_host = loadenv('MOODLE_REDIS_HOST', '127.0.0.1');
-    $CFG->session_redis_port = loadenv('MOODLE_REDIS_PORT', 6379);  // Optional.
-    $CFG->session_redis_database = loadenv('MOODLE_REDIS_DB', 0);  // Optional, default is db 0.
+    $CFG->session_redis_host = loadenv('REDIS_HOST', '127.0.0.1');
+    $CFG->session_redis_port = loadenv('REDIS_PORT', 6379);  // Optional.
+    $CFG->session_redis_database = loadenv('REDIS_DB', 0);  // Optional, default is db 0.
     $CFG->session_redis_auth = ''; // Optional, default is don't set one.
-    $CFG->session_redis_prefix = loadenv('MOODLE_REDIS_PREFIX', '');; // Optional, default is don't set one.
+    $CFG->session_redis_prefix = loadenv('REDIS_PREFIX', '');; // Optional, default is don't set one.
     $CFG->session_redis_acquire_lock_timeout = 120;
     $CFG->session_redis_lock_expire = 7200;
 }
