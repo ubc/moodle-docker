@@ -7,12 +7,13 @@ services:
       - MYSQL_DATABASE=moodle
       - MYSQL_USER=moodle
       - MYSQL_PASSWORD=password
+    command: mysqld --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
     volumes:
       - ./.data/db:/var/lib/mysql
     ports:
       - 3306:3306
   web:
-    image: lthub/moodle
+    image: lthub/moodle:sauder
     build: .
     ports:
       - 8080:80
