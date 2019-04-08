@@ -48,12 +48,11 @@ RUN curl -L https://moodle.org/plugins/download.php/19206/mod_questionnaire_mood
     && unzip questionnaire.zip \
     && rm questionnaire.zip
 	
-# Incompatible with Moodle 3.6
-# RUN curl -L https://moodle.org/plugins/download.php/14021/block_accessibility_moodle31_2017051700.zip -o /accessibility.zip \
-#     && cp /accessibility.zip /var/www/html/blocks/ \
-#     && cd /var/www/html/blocks \
-#     && unzip accessibility.zip \
-#     && rm accessibility.zip
+RUN curl -L https://moodle.org/plugins/download.php/14021/block_accessibility_moodle31_2017051700.zip -o /accessibility.zip \
+    && cp /accessibility.zip /var/www/html/blocks/ \
+    && cd /var/www/html/blocks \
+    && unzip accessibility.zip \
+    && rm accessibility.zip
 	
 RUN curl -L https://moodle.org/plugins/download.php/19296/qtype_multichoiceset_moodle36_2019040501.zip -o /multichoiceset.zip \
     && cp /multichoiceset.zip /var/www/html/question/type/ \
@@ -67,12 +66,11 @@ RUN curl -L https://moodle.org/plugins/download.php/18171/enrol_autoenrol_moodle
     && unzip autoenrol.zip \
     && rm autoenrol.zip
 	
-# Incompatible with Moodle 3.6
-# RUN curl -L https://moodle.org/plugins/download.php/17251/format_buttons_moodle35_2018062700.zip -o /buttons.zip \
-#     && cp /buttons.zip /var/www/html/course/format/ \
-#     && cd /var/www/html/course/format \
-#     && unzip buttons.zip \
-#     && rm buttons.zip
+RUN curl -L https://moodle.org/plugins/download.php/17251/format_buttons_moodle35_2018062700.zip -o /buttons.zip \
+    && cp /buttons.zip /var/www/html/course/format/ \
+    && cd /var/www/html/course/format \
+    && unzip buttons.zip \
+    && rm buttons.zip
 	
 RUN chown -R www-data /var/www/html
 
