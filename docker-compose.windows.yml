@@ -1,0 +1,4 @@
+version: '2'
+services:
+  db:
+    command: mysqld --innodb-flush-method=littlesync
