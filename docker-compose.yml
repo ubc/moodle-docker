@@ -12,7 +12,7 @@ services:
     ports:
       - 3306:3306
   web:
-    image: lthub/moodle
+    image: lthub/moodle:education
     build: .
     ports:
       - 8080:80
