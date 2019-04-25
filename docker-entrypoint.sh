@@ -92,20 +92,20 @@ TERM=dumb php -- <<'EOPHP'
 <?php
 // database might not exist, so let's try creating it (just to be safe)
 
-if ($_ENV['MOODLE_DB_TYPE'] == 'mysql' || $_ENV['MOODLE_DB_TYPE'] == 'mariadb') {
+if (getenv('MOODLE_DB_TYPE') == 'mysql' || getenv('MOODLE_DB_TYPE') == 'mariadb') {
 
-	$mysql = new mysqli($_ENV['MOODLE_DB_HOST'], $_ENV['MOODLE_DB_USER'], $_ENV['MOODLE_DB_PASSWORD'], '', (int) $_ENV['MOODLE_DB_PORT']);
+    $mysql = new mysqli(getenv('MOODLE_DB_HOST'), getenv('MOODLE_DB_USER'), getenv('MOODLE_DB_PASSWORD'), '', (int)getenv('MOODLE_DB_PORT'));
 
-	if ($mysql->connect_error) {
-		file_put_contents('php://stderr', 'MySQL Connection Error: (' . $mysql->connect_errno . ') ' . $mysql->connect_error . "\n");
-		exit(1);
-	}
+    if ($mysql->connect_error) {
+        file_put_contents('php://stderr', 'MySQL Connection Error: (' . $mysql->connect_errno . ') ' . $mysql->connect_error . "\n");
+        exit(1);
+    }
 
-	if (!$mysql->query('CREATE DATABASE IF NOT EXISTS `' . $mysql->real_escape_string($_ENV['MOODLE_DB_NAME']) . '`')) {
-		file_put_contents('php://stderr', 'MySQL "CREATE DATABASE" Error: ' . $mysql->error . "\n");
-	}
+    if (!$mysql->query('CREATE DATABASE IF NOT EXISTS `' . $mysql->real_escape_string(getenv('MOODLE_DB_NAME')) . '`')) {
+        file_put_contents('php://stderr', 'MySQL "CREATE DATABASE" Error: ' . $mysql->error . "\n");
+    }
 
-	$mysql->close();
+    $mysql->close();
 }
 EOPHP
 
