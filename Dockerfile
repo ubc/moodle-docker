@@ -1,6 +1,9 @@
 FROM php:7.2-apache
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
+ENV MOODLE_VERSION=3.6.3
+ENV UPLOAD_MAX_FILESIZE=20M
+
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update
