@@ -43,3 +43,5 @@ RUN curl -L https://moodle.org/plugins/download.php/19061/mod_attendance_moodle3
     && cd /var/www/html/course/format \
     && unzip buttons.zip \
     && rm buttons.zip
+
+RUN chown -R www-data /var/www/html
