@@ -1,4 +1,4 @@
-FROM lthub/moodle:3.6.3
+FROM lthub/moodle:3.6.4
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 RUN curl -L https://moodle.org/plugins/download.php/19206/mod_questionnaire_moodle36_2018050109.zip -o /questionnaire.zip \
@@ -54,6 +54,12 @@ RUN curl -L https://moodle.org/plugins/download.php/19206/mod_questionnaire_mood
     && cd /var/www/html/course/format \
     && unzip buttons.zip \
     && rm buttons.zip \
+
+    && curl -L https://moodle.org/plugins/download.php/19255/theme_fordson_moodle36_2019111003.zip -o /fordson.zip \
+    && cp /fordson.zip /var/www/html/theme/ \
+    && cd /var/www/html/theme \
+    && unzip fordson.zip \
+    && rm fordson.zip \
 
     && curl -L https://moodle.org/plugins/download.php/19083/theme_moove_moodle36_2019022800.zip -o /moove.zip \
     && cp /moove.zip /var/www/html/theme/ \
