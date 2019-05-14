@@ -14,11 +14,6 @@ RUN apt-get update \
     && pecl install redis \
     && docker-php-ext-enable redis \
     && curl -L https://github.com/moodle/moodle/archive/v${MOODLE_VERSION}.tar.gz | tar xz --strip=1 \
-    && curl -L https://moodle.org/plugins/download.php/19255/theme_fordson_moodle36_2019111003.zip -o /fordson.zip \
-    && cp /fordson.zip /var/www/html/theme/ \
-    && cd /var/www/html/theme \
-    && unzip fordson.zip \
-    && rm fordson.zip \
     && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && mkdir -p /moodledata /var/local/cache \
     && chown -R www-data /moodledata \
