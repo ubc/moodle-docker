@@ -1,4 +1,4 @@
-FROM lthub/moodle:3.6.3
+FROM lthub/moodle:3.6.4
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle36_2018120301.zip -o /customcert.zip \
