@@ -80,4 +80,6 @@ RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle3
     && rm ubcblue.zip \
     && mv ubc-blue-master ubc_blue \
 
+    && docker-php-ext-install exif \
+
     && chown -R www-data /var/www/html
