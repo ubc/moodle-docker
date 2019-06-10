@@ -228,4 +228,12 @@ if [ "$MOODLE_UPDATE" = 'true' -a ! -f "$MOODLE_SHARED/update.lock" ]; then
     echo "Done."
 fi
 
+# Run additional init scripts
+DIR=/docker-entrypoint.d
+
+if [[ -d "$DIR"  ]]
+then
+    /bin/run-parts --verbose "$DIR"
+fi
+
 exec "$@"

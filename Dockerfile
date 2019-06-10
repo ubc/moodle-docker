@@ -19,7 +19,8 @@ RUN apt-get update \
     && chown -R www-data /moodledata \
     && chmod -R 777 /moodledata /var/local/cache \
     && chmod -R 0755 /var/www/html \
-    && chown -R www-data /var/www/html
+    && chown -R www-data /var/www/html \
+    && mkdir /docker-entrypoint.d
 
 COPY config.php /var/www/html/
 COPY docker-entrypoint.sh /docker-entrypoint.sh
