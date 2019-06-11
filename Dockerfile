@@ -1,4 +1,4 @@
-FROM lthub/moodle:3.6.4
+FROM lthub/moodle:3.6.4.1
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle36_2018120301.zip -o /customcert.zip \
@@ -83,3 +83,18 @@ RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle3
     && docker-php-ext-install exif \
 
     && chown -R www-data /var/www/html
+
+# install odbc for shib sp
+RUN echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /etc/apt/sources.list.d/backports.list && \
+    apt-get update && \
+    apt-get -y -t stretch-backports install unixodbc libapache2-mod-shib gettext && \
+    cd /usr && \
+    curl https://downloads.mariadb.com/Connectors/odbc/connector-odbc-3.1.1/mariadb-connector-odbc-3.1.1-ga-debian-x86_64.tar.gz | tar -xvz && \
+    echo "[MariaDB]" > MariaDB_odbc_driver_template.ini && \
+    echo "Description = MariaDB Connector/ODBC v.3.1" >> MariaDB_odbc_driver_template.ini && \
+    echo "Driver = /usr/lib/libmaodbc.so" >> MariaDB_odbc_driver_template.ini && \
+    odbcinst -i -d -f MariaDB_odbc_driver_template.ini
+
+COPY shibboleth2.xml-template /etc/shibboleth/
+COPY moodle-shib.conf /etc/apache2/conf-enabled/
+COPY docker-entrypoint.d/* /docker-entrypoint.d/
