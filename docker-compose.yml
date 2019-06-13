@@ -25,6 +25,7 @@ services:
     # uncomment the 'volumes' section to enable a shared volume with docker-compose
     volumes:
       - ./.data/web:/moodledata:rw
+      - ./.data/ubc_payment_upload:/var/www/html/ubc_course_payments/locked/course_payments/supervisor_payment_info/uploaded_files:rw
       # do not uncomment this when starting a new instance from scratch as
       # init script won't be able to move this file
       #- ./LocalSettings.php:/var/www/html/LocalSettings.php
@@ -72,6 +73,26 @@ services:
       - SHIBD_ATTRIBUTE_MAP_URL=https://sp1.shib3.id.ubc.ca/attribute-map.xml
       - SHIBD_SERVICE_NAME=shibd
       - SHIBD_SERVICE_PORT=1600
+      - MOODLE_UBC_COURSE_PAYMENT_DB_HOST=db
+      - MOODLE_UBC_COURSE_PAYMENT_DB_NAME=Moodle_Payments
+      - MOODLE_UBC_COURSE_PAYMENT_DB_USER=moodle
+      - MOODLE_UBC_COURSE_PAYMENT_DB_PASSWORD=password
+      - MOODLE_UBC_COURSE_PAYMENT_DB_PORT=3306
+      - MOODLE_UBC_COURSE_PAYMENT_UPLOAD_DIR=/var/www/html/ubc_course_payments/locked/course_payments/supervisor_payment_info/uploaded_files/
+      - MOODLE_UBC_COURSE_PAYMENT_CBM_DEBUG=true
+      - MOODLE_UBC_COURSE_PAYMENT_CBM_LOGFILE=/tmp/cbm_error.log
+      - MOODLE_UBC_COURSE_PAYMENT_CBM_AUTH_URL=https://cbm.server/authServer/authenticate
+      - MOODLE_UBC_COURSE_PAYMENT_CBM_PYMT_URL=https://cbm.server/creditcardservice/CreditCardPaymentForm
+      - MOODLE_UBC_COURSE_PAYMENT_CBM_USER_ID=abcdefg
+      - MOODLE_UBC_COURSE_PAYMENT_CBM_CREDENTIAL=abcdef
+      - MOODLE_UBC_COURSE_PAYMENT_CBM_SRCE_TYP_CD=ABCD
+      - MOODLE_UBC_COURSE_PAYMENT_EMAIL_FROM=sender@example.com
+      - MOODLE_UBC_COURSE_PAYMENT_EMAIL_RMS_RECIPIENT=rmsRecipient@example.com
+      - MOODLE_UBC_COURSE_PAYMENT_EMAIL_IMMUNIZATION=immunization@example.com
+      - MOODLE_UBC_COURSE_PAYMENT_EMAIL_IMMUNIZATION_RECIPIENT=immunizationRecipient@example.com
+      - MOODLE_UBC_COURSE_PAYMENT_EMAIL_JV_RECIPIENT=jvRecipient@example.com
+      - MOODLE_UBC_COURSE_PAYMENT_EMAIL_JCART_JV_RECIPIENT=jcartJvRecipient@example.com
+      - MOODLE_UBC_COURSE_PAYMENT_EMAIL_WEBSITE_ADMIN=websiteAdmin@example.com
   redis:
     image: redis:5.0-alpine
     volumes:
@@ -79,7 +100,7 @@ services:
     ports:
       - 6379:6379
   shibd:
-    image: shibd
+    image: lthub/shibd
     environment:
       - SHIBBOLETH_IDP_DISCOVERY_URL=https://authentication.stg.id.ubc.ca
       - SHIBBOLETH_IDP_METADATA_URL=https://authentication.stg.id.ubc.ca/idp/shibboleth

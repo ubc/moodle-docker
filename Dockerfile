@@ -95,6 +95,16 @@ RUN echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /e
     echo "Driver = /usr/lib/libmaodbc.so" >> MariaDB_odbc_driver_template.ini && \
     odbcinst -i -d -f MariaDB_odbc_driver_template.ini
 
+# add logic for payment
+RUN apt-get update -y \
+    && apt-get install -y --no-install-recommends git \
+    && cd /tmp \
+    && git clone https://gitlab+deploy-token-8:2VsJCQzRsyy9pGfeSiCa@repo.code.ubc.ca/lt/rms-moodle-payments.git \
+    && cp -rp rms-moodle-payments/ubc_course_payments /var/www/html \
+    && cp -rp rms-moodle-payments/moodle/grade/course_payment /var/www/html/grade \
+    && cp rms-moodle-payments/moodle-payments-shib.conf /etc/apache2/conf-enabled/ \
+    && cd /tmp && rm -fR rms-moodle-payments
+
 COPY shibboleth2.xml-template /etc/shibboleth/
 COPY moodle-shib.conf /etc/apache2/conf-enabled/
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
