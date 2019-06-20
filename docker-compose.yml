@@ -30,6 +30,7 @@ services:
       # init script won't be able to move this file
       #- ./LocalSettings.php:/var/www/html/LocalSettings.php
     environment:
+      - SERVER_NAME=localhost
       - MOODLE_DB_TYPE=mariadb
       - MOODLE_DB_HOST=db
       #- MOODLE_DB_PORT=
