@@ -108,3 +108,4 @@ RUN apt-get update -y \
 COPY shibboleth2.xml-template /etc/shibboleth/
 COPY moodle-shib.conf /etc/apache2/conf-enabled/
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
+COPY 000-default.conf /etc/apache2/sites-available/
