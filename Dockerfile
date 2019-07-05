@@ -26,7 +26,7 @@ RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle3
     && rm facetoface.zip \
 
     && curl -L https://moodle.org/plugins/download.php/18351/mod_scheduler_moodle36_2018112600.zip -o /scheduler.zip \
-    && mv/scheduler.zip /var/www/html/mod/ \
+    && mv /scheduler.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip scheduler.zip \
     && rm scheduler.zip \
