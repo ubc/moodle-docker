@@ -43,7 +43,7 @@ RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle3
     && unzip quickmail.zip \
     && rm quickmail.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/19118/qtype_ordering_moodle36_2019030689.zip -o /ordering.zip \
+    && curl -L https://moodle.org/plugins/download.php/19939/qtype_ordering_moodle37_2019071292.zip -o /ordering.zip \
     && mv /ordering.zip /var/www/html/question/type/ \
     && cd /var/www/html/question/type \
     && unzip ordering.zip \
