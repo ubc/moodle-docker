@@ -128,6 +128,10 @@ input.addEventListener("keyup", function(event) {
 						<div class="center l">
 							<h4>Non-UBC users with an account:</h4>
 						</div>
+						<?php
+						if (optional_param('errorcode', 0, PARAM_INT) == 3) {
+							echo '<div class="error_msg">The Username and/or Password entered is invalid, please try again.</div></br>';}
+						?>
 						<div class="center l" style=" line-height:2.5;">
 								<table border="0">
 									<form name="myForm" action="/login/index.php" method="post">
