@@ -121,3 +121,7 @@ a:link {
 	.login {
 	}
 }
+
+.error_msg{
+	color: red;
+}

@@ -20,7 +20,7 @@ $login_token = \core\session\manager::get_login_token();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<title>Risk Management Service STG | The University of British Columbia</title>
+<title>Safety and Risk Services | The University of British Columbia</title>
 <meta name="viewport" content="width=device-width">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -103,7 +103,7 @@ input.addEventListener("keyup", function(event) {
         <div id="ubc7-unit" class="row-fluid expand">
             <div class="span12">
                 <!-- Mobile Menu Icon -->
-				<div id="ubc7-unit-name" class="ubc7-single-element"><a href="https://rms.ubc.ca/" title="Risk Management Service STG"><span id="ubc7-unit-faculty">Risk Management Service STG</span><span id="ubc7-unit-identifier">Risk Management Service STG</span></a></div>
+				<div id="ubc7-unit-name" class="ubc7-single-element"><a href="https://rms.ubc.ca/" title="Risk Management Service"><span id="ubc7-unit-faculty">Safety and Risk Services</span><span id="ubc7-unit-identifier">Safety and Risk Services</span></a></div>
             </div>
         </div>
         <!-- End of UBC Unit Identifier -->
@@ -128,6 +128,10 @@ input.addEventListener("keyup", function(event) {
 						<div class="center l">
 							<h4>Non-UBC users with an account:</h4>
 						</div>
+						<?php
+						if (optional_param('errorcode', 0, PARAM_INT) == 3) {
+							echo '<div class="error_msg">The Username and/or Password entered is invalid, please try again.</div></br>';}
+						?>
 						<div class="center l" style=" line-height:2.5;">
 								<table border="0">
 									<form name="myForm" action="/login/index.php" method="post">
