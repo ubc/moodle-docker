@@ -66,6 +66,11 @@ RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle3
 
 # custom login page
 COPY custom_login /var/www/html/custom_login
+
+# add custom certs
+COPY custom_certs/certs /var/www/html/mod/certificate/type
+COPY custom_certs/pix /var/www/html/mod/certificate/pix
+
 RUN chown -R www-data /var/www/html/custom_login
 
 # install odbc for shib sp
@@ -93,3 +98,4 @@ COPY shibboleth2.xml-template /etc/shibboleth/
 COPY moodle-shib.conf /etc/apache2/conf-enabled/
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
 COPY 000-default.conf /etc/apache2/sites-available/
+
