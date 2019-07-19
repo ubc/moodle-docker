@@ -159,7 +159,7 @@ input.addEventListener("keyup", function(event) {
                         <span id="ubc7-address-city">Vancouver</span>, <span id="ubc7-address-province">BC</span> <span id="ubc7-address-country">Canada</span> <span id="ubc7-address-postal">V6T 1Z3</span>
                     </div>
                     <div id="ubc7-address-phone">Tel 604 822 2029</div>
-                    <div id="ubc7-address-email">E-mail <a href="mailto:riskmanagement@rms.ubc.ca">riskmanagement@rms.ubc.ca</a></div>
+                    <div id="ubc7-address-email">E-mail <a href="mailto:rms.training@ubc.ca">rms.training@ubc.ca</a></div>
                 </div>
                 <div class="span2">
                 </div>
