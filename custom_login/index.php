@@ -26,7 +26,7 @@ $login_token = \core\session\manager::get_login_token();
 <meta name="author" content="">
 <link href="https://cdn.ubc.ca/clf/7.0.4/css/ubc-clf-full.min.css" rel="stylesheet">
 <!-- Stylesheets -->
-<link rel="stylesheet" href="./files/styles.css?v=1.0">
+<link rel="stylesheet" href="./files/styles.css?v=1.1">
 <link rel="icon" href="./files/favicon.png" sizes="16x16" type="image/png">
 <!--[if lte IE 7]>
 <link href="//cdn.ubc.ca/clf/7.0.4/css/font-awesome-ie7.css" rel="stylesheet">
@@ -160,8 +160,9 @@ input.addEventListener("keyup", function(event) {
 								<li>If you are prompted for an "enrolment key" - use the one that your teacher has given you. This will "enrol" you in the course.</li>
 								<li>You can now access the full course. From now on you will only need to enter your personal username and password (in the form on this page) to log in and access any course you have enrolled in.</li>
 								</ol>
-								<input id="crateAccount" type="button" onclick="location.href='/login/signup.php'" value="Create new (non-CWL) account">
-							</div>
+								<div class="center l">
+									<input id="crateAccount" type="button" onclick="location.href='/login/signup.php'" value="Create new (non-CWL) account">
+								</div>
 						</div>
 					</div>
 				</div>
