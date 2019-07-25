@@ -113,48 +113,48 @@ if ($certificate->orientation == 'L') {
 //	else
 //		$coursecompletionmsg = "has successfully completed"
 //	end if
-//		
+//
 //	//Now assign job titles and signatures to the professors and second names
 //	If instructor_name = "Ted Sedgwick" Then
 //		$instructorsign = "TedSedgwick.jpg"
 //		$instructortitle = "RMS Radiation Safety Advisor"
 //	End If
-//		
+//
 //	If second_name = "Rosemary Redfield" Then
 //		$second_name_sign = "RosemaryRedfield.gif"
 //		$second_name_title = "Chair, Advisory Committee on Radioisotopes and Radiation Hazards"
 //	End If
-//		
+//
 //	If instructor_name = "Stephanie Thomson" Then
 //		$instructorsign = "Thomson.jpg"
 //		$instructortitle = "RMS Biosafety Advisor"
 //	End If
-		
+
 //	If second_name = "Bruce Anderson" Then
 //		$second_name_sign = "BruceAnderson.gif"
 //		$second_name_title = "Director, Occupational and Research Safety"
 //	End If
-		
+
 //	If instructor_name = "Sonny Dhasi" Then
 //		$instructorsign = "SonnyDhasi.gif"
 //		$instructortitle = "Occupational Hygiene Associate"
 //	End If
-		
+
 //	If instructor_name = "Paul Nakagawa" Then
 //		$instructorsign = "Nakagawa2.jpg"
 //		$instructortitle = "Safety Program Advisor"
 //	End If
-		
+
 //	If instructor_name = "Calvin Cheung" Then
 //		$instructorsign = "CalvinCheung.gif"
 //		$instructortitle = "Emergency and Continuity Planner"
 //	End If
-		
+
 //	If second_name = "Paul Nakagawa" Then
 //		$second_name_sign = "Nakagawa.jpg"
 //		$second_name_title = "Safety Program Advisor"
 //	End If
-	
+
 //	If second_name = "Calvin Cheung" Then
 //		$second_name_sign = "CalvinCheung.gif"
 //		$second_name_title = "Emergency and Continuity Planner"
@@ -182,7 +182,7 @@ $pdf->SetTextColor(0, 51, 104);
 
 certificate_print_text($pdf, $x, $y + 20, 'C', 'freesans', 'B', 40, $course->fullname);
 
-certificate_print_text($pdf, $x, $y + 20, 'C', 'freeserif', '', 20, get_string('certify', 'certificate'));
+#certificate_print_text($pdf, $x, $y + 20, 'C', 'freeserif', '', 20, get_string('certify', 'certificate'));
 certificate_print_text($pdf, $x + 5, $y + 60, 'L', 'freesans', '', 24, "Name: " . fullname($USER));
 certificate_print_text($pdf, $x + 5, $y + 72, 'L', 'freesans', '', 24, "Employer Address: ___________________________________ ");
 certificate_print_text($pdf, $x + 5, $y + 86, 'L', 'freesans', '', 18, "This person has sound knowledge of the following topics: ");
