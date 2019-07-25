@@ -29,6 +29,7 @@ services:
       # do not uncomment this when starting a new instance from scratch as
       # init script won't be able to move this file
       #- ./LocalSettings.php:/var/www/html/LocalSettings.php
+      - ../moodle-rms-sync-plugin:/var/www/html/admin/tool/hrsync
     environment:
       - SERVER_NAME=localhost
       - MOODLE_DB_TYPE=mariadb

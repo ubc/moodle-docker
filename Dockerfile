@@ -66,6 +66,8 @@ RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle3
 
 # custom login page
 COPY custom_login /var/www/html/custom_login
+# custom scritps
+COPY custom_scripts /var/www/html
 
 # add custom certs
 COPY custom_certs/certs /var/www/html/mod/certificate/type
