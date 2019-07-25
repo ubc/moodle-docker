@@ -85,12 +85,12 @@ input.addEventListener("keyup", function(event) {
             </div>
             <div class="span2">
                 <div id="ubc7-apom">
-                    <a href="//cdn.ubc.ca/clf/ref/aplaceofmind">UBC - A Place of Mind</a>                        
+                    <a href="//cdn.ubc.ca/clf/ref/aplaceofmind">UBC - A Place of Mind</a>
                 </div>
             </div>
             <div class="span9" id="ubc7-wordmark-block">
                 <div id="ubc7-wordmark">
-                    <a href="http://www.ubc.ca">The University of British Columbia</a>                   
+                    <a href="http://www.ubc.ca">The University of British Columbia</a>
                 </div>
                 <div id="ubc7-global-utility">
                     <button type="button" data-toggle="collapse" data-target="#ubc7-global-menu"><span>UBC Search</span></button>
@@ -110,7 +110,7 @@ input.addEventListener("keyup", function(event) {
 
 
         <!-- Content Area -->
-        <div class="content expand" role="main">        
+        <div class="content expand" role="main">
 			<div class="maintable container">
 				<div class="center" style="width:100%; padding-top:20px; padding-bottom:20px;">
 					<div class="col rightborder">
@@ -147,7 +147,7 @@ input.addEventListener("keyup", function(event) {
 								Cookies must be enabled in your browser
 							</div>
 							<div class="center l">
-								<h4>Don't have a CWL?</h4>
+								<h4>Create non-CWL account</h4>
 							</div>
 							<div class="center howtotext">
 								<p>Hi! For full access to courses you'll need to take a minute to create a new account for yourself on this web site. Here are the steps:</p>
