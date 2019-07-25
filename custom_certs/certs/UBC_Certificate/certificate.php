@@ -113,48 +113,48 @@ if ($certificate->orientation == 'L') {
 //	else
 //		$coursecompletionmsg = "has successfully completed"
 //	end if
-//		
+//
 //	//Now assign job titles and signatures to the professors and second names
 //	If instructor_name = "Ted Sedgwick" Then
 //		$instructorsign = "TedSedgwick.jpg"
 //		$instructortitle = "RMS Radiation Safety Advisor"
 //	End If
-//		
+//
 //	If second_name = "Rosemary Redfield" Then
 //		$second_name_sign = "RosemaryRedfield.gif"
 //		$second_name_title = "Chair, Advisory Committee on Radioisotopes and Radiation Hazards"
 //	End If
-//		
+//
 //	If instructor_name = "Stephanie Thomson" Then
 //		$instructorsign = "Thomson.jpg"
 //		$instructortitle = "RMS Biosafety Advisor"
 //	End If
-		
+
 //	If second_name = "Bruce Anderson" Then
 //		$second_name_sign = "BruceAnderson.gif"
 //		$second_name_title = "Director, Occupational and Research Safety"
 //	End If
-		
+
 //	If instructor_name = "Sonny Dhasi" Then
 //		$instructorsign = "SonnyDhasi.gif"
 //		$instructortitle = "Occupational Hygiene Associate"
 //	End If
-		
+
 //	If instructor_name = "Paul Nakagawa" Then
 //		$instructorsign = "Nakagawa2.jpg"
 //		$instructortitle = "Safety Program Advisor"
 //	End If
-		
+
 //	If instructor_name = "Calvin Cheung" Then
 //		$instructorsign = "CalvinCheung.gif"
 //		$instructortitle = "Emergency and Continuity Planner"
 //	End If
-		
+
 //	If second_name = "Paul Nakagawa" Then
 //		$second_name_sign = "Nakagawa.jpg"
 //		$second_name_title = "Safety Program Advisor"
 //	End If
-	
+
 //	If second_name = "Calvin Cheung" Then
 //		$second_name_sign = "CalvinCheung.gif"
 //		$second_name_title = "Emergency and Continuity Planner"
@@ -179,7 +179,7 @@ certificate_print_image($pdf, $certificate, CERT_IMAGE_SIGNATURE, $sigx, $sigy, 
 $pdf->SetTextColor(0, 0, 120);
 //certificate_print_text($pdf, $x, $y, 'C', 'freesans', '', 30, get_string('title', 'certificate'));
 $pdf->SetTextColor(0, 51, 104);
-certificate_print_text($pdf, $x, $y + 20, 'C', 'freeserif', '', 20, get_string('certify', 'certificate'));
+//certificate_print_text($pdf, $x, $y + 10, 'C', 'freeserif', '', 20, get_string('certify', 'certificate'));
 certificate_print_text($pdf, $x, $y + 20, 'C', 'freesans', 'B', 35, fullname($USER));
 certificate_print_text($pdf, $x, $y + 40, 'C', 'freesans', '', 20, get_string('statement', 'certificate'));
 
@@ -209,7 +209,7 @@ If ($course->id == 56){
 		$certificate_code_additional = "S-"; //Add an S for Sealed in front of the certificate code
 		certificate_print_text($pdf, $x, $y + 70, 'C', 'freesans', '', 20,  "Sealed Sources"); //Add text under the course name that says "Sealed Sources"
 	}
-	
+
 	//74 is the certificate ID for the Open Source Certificate
 	If ($certificate->id == 74){
 		$certificate_code_additional = "O-"; //Add an O for Open in front of the certificate code
