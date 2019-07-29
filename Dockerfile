@@ -1,6 +1,9 @@
 FROM lthub/moodle:3.6.4.1
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
+RUN apt-get -y install libssh2-1-dev \
+    && pecl install ssh2-1.1.2
+
 RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle36_2018120301.zip -o /customcert.zip \
     && mv /customcert.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
@@ -61,7 +64,15 @@ RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle3
     && unzip mergeusers.zip \
     && rm mergeusers.zip \
 
+    && curl -L https://github.com/ubc/moodle-rms-sync-plugin/archive/master.zip -o /hr_sync.zip \
+    && mv /hr_sync.zip /var/www/html/admin/tool/ \
+    && cd /var/www/html/admin/tool \
+    && unzip hr_sync.zip \
+    && mv moodle-rms-sync-plugin-master hrsync \
+    && rm hr_sync.zip \
+
     && docker-php-ext-install exif \
+    && docker-php-ext-enable ssh2 \
     && chown -R www-data /var/www/html
 
 # custom login page
@@ -87,14 +98,14 @@ RUN echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /e
     odbcinst -i -d -f MariaDB_odbc_driver_template.ini
 
 # add logic for payment
-RUN apt-get update -y \
-    && apt-get install -y --no-install-recommends git \
+RUN apt-get install -y --no-install-recommends git \
     && cd /tmp \
     && git clone https://gitlab+deploy-token-8:2VsJCQzRsyy9pGfeSiCa@repo.code.ubc.ca/lt/rms-moodle-payments.git \
     && cp -rp rms-moodle-payments/ubc_course_payments /var/www/html \
     && cp -rp rms-moodle-payments/moodle/grade/course_payment /var/www/html/grade \
     && cp rms-moodle-payments/moodle-payments-shib.conf /etc/apache2/conf-enabled/ \
-    && cd /tmp && rm -fR rms-moodle-payments
+    && cd /tmp && rm -fR rms-moodle-payments \
+    && apt-get clean all
 
 COPY shibboleth2.xml-template /etc/shibboleth/
 COPY moodle-shib.conf /etc/apache2/conf-enabled/
