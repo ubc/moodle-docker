@@ -20,7 +20,7 @@ $login_token = \core\session\manager::get_login_token();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<title>Safety and Risk Services | The University of British Columbia</title>
+<title>Risk Management Services | The University of British Columbia</title>
 <meta name="viewport" content="width=device-width">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -103,7 +103,7 @@ input.addEventListener("keyup", function(event) {
         <div id="ubc7-unit" class="row-fluid expand">
             <div class="span12">
                 <!-- Mobile Menu Icon -->
-				<div id="ubc7-unit-name" class="ubc7-single-element"><a href="https://rms.ubc.ca/" title="Risk Management Service"><span id="ubc7-unit-faculty">Safety and Risk Services</span><span id="ubc7-unit-identifier">Safety and Risk Services</span></a></div>
+				<div id="ubc7-unit-name" class="ubc7-single-element"><a href="https://rms.ubc.ca/" title="Risk Management Service"><span id="ubc7-unit-faculty">Risk Management Services</span><span id="ubc7-unit-identifier">Risk Management Services</span></a></div>
             </div>
         </div>
         <!-- End of UBC Unit Identifier -->
@@ -146,23 +146,11 @@ input.addEventListener("keyup", function(event) {
 							<div style="height:60px; vertical-align:middle;">
 								Cookies must be enabled in your browser
 							</div>
-							<div class="center l">
-								<h4>Create non-CWL account</h4>
-							</div>
 							<div class="center howtotext">
-								<p>Hi! For full access to courses you'll need to take a minute to create a new account for yourself on this web site. Here are the steps:</p>
-								<ol>
-									<li>Fill out the New Account form with your details.</li>
-									<li>An email will be immediately sent to your email address.</li>
-									<li>Read your email, and click on the web link it contains.</li>
-									<li>Your account will be confirmed and you will be logged in.</li>
-									<li>Now, select the course you want to participate in.</li>
-								<li>If you are prompted for an "enrolment key" - use the one that your teacher has given you. This will "enrol" you in the course.</li>
-								<li>You can now access the full course. From now on you will only need to enter your personal username and password (in the form on this page) to log in and access any course you have enrolled in.</li>
-								</ol>
 								<div class="center l">
-									<input id="crateAccount" type="button" onclick="location.href='/login/signup.php'" value="Create new (non-CWL) account">
+									<input id="crateAccount" type="button" onclick="location.href='/login/signup.php'" value="Create Moodle Account (non-CWL)">
 								</div>
+								<p>You will need to confirm your account by clicking on the link sent to your email address</p>
 						</div>
 					</div>
 				</div>
