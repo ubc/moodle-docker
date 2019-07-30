@@ -195,23 +195,23 @@ If ($course->fullname == "Radionuclide Safety and Methodology Course"){
 	certificate_print_text($pdf, $x, $y + 88, 'C', 'freesans', '', 20,  "Including Receiving Class 7 Dangerous Goods");
 }
 
-If ($course->id == 29){
-	$certificate_code_additional = "PI-";
-}Else{
-	$certificate_code_additional = "";
+if ($course->shortname == 'BioPI'){
+    $certificate_code_additional = "PI-";
+}else{
+    $certificate_code_additional = "";
 }
 
 //Added on Dec 16, 2016 by Jessica
 //If the course is the radiation course (id 56), then add either an O for open source or a S for sealed source in front of the certificate code
-If ($course->id == 56){
+If ($course->shortname == 'Radiation'){
 	//72 is the certificate ID for the Sealed Source Certificate
-	If ($certificate->id == 72){
+	If ($certificate->name == 'Completion Certificate (Sealed Sources)'){
 		$certificate_code_additional = "S-"; //Add an S for Sealed in front of the certificate code
 		certificate_print_text($pdf, $x, $y + 70, 'C', 'freesans', '', 20,  "Sealed Sources"); //Add text under the course name that says "Sealed Sources"
 	}
 
 	//74 is the certificate ID for the Open Source Certificate
-	If ($certificate->id == 74){
+	If ($certificate->name == 'Completion Certificate (Open Sources)'){
 		$certificate_code_additional = "O-"; //Add an O for Open in front of the certificate code
 		certificate_print_text($pdf, $x, $y + 70, 'C', 'freesans', '', 20,  "Open Sources"); //Add text under the course name that says "Open Sources"
 	}
