@@ -71,6 +71,13 @@ RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle3
     && mv moodle-rms-sync-plugin-master hrsync \
     && rm hr_sync.zip \
 
+    && curl -L https://github.com/ubc/moodle-completion-reset-plugin/archive/master.zip -o /completion_reset.zip \
+    && mv /completion_reset.zip /var/www/html/admin/tool/ \
+    && cd /var/www/html/admin/tool \
+    && unzip completion_reset.zip \
+    && mv moodle-completion-reset-plugin-master completionreset \
+    && rm completion_reset.zip \
+
     && docker-php-ext-install exif \
     && docker-php-ext-enable ssh2 \
     && chown -R www-data /var/www/html
