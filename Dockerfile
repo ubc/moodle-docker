@@ -46,11 +46,11 @@ RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle3
     && unzip quickmail.zip \
     && rm quickmail.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/19939/qtype_ordering_moodle37_2019071292.zip -o /ordering.zip \
-    && mv /ordering.zip /var/www/html/question/type/ \
-    && cd /var/www/html/question/type \
-    && unzip ordering.zip \
-    && rm ordering.zip \
+    #&& curl -L https://moodle.org/plugins/download.php/19939/qtype_ordering_moodle37_2019071292.zip -o /ordering.zip \
+    #&& mv /ordering.zip /var/www/html/question/type/ \
+    #&& cd /var/www/html/question/type \
+    #&& unzip ordering.zip \
+    #&& rm ordering.zip \
 
     && curl -L https://moodle.org/plugins/download.php/18171/enrol_autoenrol_moodle36_2018101902.zip -o /autoenrol.zip \
     && mv /autoenrol.zip /var/www/html/enrol/ \
@@ -77,6 +77,14 @@ RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle3
     && unzip completion_reset.zip \
     && mv moodle-completion-reset-plugin-master completionreset \
     && rm completion_reset.zip \
+
+    # use forked ordering plugin while waiting for PR merged
+    && curl -L https://github.com/ubc/moodle-qtype_ordering/archive/master.zip -o /ordering.zip \
+    && mv /ordering.zip /var/www/html/question/type/ \
+    && cd /var/www/html/question/type \
+    && unzip ordering.zip \
+    && mv moodle-qtype_ordering-master ordering \
+    && rm ordering.zip \
 
     && docker-php-ext-install exif \
     && docker-php-ext-enable ssh2 \
