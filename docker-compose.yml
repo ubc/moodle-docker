@@ -96,6 +96,7 @@ services:
       - MOODLE_UBC_COURSE_PAYMENT_EMAIL_JV_RECIPIENT=jvRecipient@example.com
       - MOODLE_UBC_COURSE_PAYMENT_EMAIL_JCART_JV_RECIPIENT=jcartJvRecipient@example.com
       - MOODLE_UBC_COURSE_PAYMENT_EMAIL_WEBSITE_ADMIN=websiteAdmin@example.com
+      - PHP_MEMORY_LIMIT=256M
   redis:
     image: redis:5.0-alpine
     volumes:

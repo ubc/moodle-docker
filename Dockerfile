@@ -1,4 +1,4 @@
-FROM lthub/moodle:3.6.4.1
+FROM lthub/moodle:3.6.4.2
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 RUN apt-get -y install libssh2-1-dev \
@@ -102,9 +102,8 @@ COPY custom_certs/pix /var/www/html/mod/certificate/pix
 RUN chown -R www-data /var/www/html/custom_login
 
 # install odbc for shib sp
-RUN echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /etc/apt/sources.list.d/backports.list && \
-    apt-get update && \
-    apt-get -y -t stretch-backports install unixodbc libapache2-mod-shib gettext && \
+RUN apt-get update && \
+    apt-get -y install unixodbc libapache2-mod-shib gettext && \
     cd /usr && \
     curl https://downloads.mariadb.com/Connectors/odbc/connector-odbc-3.1.1/mariadb-connector-odbc-3.1.1-ga-debian-x86_64.tar.gz | tar -xvz && \
     echo "[MariaDB]" > MariaDB_odbc_driver_template.ini && \
