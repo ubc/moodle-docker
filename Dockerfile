@@ -1,4 +1,4 @@
-FROM lthub/moodle:3.6.4.2
+FROM lthub/moodle:3.6.5.1
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 RUN apt-get -y install libssh2-1-dev \
