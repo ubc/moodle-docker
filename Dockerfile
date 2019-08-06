@@ -2,7 +2,8 @@ FROM lthub/moodle:3.6.5.1
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 RUN apt-get -y install libssh2-1-dev \
-    && pecl install ssh2-1.1.2
+    && pecl install ssh2-1.1.2 \
+    && a2enmod rewrite
 
 RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle36_2018120301.zip -o /customcert.zip \
     && mv /customcert.zip /var/www/html/mod/ \
@@ -120,6 +121,7 @@ RUN apt-get install -y --no-install-recommends git \
     && cp rms-moodle-payments/moodle-payments-shib.conf /etc/apache2/conf-enabled/ \
     && cd /tmp && rm -fR rms-moodle-payments \
     && apt-get clean all
+
 
 COPY shibboleth2.xml-template /etc/shibboleth/
 COPY moodle-shib.conf /etc/apache2/conf-enabled/
