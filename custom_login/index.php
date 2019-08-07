@@ -128,7 +128,7 @@ input.addEventListener("keyup", function(event) {
 					</div>
 					<div class="col">
 						<div class="center l">
-							<h4>Non-UBC users with an account:</h4>
+							<h4>Login for Existing Non-CWL Moodle Account Users:</h4>
 						</div>
 						<?php
 						if (optional_param('errorcode', 0, PARAM_INT) == 3) {
@@ -148,6 +148,7 @@ input.addEventListener("keyup", function(event) {
 							</div>
 							<div class="center howtotext">
 								<div class="center l">
+									<h4>Create Moodle Account for non-CWL Users:</h4>
 									<input id="crateAccount" type="button" onclick="location.href='/login/signup.php'" value="Create Moodle Account (non-CWL)">
 								</div>
 								<p>You will need to confirm your account by clicking on the link sent to your email address</p>
