@@ -23,10 +23,11 @@ RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle3
     && unzip choicegroup.zip \
     && rm choicegroup.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/18183/mod_facetoface_moodle35_2018110900.zip -o /facetoface.zip \
+    && curl -L https://github.com/ubc/moodle-mod_facetoface/archive/master.zip -o /facetoface.zip \
     && mv /facetoface.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip facetoface.zip \
+    && mv moodle-mod_facetoface-master facetoface \
     && rm facetoface.zip \
 
     && curl -L https://moodle.org/plugins/download.php/18351/mod_scheduler_moodle36_2018112600.zip -o /scheduler.zip \
