@@ -66,11 +66,11 @@ RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle3
     && unzip mergeusers.zip \
     && rm mergeusers.zip \
 
-    && curl -L https://github.com/ubc/moodle-rms-sync-plugin/archive/v0.2.zip -o /hr_sync.zip \
+    && curl -L https://github.com/ubc/moodle-rms-sync-plugin/archive/v0.3.zip -o /hr_sync.zip \
     && mv /hr_sync.zip /var/www/html/admin/tool/ \
     && cd /var/www/html/admin/tool \
     && unzip hr_sync.zip \
-    && mv moodle-rms-sync-plugin-0.2 hrsync \
+    && mv moodle-rms-sync-plugin-0.3 hrsync \
     && rm hr_sync.zip \
 
     && curl -L https://github.com/ubc/moodle-completion-reset-plugin/archive/master.zip -o /completion_reset.zip \
