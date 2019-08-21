@@ -11,10 +11,11 @@ RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle3
     && unzip customcert.zip \
     && rm customcert.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/11565/mod_certificate_moodle33_2016052300.zip -o /certificate.zip \
+    && curl -L https://github.com/ubc/moodle-mod_certificate/archive/master.zip -o /certificate.zip \
     && mv /certificate.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip certificate.zip \
+    && mv moodle-mod_certificate-master certificate \
     && rm certificate.zip \
 
     && curl -L https://moodle.org/plugins/download.php/17344/mod_choicegroup_moodle35_2018070900.zip -o /choicegroup.zip \
