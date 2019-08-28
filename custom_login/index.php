@@ -20,7 +20,7 @@ $login_token = \core\session\manager::get_login_token();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<title>Risk Management Services | The University of British Columbia</title>
+<title>Safety & Risk Services | The University of British Columbia</title>
 <meta name="viewport" content="width=device-width">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -103,7 +103,7 @@ input.addEventListener("keyup", function(event) {
         <div id="ubc7-unit" class="row-fluid expand">
             <div class="span12">
                 <!-- Mobile Menu Icon -->
-				<div id="ubc7-unit-name" class="ubc7-single-element"><a href="https://rms.ubc.ca/" title="Risk Management Service"><span id="ubc7-unit-faculty">Risk Management Services</span><span id="ubc7-unit-identifier">Risk Management Services</span></a></div>
+				<div id="ubc7-unit-name" class="ubc7-single-element"><a href="https://rms.ubc.ca/" title="Risk Management Service"><span id="ubc7-unit-faculty">Risk Management Services</span><span id="ubc7-unit-identifier">Safety & Risk Services</span></a></div>
             </div>
         </div>
         <!-- End of UBC Unit Identifier -->
@@ -162,7 +162,7 @@ input.addEventListener("keyup", function(event) {
         <footer id="ubc7-footer" class="expand" role="contentinfo">
             <div class="row-fluid expand" id="ubc7-unit-footer">
                 <div class="span10" id="ubc7-unit-address">
-                    <div id="ubc7-address-unit-name">Risk Management Services</div>
+                    <div id="ubc7-address-unit-name">Safety & Risk Services</div>
                     <div id="ubc7-address-campus">Donald Rix Building (TEF 2)</div>
                     <div id="ubc7-address-street">#336 – 2389 Health Sciences Mall</div>
                     <div id="ubc7-address-location">
