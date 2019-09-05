@@ -104,6 +104,9 @@ COPY custom_certs/pix /var/www/html/mod/certificate/pix
 
 RUN chown -R www-data /var/www/html/custom_login
 
+# LST training files
+COPY safety_virtual_tour /var/www/html/safety_virtual_tour
+
 # install odbc for shib sp
 RUN apt-get update && \
     apt-get -y install unixodbc libapache2-mod-shib gettext && \
