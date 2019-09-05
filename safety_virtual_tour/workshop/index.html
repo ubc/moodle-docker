@@ -1,0 +1,37 @@
+<html>
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <title>Safety Tour</title>
+ </head>
+ <body leftMargin="0" topMargin="0" rightMargin="0" bottomMargin="0">
+ <script type="text/javascript" src="swfobject.js"></script>
+ <div id="flashcontent">
+ To view virtual tour properly, Flash Player 9.0.28 or later version is needed.
+ Please download the latest version of <a href="http://www.adobe.com/go/getflashplayer" target="_blank">Flash Player</a> and install it on your computer.
+ </div>
+
+ <script type="text/javascript">
+ // <![CDATA[
+ var so = new SWFObject("twviewer.swf", "sotester", "700", "586", "9.0.0", "#FFFFFF");
+ so.addParam("allowNetworking", "all");
+ so.addParam("allowScriptAccess", "always");
+ so.addParam("allowFullScreen", "true");
+ so.addParam("scale", "noscale");
+ //<!-%% Share Mode %%->
+ so.addVariable("lwImg", "resources/workshop tour_wait2.jpg");
+ so.addVariable("lwBgColor", "255,255,243,231");
+ so.addVariable("lwBarBgColor", "255,207,142,137");
+ so.addVariable("lwBarColor", "255,255,204,153");
+ so.addVariable("lwBarBounds", "140,527,420,20");
+ so.addVariable("lwlocation", "0");
+ so.addVariable("lwShowLoadingPercent", "true");
+ so.addVariable("lwTextColor", "255,0,0,0");
+ so.addVariable("iniFile", "config_Workshop Tour.bin");
+ so.addVariable("progressType", "0");
+ so.addVariable("swfFile", "");
+ so.addVariable("href", location.href);
+ so.write("flashcontent");
+ // ]]>
+ </script>
+ </body>
+ </html>
