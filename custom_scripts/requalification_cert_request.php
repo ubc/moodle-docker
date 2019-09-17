@@ -66,11 +66,11 @@ An email has been sent to the instructor of the course, they will verify that yo
 echo "<a target='_parent' href='/course/view.php?id=" . $course_id . "'>Click here to return to the " . $course_name . " page</a>.";
 
 $mapping = array(
-    'RadSafety' => array('to' => 'rms.training@ubc.ca', 'subject' => 'Radiation Safety Completion Certificate'),
-    'Old ChemSafety' => array('to' => 'rms.training@ubc.ca', 'subject' => 'Chemical Safety Completion Certificate'),
-    'Chemsafe' => array('to' => 'rms.training@ubc.ca', 'subject' => 'Chemical Safety Completion Certificate'),
-    'OldBioSafety' => array('to' => 'rms.training@ubc.ca', 'subject' => 'Biological Safety Completion Certificate'),
-    'BioSafety' => array('to' => 'rms.training@ubc.ca', 'subject' => 'Biological Safety Completion Certificate'),
+    'RadSafety' => array('to' => 'safety.training@ubc.ca', 'subject' => 'Radiation Safety Completion Certificate'),
+    'Old ChemSafety' => array('to' => 'safety.training@ubc.ca', 'subject' => 'Chemical Safety Completion Certificate'),
+    'Chemsafe' => array('to' => 'safety.training@ubc.ca', 'subject' => 'Chemical Safety Completion Certificate'),
+    'OldBioSafety' => array('to' => 'safety.training@ubc.ca', 'subject' => 'Biological Safety Completion Certificate'),
+    'BioSafety' => array('to' => 'safety.training@ubc.ca', 'subject' => 'Biological Safety Completion Certificate'),
 );
 
 if (array_key_exists($course_shortname, $mapping)) {
