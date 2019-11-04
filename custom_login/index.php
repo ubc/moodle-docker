@@ -14,7 +14,7 @@ $login_token = \core\session\manager::get_login_token();
  * UBC CLF (Common Look and Feel) v7.0.4
  * Copyright 2012-2013 The University of British Columbia
  * UBC Communications and Marketing
- * http://brand.ubc.ca/clf
+ * https://brand.ubc.ca/clf
  */
 -->
 <head>
@@ -63,7 +63,7 @@ input.addEventListener("keyup", function(event) {
         <div class="collapse expand" id="ubc7-global-menu">
             <div id="ubc7-search" class="expand">
                 <div id="ubc7-search-box">
-                    <form class="form-search" method="get" action="http://www.ubc.ca/search/refine/" role="search">
+                    <form class="form-search" method="get" action="https://www.ubc.ca/search/refine/" role="search">
                         <input type="text" name="q" placeholder="Search this website" class="input-xlarge search-query">
                         <input type="hidden" name="label" value="Search UBC" />
                         <input type="hidden" name="site" value="*.ubc.ca" />
@@ -80,7 +80,7 @@ input.addEventListener("keyup", function(event) {
         <header id="ubc7-header" class="row-fluid expand" role="banner">
             <div class="span1">
                 <div id="ubc7-logo">
-                    <a href="http://www.ubc.ca">The University of British Columbia</a>
+                    <a href="https://www.ubc.ca">The University of British Columbia</a>
                 </div>
             </div>
             <div class="span2">
@@ -90,11 +90,11 @@ input.addEventListener("keyup", function(event) {
             </div>
             <div class="span9" id="ubc7-wordmark-block">
                 <div id="ubc7-wordmark">
-                    <a href="http://www.ubc.ca">The University of British Columbia</a>
+                    <a href="https://www.ubc.ca">The University of British Columbia</a>
                 </div>
                 <div id="ubc7-global-utility">
                     <button type="button" data-toggle="collapse" data-target="#ubc7-global-menu"><span>UBC Search</span></button>
-                    <noscript><a id="ubc7-global-utility-no-script" href="http://www.ubc.ca/">UBC Search</a></noscript>
+                    <noscript><a id="ubc7-global-utility-no-script" href="https://www.ubc.ca/">UBC Search</a></noscript>
                 </div>
             </div>
         </header>
@@ -180,7 +180,7 @@ input.addEventListener("keyup", function(event) {
                 </div>
             </div>
             <div class="row-fluid expand" id="ubc7-global-footer">
-                <div class="span5" id="ubc7-signature"><a href="http://www.ubc.ca/">The University of British Columbia</a></div>
+                <div class="span5" id="ubc7-signature"><a href="https://www.ubc.ca/">The University of British Columbia</a></div>
                 <div class="span7" id="ubc7-footer-menu">
                 </div>
             </div>
