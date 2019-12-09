@@ -43,5 +43,11 @@ RUN curl -L https://moodle.org/plugins/download.php/19061/mod_attendance_moodle3
     && cd /var/www/html/course/format \
     && unzip buttons.zip \
     && rm buttons.zip
+	
+	&& curl -L https://moodle.org/plugins/download.php/19255/theme_fordson_moodle36_2019111003.zip -o /fordson.zip \
+    && cp /fordson.zip /var/www/html/theme/ \
+    && cd /var/www/html/theme \
+    && unzip fordson.zip \
+    && rm fordson.zip
 
 RUN chown -R www-data /var/www/html
