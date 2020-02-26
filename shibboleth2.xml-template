@@ -42,6 +42,8 @@
 
       <LogoutInitiator type="Admin" Location="/Logout/Admin" acl="127.0.0.1" />
 
+      <LogoutInitiator type="Local" Location="/Logout/Redirect" />
+
       <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
 
       <Handler type="Status" Location="/Status" acl="127.0.0.1"/>
