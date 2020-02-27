@@ -1,7 +1,7 @@
 FROM php:7.2-apache
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
-ENV MOODLE_VERSION=3.7.3
+ENV MOODLE_VERSION=3.7.4
 ENV UPLOAD_MAX_FILESIZE=20M
 ENV PHP_MEMORY_LIMIT=128M
 ENV PHP_MAX_EXECUTION_TIME=30
@@ -28,6 +28,9 @@ RUN apt-get update \
 COPY config.php /var/www/html/
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 COPY custom-php.ini $PHP_INI_DIR/conf.d/
+
+RUN mkdir -p /var/www/html/admin/tool/heartbeat \
+    && curl -L https://github.com/catalyst/moodle-tool_heartbeat/tarball/master | tar zx --strip-components=1 -C /var/www/html/admin/tool/heartbeat
 
 VOLUME /moodledata
 EXPOSE 80
