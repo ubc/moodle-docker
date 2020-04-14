@@ -26,7 +26,7 @@ $login_token = \core\session\manager::get_login_token();
 <meta name="author" content="">
 <link href="https://cdn.ubc.ca/clf/7.0.4/css/ubc-clf-full.min.css" rel="stylesheet">
 <!-- Stylesheets -->
-<link rel="stylesheet" href="./files/styles.css?v=1.2">
+<link rel="stylesheet" href="./files/styles.css?v=1.3">
 <link rel="icon" href="./files/favicon.png" sizes="16x16" type="image/png">
 <!--[if lte IE 7]>
 <link href="//cdn.ubc.ca/clf/7.0.4/css/font-awesome-ie7.css" rel="stylesheet">
