@@ -138,7 +138,7 @@ input.addEventListener("keyup", function(event) {
 					<p>Click here if</p>
 					<div class="description">
 						<ul>
-							<li>ou are a UBC employee, student or contractor with a CWL and,</li>
+							<li>You are a UBC employee, student or contractor with a CWL and,</li>
 							<li>You want to enroll in a course or,</li>
 							<li>You enrolled in a course on or after April 15th, 2020, or,</li>
 							<li>You would like to access a course completion record (certificate) for a course you completed on or after April 15th, 2020</li>
