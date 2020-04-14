@@ -213,7 +213,7 @@ li {
 }
 .description li {
   list-style: url("checkIcon.png");
-  font-size: 0.8rem;
+  font-size: 1 rem;
   font-stretch: extra-expanded;
 }
 

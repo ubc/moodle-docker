@@ -26,7 +26,7 @@ $login_token = \core\session\manager::get_login_token();
 <meta name="author" content="">
 <link href="https://cdn.ubc.ca/clf/7.0.4/css/ubc-clf-full.min.css" rel="stylesheet">
 <!-- Stylesheets -->
-<link rel="stylesheet" href="./files/styles.css?v=1.1">
+<link rel="stylesheet" href="./files/styles.css?v=1.2">
 <link rel="icon" href="./files/favicon.png" sizes="16x16" type="image/png">
 <!--[if lte IE 7]>
 <link href="//cdn.ubc.ca/clf/7.0.4/css/font-awesome-ie7.css" rel="stylesheet">
@@ -58,64 +58,7 @@ input.addEventListener("keyup", function(event) {
 
 </head>
 <body>
-	<div class="container">
-		<div class="expectedTitle">
-			<h2>ATTENTION!</h2>
-			<br>
-			<h4> We are transitioning our learning platform from Moodle to the Workplace Learning Ecosystem.
-            <br>Please read carefully below and choose the best option for you.</h4>
-            <br>
-            <h6 class="supportEmail">If you have questions or need additional support, please contact us at: <a href="mailto:wpl.support@ubc.ca?subject=Support%20SRS%20Course" target="_top">wpl.support@ubc.ca</a></h6>
-		</div>
-		<div class="expectedContent">
-			<div class="e1">
-				<a href="#moodleanchor">
-				<img src="./files/Moodle.png" alt="Moodle">
-				<p>Click here if</p>
-				<div class="description">
-					<ul>
-						<li>You enrolled in a course before April 15th, 2020, and have not yet completed it, or</li>
-						<li>You would like to access a course completion record (certificate) for a course you completed prior to April 15th, 2020</li>
-					</ul>
-				</div>
-				</a>
-			</div>
-			<div class="e2">
-				<a href="https://wpl.ubc.ca/">
-				<img src="./files/WPL.png" alt="Workplace Learning Ecosystem">
-				<p>Click here if</p>
-				<div class="description">
-					<ul>
-						<li>You are a UBC employee, student, or contractor and,</li>
-						<li>You want to enroll in a course or,</li>
-						<li>You enrolled in a course on or after April 15th, 2020, or,</li>
-						<li>You would like to access a course completion record (certificate) for a course you completed on or after April 15th, 2020</li>
-					</ul>
-				</div>
-				</a>
-			</div>
-			<div class="e3">
-				<a href="https://courses.cpe.ubc.ca/browse/wpl/srs-external">
-				<img src="./files/Non-UBC.png" alt="Non-UBC">
-				<p>Click here if</p>
-				<div class="description">
-					<ul>
-						<li>You are not a UBC employee, student or contractor and</li>
-						<li>You want to enroll in a course or,</li>
-						<li>You enrolled in a course on or after April 15th, 2020, or,</li>
-						<li>You would like to access a course completion record (certificate) for a course you 	completed on or after April 15th, 2020</li>
-					</ul>
-				</div>
-			</div>
-				</a>
-		</div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-	</div>
-    <div class="container" id="moodleanchor">
+    <div class="container">
         <!-- UBC Global Utility Menu -->
         <div class="collapse expand" id="ubc7-global-menu">
             <div id="ubc7-search" class="expand">
@@ -166,8 +109,68 @@ input.addEventListener("keyup", function(event) {
         <!-- End of UBC Unit Identifier -->
 
 
+
+		<div class="content expand" >
+			<div class="expectedTitle">
+				<h2>ATTENTION!</h2>
+				<br>
+				<h4> We are transitioning our learning platform from Moodle to the Workplace Learning Ecosystem.
+				<br>Please read carefully below and choose the best option for you.</h4>
+				<br>
+				<h6 class="supportEmail">If you have questions or need additional support, please contact us at: <a href="mailto:wpl.support@ubc.ca?subject=Support%20SRS%20Course" target="_top">wpl.support@ubc.ca</a></h6>
+			</div>
+			<div class="expectedContent">
+				<div class="e1">
+					<a href="#moodleanchor">
+					<img src="./files/Moodle.png" alt="Moodle">
+					<p>Click here if</p>
+					<div class="description">
+						<ul>
+							<li>You enrolled in a course before April 15th, 2020, and have not yet completed it, or</li>
+							<li>You would like to access a course completion record (certificate) for a course you completed prior to April 15th, 2020</li>
+						</ul>
+					</div>
+					</a>
+				</div>
+				<div class="e2">
+					<a href="https://wpl.ubc.ca/">
+					<img src="./files/WPL.png" alt="Workplace Learning Ecosystem">
+					<p>Click here if</p>
+					<div class="description">
+						<ul>
+							<li>ou are a UBC employee, student or contractor with a CWL and,</li>
+							<li>You want to enroll in a course or,</li>
+							<li>You enrolled in a course on or after April 15th, 2020, or,</li>
+							<li>You would like to access a course completion record (certificate) for a course you completed on or after April 15th, 2020</li>
+						</ul>
+					</div>
+					</a>
+				</div>
+				<div class="e3">
+					<a href="https://courses.cpe.ubc.ca/browse/wpl/srs-external">
+					<img src="./files/Non-UBC.png" alt="Non-UBC">
+					<p>Click here if</p>
+					<div class="description">
+						<ul>
+							<li>You are not a UBC employee, student or contractor and</li>
+							<li>You want to enroll in a course or,</li>
+							<li>You enrolled in a course on or after April 15th, 2020, or,</li>
+							<li>You would like to access a course completion record (certificate) for a course you 	completed on or after April 15th, 2020</li>
+						</ul>
+					</div>
+				</div>
+					</a>
+			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+		</div>
+
+
         <!-- Content Area -->
-        <div class="content expand" role="main">
+        <div class="content expand" role="main" id="moodleanchor">
 			<div class="maintable container">
 				<div class="center" style="width:100%; padding-top:20px; padding-bottom:20px;">
 					<div class="col rightborder">
