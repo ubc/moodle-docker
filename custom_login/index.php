@@ -58,6 +58,58 @@ input.addEventListener("keyup", function(event) {
 
 </head>
 <body>
+	<div class="container">
+		<div class="expectedTitle">
+			<h2>ATTENTION!</h2>
+			<br>
+			<h4> We are transitioning our learning platform from Moodle to the Workplace Learning Ecosystem.
+            <br>Please read carefully below and choose the best option for you.</h4>
+            <br>
+            <h6 class="supportEmail">If you have questions or need additional support, please contact us at: <a href="mailto:wpl.support@ubc.ca?subject=Support%20SRS%20Course" target="_top">wpl.support@ubc.ca</a></h6>
+		</div>
+		<div class="expectedContent">
+			<div class="e1">
+				<a href="#moodleanchor">
+				<img src="./Moodle.png" alt="Moodle">
+				<p>Click here if</p>
+				<div class="description">
+					<ul>
+						<li>You enrolled in a course before April 15th, 2020, and have not yet completed it, or</li>
+						<li>You would like to access a course completion record (certificate) for a course you completed prior to April 15th, 2020</li>
+					</ul>
+				</div>
+				</a>
+			</div>
+			<div class="e2">
+				<a href="https://wpl.ubc.ca/">
+				<img src="./WPL.png" alt="Workplace Learning Ecosystem">
+				<p>Click here if</p>
+				<div class="description">
+					<ul>
+						<li>You are a UBC employee, student, or contractor and,</li>
+						<li>You want to enroll in a course or,</li>
+						<li>You enrolled in a course on or after April 15th, 2020, or,</li>
+						<li>You would like to access a course completion record (certificate) for a course you completed on or after April 15th, 2020</li>
+					</ul>
+				</div>
+				</a>
+			</div>
+			<div class="e3">
+				<a href="https://courses.cpe.ubc.ca/browse/wpl/srs-external">
+				<img src="./Non-UBC.png" alt="Non-UBC">
+				<p>Click here if</p>
+				<div class="description">
+					<ul>
+						<li>You are not a UBC employee, student or contractor and</li>
+						<li>You want to enroll in a course or,</li>
+						<li>You enrolled in a course on or after April 15th, 2020, or,</li>
+						<li>You would like to access a course completion record (certificate) for a course you 	completed on or after April 15th, 2020</li>
+					</ul>
+				</div>
+			</div>
+				</a>
+		</div>
+	</div>
     <div class="container">
         <!-- UBC Global Utility Menu -->
         <div class="collapse expand" id="ubc7-global-menu">

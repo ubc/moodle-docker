@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Transitioning WPL</title>
+    <link rel="stylesheet" type="text/css" href=".\styles.css">
+  </head>
+  <body>
+      <div class="expectedTitle">
+          <h2>ATTENTION!</h2>
+          <br>
+          <h4> We are transitioning our learning platform from Moodle to the Workplace Learning Ecosystem.
+                <br>Please read carefully below and choose the best option for you.</h4>
+                <br>
+                <h6 class="supportEmail">If you have questions or need additional support, please contact us at: <a href="mailto:wpl.support@ubc.ca?subject=Support%20SRS%20Course" target="_top">wpl.support@ubc.ca</a></h6>
+        </div>
+        <div class="expectedContent">
+          <div class="e1">
+            <a href="#moodleanchor">
+            <img src="./Moodle.png" alt="Moodle">
+            <p>Click here if</p>
+            <div class="description">
+              <ul>
+                <li>You enrolled in a course before April 15th, 2020, and have not yet completed it, or</li>
+                <li>You would like to access a course completion record (certificate) for a course you completed prior to April 15th, 2020</li>
+              </ul>
+            </div>
+          </a>
+          </div>
+          <div class="e2">
+            <a href="https://wpl.ubc.ca/">
+            <img src="./WPL.png" alt="Workplace Learning Ecosystem">
+              <p>Click here if</p>
+              <div class="description">
+                <ul>
+                  <li>You are a UBC employee, student, or contractor and,</li>
+                  <li>You want to enroll in a course or,</li>
+                  <li>You enrolled in a course on or after April 15th, 2020, or,</li>
+                  <li>You would like to access a course completion record (certificate) for a course you completed on or after April 15th, 2020</li>
+                </ul>
+              </div>
+            </a>
+          </div>
+          <div class="e3">
+            <a href="https://courses.cpe.ubc.ca/browse/wpl/srs-external">
+            <img src="./Non-UBC.png" alt="Non-UBC">
+            <p>Click here if</p>
+            <div class="description">
+              <ul>
+                <li>You are not a UBC employee, student or contractor and</li>
+                <li>You want to enroll in a course or,</li>
+                <li>You enrolled in a course on or after April 15th, 2020, or,</li>
+                <li>You would like to access a course completion record (certificate) for a course you completed on or after April 15th, 2020</li>
+              </ul>
+            </div>
+          </div>
+        </a>
+          </div>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+
+          <! We need to add here the current login option for moodle, without the option: create an account.>
+
+          <div class="center" style="width:100%; padding-top:20px; padding-bottom:20px;">
+					<div class="col rightborder">
+						<div class="center l">
+							<img src="./files/ubc-logo-2018-crest-blue-rgb300.png" alt="" width="100" height="136">
+						</div>
+						<div class="center l" id="moodleanchor">
+							UBC faculty, staff, and students with a CWL:
+						</div>
+						<div class="center">
+							<a href="/auth/shibboleth/index.php">
+								<img src="./files/cwl_login.png" alt="" width="83" height="35">
+							</a>
+						</div>
+					</div>
+					<div class="col">
+						<div class="center l">
+							<h4>Login for Existing Non-CWL Moodle Account Users:</h4>
+						</div>
+												<div class="center l" style=" line-height:2.5;">
+							<table class="center l" border="0">
+								<form name="myForm" action="/login/index.php" method="post"></form>
+								<input type="hidden" name="logintoken" value="3Qe0lGRKwYhxoMBZND0GHksmGIIg7IX3">
+								<tbody><tr><td>Username:</td><td><input type="text" name="username"></td></tr>
+								<tr><td>Password:</td><td><input id="passwordBox" type="password" name="password"></td></tr>
+							</tbody></table>
+							<div><input id="loginButton" type="button" onclick="login()" value="Login"></div>
+							<div><a href="/login/forgot_password.php">Forgotten your username or password?</a></div>
+							<div style="height:60px; vertical-align:middle;">
+								Cookies must be enabled in your browser
+							</div>
+					</div>
+				</div>
+			</div>
+    </main>
+  </body>
+</html>

@@ -137,3 +137,91 @@ a:link {
 	vertical-align: top;
 	padding-top: 40px;
 }
+
+
+
+h6 {
+  font-size: 0.8rem;
+}
+
+li {
+  list-style: url("checkIcon.png");
+  font-size: 1.2rem;
+  font-stretch: extra-expanded;
+}
+
+.e1 a, .e2 a, .e3 a {
+  text-decoration: none;
+}
+
+.e1 a:hover, .e2 a:hover, .e3 a:hover {
+  color: #0055B7;
+  cursor: pointer;
+  background-color: #97d4e9;
+}
+
+.expectedTitle {
+  padding: 30px 0px 50px 20px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.expectedContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.expectedContent p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 15px 15px 5px 0px;
+  text-align: center;
+}
+
+.e1, .e2, .e3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 1;
+  flex-grow: 1;
+}
+
+.e1 img, .e2 img, .e3 img {
+  justify-content: center;
+  max-width: 300px;
+  height: auto;
+}
+
+.descriptions {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-grow: 1;
+}
+
+.description {
+  padding: 10px 15px 0px 15px;
+  max-width: 300px;
+}
+
+.description ul {
+  padding-bottom: 20px;
+  padding-left: 20px;
+  min-height: 200px;
+}
+.description li {
+  list-style: url("checkIcon.png");
+  font-size: 0.8rem;
+  font-stretch: extra-expanded;
+}
+
+.prework {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  flex-basis: auto;
+  padding: 0px 0px 100px 0px;
+}
