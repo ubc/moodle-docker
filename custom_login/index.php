@@ -70,7 +70,7 @@ input.addEventListener("keyup", function(event) {
 		<div class="expectedContent">
 			<div class="e1">
 				<a href="#moodleanchor">
-				<img src="./Moodle.png" alt="Moodle">
+				<img src="./files/Moodle.png" alt="Moodle">
 				<p>Click here if</p>
 				<div class="description">
 					<ul>
@@ -82,7 +82,7 @@ input.addEventListener("keyup", function(event) {
 			</div>
 			<div class="e2">
 				<a href="https://wpl.ubc.ca/">
-				<img src="./WPL.png" alt="Workplace Learning Ecosystem">
+				<img src="./files/WPL.png" alt="Workplace Learning Ecosystem">
 				<p>Click here if</p>
 				<div class="description">
 					<ul>
@@ -96,7 +96,7 @@ input.addEventListener("keyup", function(event) {
 			</div>
 			<div class="e3">
 				<a href="https://courses.cpe.ubc.ca/browse/wpl/srs-external">
-				<img src="./Non-UBC.png" alt="Non-UBC">
+				<img src="./files/Non-UBC.png" alt="Non-UBC">
 				<p>Click here if</p>
 				<div class="description">
 					<ul>
@@ -109,8 +109,13 @@ input.addEventListener("keyup", function(event) {
 			</div>
 				</a>
 		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 	</div>
-    <div class="container">
+    <div class="container" id="moodleanchor">
         <!-- UBC Global Utility Menu -->
         <div class="collapse expand" id="ubc7-global-menu">
             <div id="ubc7-search" class="expand">
