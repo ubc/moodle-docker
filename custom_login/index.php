@@ -117,7 +117,7 @@ input.addEventListener("keyup", function(event) {
 				<h4> We are transitioning our learning platform from Moodle to the Workplace Learning Ecosystem.
 				<br>Please read carefully below and choose the best option for you.</h4>
 				<br>
-				<h6 class="supportEmail">If you have questions or need additional support, please contact us at: <a href="mailto:wpl.support@ubc.ca?subject=Support%20SRS%20Course" target="_top">wpl.support@ubc.ca</a></h6>
+				<h6 class="supportEmail">If you have questions or need additional support, please contact us at: <a href="mailto:support.wpl@ubc.ca?subject=Support%20SRS%20Course" target="_top">support.wpl@ubc.ca</a></h6>
 			</div>
 			<div class="expectedContent">
 				<div class="e1">
