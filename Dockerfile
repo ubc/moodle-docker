@@ -1,67 +1,71 @@
-FROM php:7.2-apache
+FROM lthub/moodle:3.8.3
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
-ENV MOODLE_VERSION=3.8.3
-ENV UPLOAD_MAX_FILESIZE=20M
-ENV PHP_MEMORY_LIMIT=128M
-ENV PHP_MAX_EXECUTION_TIME=30
+RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_moodle39_2020011508.zip -o /questionnaire.zip \
+    && cp /questionnaire.zip /var/www/html/mod/ \
+    && cd /var/www/html/mod \
+    && unzip questionnaire.zip \
+    && rm questionnaire.zip \
 
-ARG DEBIAN_FRONTEND=noninteractive
+    && curl -L https://moodle.org/plugins/download.php/11565/mod_certificate_moodle33_2016052300.zip -o /certificate.zip \
+    && cp /certificate.zip /var/www/html/mod/ \
+    && cd /var/www/html/mod \
+    && unzip certificate.zip \
+    && rm certificate.zip \
 
-WORKDIR /var/www/html
+    && curl -L https://moodle.org/plugins/download.php/21208/mod_customcert_moodle38_2019111804.zip -o /customcert.zip \
+    && cp /customcert.zip /var/www/html/mod/ \
+    && cd /var/www/html/mod \
+    && unzip customcert.zip \
+    && rm customcert.zip \
 
-RUN apt-get update \
-    && apt-get -qq install graphviz aspell ghostscript libpspell-dev libpng-dev libicu-dev libxml2-dev libldap2-dev sudo netcat unzip libssl-dev zlib1g-dev libjpeg-dev libfreetype6-dev \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) pspell gd intl xml xmlrpc ldap zip soap mbstring mysqli opcache \
-    && pecl install redis \
-    && docker-php-ext-enable redis \
-    && curl -L https://github.com/moodle/moodle/archive/v${MOODLE_VERSION}.tar.gz | tar xz --strip=1 \
-    && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
-    && mkdir -p /moodledata /var/local/cache \
-    && chown -R www-data /moodledata \
-    && chmod -R 777 /moodledata /var/local/cache \
-    && chmod -R 0755 /var/www/html \
-    && chown -R www-data /var/www/html \
-    && mkdir /docker-entrypoint.d
+    && curl -L https://moodle.org/plugins/download.php/21001/mod_hvp_moodle39_2020020500.zip -o /hvp.zip \
+    && cp /hvp.zip /var/www/html/mod/ \
+    && cd /var/www/html/mod \
+    && unzip hvp.zip \
+    && rm hvp.zip \
 
-# see https://secure.php.net/manual/en/opcache.installation.php
-RUN { \
-        echo 'opcache.memory_consumption=128'; \
-        echo 'opcache.interned_strings_buffer=8'; \
-        echo 'opcache.max_accelerated_files=4000'; \
-        echo 'opcache.revalidate_freq=2'; \
-        echo 'opcache.fast_shutdown=1'; \
-     } > /usr/local/etc/php/conf.d/opcache-recommended.ini
+    && curl -L https://moodle.org/plugins/download.php/16906/block_poll_moodle37_2018052500.zip -o /poll.zip \
+    && cp /poll.zip /var/www/html/blocks/ \
+    && cd /var/www/html/blocks \
+    && unzip poll.zip \
+    && rm poll.zip \
 
-RUN set -eux; \
-    a2enmod rewrite expires; \
-    \
-# https://httpd.apache.org/docs/2.4/mod/mod_remoteip.html
-    a2enmod remoteip; \
-    { \
-        echo 'RemoteIPHeader X-Forwarded-For'; \
-# these IP ranges are reserved for "private" use and should thus *usually* be safe inside Docker
-        echo 'RemoteIPTrustedProxy 10.0.0.0/8'; \
-        echo 'RemoteIPTrustedProxy 172.16.0.0/12'; \
-        echo 'RemoteIPTrustedProxy 192.168.0.0/16'; \
-        echo 'RemoteIPTrustedProxy 169.254.0.0/16'; \
-        echo 'RemoteIPTrustedProxy 127.0.0.0/8'; \
-     } > /etc/apache2/conf-available/remoteip.conf; \
     a2enconf remoteip; \
-# https://github.com/docker-library/wordpress/issues/383#issuecomment-507886512
-# (replace all instances of "%h" with "%a" in LogFormat)
-    find /etc/apache2 -type f -name '*.conf' -exec sed -ri 's/([[:space:]]*LogFormat[[:space:]]+"[^"]*)%h([^"]*")/\1%a\2/g' '{}' +
+    && curl -L https://moodle.org/plugins/download.php/20541/report_customsql_moodle38_2019111101.zip -o /customsql.zip \
+    && cp /customsql.zip /var/www/html/report/ \
+    && cd /var/www/html/report \
+    && unzip customsql.zip \
+    && rm customsql.zip \
 
-COPY config.php /var/www/html/
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-COPY custom-php.ini $PHP_INI_DIR/conf.d/
+    && curl -L https://moodle.org/plugins/download.php/20641/format_grid_moodle38_2019111700.zip -o /grid.zip \
+    && cp /grid.zip /var/www/html/course/format/ \
+    && cd /var/www/html/course/format \
+    && unzip grid.zip \
+    && rm grid.zip \
 
-RUN mkdir -p /var/www/html/admin/tool/heartbeat \
-    && curl -L https://github.com/catalyst/moodle-tool_heartbeat/tarball/master | tar zx --strip-components=1 -C /var/www/html/admin/tool/heartbeat
+    && curl -L https://moodle.org/plugins/download.php/21512/format_flexsections_moodle38_2020051100.zip -o /flex.zip \
+    && cp /flex.zip /var/www/html/course/format/ \
+    && cd /var/www/html/course/format \
+    && unzip flex.zip \
+    && rm flex.zip \
 
-VOLUME /moodledata
-EXPOSE 80
+    && curl -L https://moodle.org/plugins/download.php/18183/mod_facetoface_moodle35_2018110900.zip -o /facetoface.zip \
+    && cp /facetoface.zip /var/www/html/mod/ \
+    && cd /var/www/html/mod \
+    && unzip facetoface.zip \
+    && rm facetoface.zip \
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["apachectl", "-e", "info", "-D", "FOREGROUND"]
+    && curl -L https://moodle.org/plugins/download.php/14468/local_mass_enroll_moodle33_2015092402.zip -o /mass.zip \
+    && cp /mass.zip /var/www/html/local/ \
+    && cd /var/www/html/local \
+    && unzip mass.zip \
+    && rm mass.zip \
+
+    && curl -L https://moodle.org/plugins/download.php/20829/block_configurable_reports_moodle38_2019122000.zip -o /configurable.zip \
+    && cp /configurable.zip /var/www/html/blocks/ \
+    && cd /var/www/html/blocks \
+    && unzip configurable.zip \
+    && rm configurable.zip
+
+RUN chown -R www-data /var/www/html
