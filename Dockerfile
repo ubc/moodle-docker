@@ -31,7 +31,6 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && unzip poll.zip \
     && rm poll.zip \
 
-    a2enconf remoteip; \
     && curl -L https://moodle.org/plugins/download.php/20541/report_customsql_moodle38_2019111101.zip -o /customsql.zip \
     && cp /customsql.zip /var/www/html/report/ \
     && cd /var/www/html/report \
