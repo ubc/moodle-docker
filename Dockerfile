@@ -5,7 +5,7 @@ RUN apt-get -y install libssh2-1-dev \
     && pecl install ssh2-1.1.2 \
     && a2enmod rewrite
 
-RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle36_2018120301.zip -o /customcert.zip \
+RUN curl -L https://moodle.org/plugins/download.php/21208/mod_customcert_moodle38_2019111804.zip -o /customcert.zip \
     && mv /customcert.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip customcert.zip \
@@ -31,7 +31,7 @@ RUN curl -L https://moodle.org/plugins/download.php/18626/mod_customcert_moodle3
     && mv moodle-mod_facetoface-master facetoface \
     && rm facetoface.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/18351/mod_scheduler_moodle36_2018112600.zip -o /scheduler.zip \
+    && curl -L https://moodle.org/plugins/download.php/20738/mod_scheduler_moodle39_2019120200.zip -o /scheduler.zip \
     && mv /scheduler.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip scheduler.zip \
