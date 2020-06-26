@@ -1,7 +1,7 @@
 FROM lthub/moodle:3.8.3
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
-RUN curl -L https://moodle.org/plugins/download.php/19061/mod_attendance_moodle36_2019022500.zip -o /attendance.zip \
+RUN curl -L https://moodle.org/plugins/download.php/21114/mod_attendance_moodle38_2019112500.zip -o /attendance.zip \
     && cp /attendance.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip attendance.zip \
@@ -14,7 +14,7 @@ RUN curl -L https://moodle.org/plugins/download.php/19061/mod_attendance_moodle3
 #     && unzip collaborate.zip \
 #     && rm collaborate.zip
 
-    && curl -L https://moodle.org/plugins/download.php/19206/mod_questionnaire_moodle36_2018050109.zip -o /questionnaire.zip \
+    && curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_moodle39_2020011508.zip -o /questionnaire.zip \
     && cp /questionnaire.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip questionnaire.zip \
@@ -26,25 +26,25 @@ RUN curl -L https://moodle.org/plugins/download.php/19061/mod_attendance_moodle3
     && unzip accessibility.zip \
     && rm accessibility.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/19296/qtype_multichoiceset_moodle36_2019040501.zip -o /multichoiceset.zip \
+    && curl -L https://moodle.org/plugins/download.php/19504/qtype_multichoiceset_moodle38_2019050800.zip -o /multichoiceset.zip \
     && cp /multichoiceset.zip /var/www/html/question/type/ \
     && cd /var/www/html/question/type \
     && unzip multichoiceset.zip \
     && rm multichoiceset.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/18171/enrol_autoenrol_moodle36_2018101902.zip -o /autoenrol.zip \
+    && curl -L https://moodle.org/plugins/download.php/20616/enrol_autoenrol_moodle38_2019111800.zip -o /autoenrol.zip \
     && cp /autoenrol.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
     && unzip autoenrol.zip \
     && rm autoenrol.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/17251/format_buttons_moodle35_2018062700.zip -o /buttons.zip \
+    && curl -L https://moodle.org/plugins/download.php/20381/format_buttons_moodle38_2019100702.zip -o /buttons.zip \
     && cp /buttons.zip /var/www/html/course/format/ \
     && cd /var/www/html/course/format \
     && unzip buttons.zip \
     && rm buttons.zip \
 	
-	&& curl -L https://moodle.org/plugins/download.php/19590/theme_fordson_moodle37_2019111006.zip -o /fordson.zip \
+	&& curl -L https://moodle.org/plugins/download.php/21132/theme_fordson_moodle38_2020030200.zip -o /fordson.zip \
     && cp /fordson.zip /var/www/html/theme/ \
     && cd /var/www/html/theme \
     && unzip fordson.zip \
