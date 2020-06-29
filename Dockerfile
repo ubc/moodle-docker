@@ -113,7 +113,7 @@ RUN apt-get update && \
 # add logic for payment
 RUN apt-get install -y --no-install-recommends git \
     && cd /tmp \
-    && git clone https://gitlab+deploy-token-8:2VsJCQzRsyy9pGfeSiCa@repo.code.ubc.ca/lt/rms-moodle-payments.git \
+    && git clone https://gitlab+deploy-token-12:ZUg6srcmQeJEfcZqRnPQ@repo.code.ubc.ca/lt/rms-moodle-payments.git \
     && cp -rp rms-moodle-payments/ubc_course_payments /var/www/html \
     && cp -rp rms-moodle-payments/moodle/grade/course_payment /var/www/html/grade \
     && cp rms-moodle-payments/moodle-payments-shib.conf /etc/apache2/conf-enabled/ \
