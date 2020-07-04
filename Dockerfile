@@ -1,7 +1,7 @@
 FROM lthub/moodle:3.5.5
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
-RUN curl -L https://moodle.org/plugins/download.php/18486/mod_questionnaire_moodle34_2017111108.zip -o /questionnaire.zip \
+RUN curl -L https://moodle.org/plugins/download.php/19206/mod_questionnaire_moodle35_2018050107.zip -o /questionnaire.zip \
     && cp /questionnaire.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip questionnaire.zip \
