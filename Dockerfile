@@ -67,4 +67,7 @@ RUN curl -L https://moodle.org/plugins/download.php/19206/mod_questionnaire_mood
     && unzip configurable.zip \
     && rm configurable.zip
 
+# add custom cert
+COPY certificate/letter_non_embedded /var/www/html/mod/certificate/type/
+
 RUN chown -R www-data /var/www/html
