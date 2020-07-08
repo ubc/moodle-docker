@@ -1,7 +1,7 @@
 FROM lthub/moodle:3.8.3
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
-RUN curl -L https://moodle.org/plugins/download.php/19206/mod_questionnaire_moodle35_2018050107.zip -o /questionnaire.zip \
+RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_moodle39_2020011508.zip -o /questionnaire.zip \
     && cp /questionnaire.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip questionnaire.zip \
@@ -13,7 +13,7 @@ RUN curl -L https://moodle.org/plugins/download.php/19206/mod_questionnaire_mood
     && unzip certificate.zip \
     && rm certificate.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/21394/mod_customcert_moodle35_2018051709.zip -o /customcert.zip \
+    && curl -L https://moodle.org/plugins/download.php/21208/mod_customcert_moodle38_2019111804.zip -o /customcert.zip \
     && cp /customcert.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip customcert.zip \
@@ -37,13 +37,13 @@ RUN curl -L https://moodle.org/plugins/download.php/19206/mod_questionnaire_mood
     && unzip customsql.zip \
     && rm customsql.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/19698/format_grid_moodle35_2018052306.zip -o /grid.zip \
+    && curl -L https://moodle.org/plugins/download.php/20641/format_grid_moodle38_2019111700.zip -o /grid.zip \
     && cp /grid.zip /var/www/html/course/format/ \
     && cd /var/www/html/course/format \
     && unzip grid.zip \
     && rm grid.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/15148/format_flexsections_moodle34_2017102700.zip -o /flex.zip \
+    && curl -L https://moodle.org/plugins/download.php/21512/format_flexsections_moodle38_2020051100.zip -o /flex.zip \
     && cp /flex.zip /var/www/html/course/format/ \
     && cd /var/www/html/course/format \
     && unzip flex.zip \
@@ -68,6 +68,6 @@ RUN curl -L https://moodle.org/plugins/download.php/19206/mod_questionnaire_mood
     && rm configurable.zip
 
 # add custom cert
-COPY certificate/ /var/www/html/mod/certificate/type/
+COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
 
 RUN chown -R www-data /var/www/html
