@@ -1,4 +1,4 @@
-FROM lthub/moodle:3.5.5
+FROM lthub/moodle:3.8.3
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 RUN curl -L https://moodle.org/plugins/download.php/19206/mod_questionnaire_moodle35_2018050107.zip -o /questionnaire.zip \
