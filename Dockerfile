@@ -86,6 +86,6 @@ COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
 COPY maker-v5.1-moodle-3.8.zip /var/www/html/theme/ 
 RUN cd /var/www/html/theme \
     && unzip maker-v5.1-moodle-3.8.zip \
-    && rm maker-v5.1-moodle-3.8.zip.zip
+    && rm maker-v5.1-moodle-3.8.zip
 
 RUN chown -R www-data /var/www/html
