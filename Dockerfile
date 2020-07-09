@@ -31,7 +31,7 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && unzip poll.zip \
     && rm poll.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/20541/report_customsql_moodle38_2019111101.zip -o /customsql.zip \
+    && curl -L https://moodle.org/plugins/download.php/21871/report_customsql_moodle39_2020062800.zip -o /customsql.zip \
     && cp /customsql.zip /var/www/html/report/ \
     && cd /var/www/html/report \
     && unzip customsql.zip \
@@ -61,12 +61,24 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && unzip mass.zip \
     && rm mass.zip \
 
+    && curl -L https://moodle.org/plugins/download.php/20585/block_course_modulenavigation_moodle38_2019052015.zip -o /modulenav.zip \
+    && cp /modulenav.zip /var/www/html/local/ \
+    && cd /var/www/html/local \
+    && unzip modulenav.zip \
+    && rm modulenav.zip \
+	
     && curl -L https://moodle.org/plugins/download.php/20829/block_configurable_reports_moodle38_2019122000.zip -o /configurable.zip \
     && cp /configurable.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
     && unzip configurable.zip \
     && rm configurable.zip
 
+    && curl -L https://moodle.org/plugins/download.php/21289/local_boostnavigation_moodle37_2020040100.zip -o /boostnav.zip \
+    && cp /boostnav.zip /var/www/html/blocks/ \
+    && cd /var/www/html/blocks \
+    && unzip boostnav.zip \
+    && rm boostnav.zip
+	
 # add custom cert
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
 
