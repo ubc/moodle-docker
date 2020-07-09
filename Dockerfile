@@ -62,7 +62,7 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && rm mass.zip \
 
     && curl -L https://moodle.org/plugins/download.php/20585/block_course_modulenavigation_moodle38_2019052015.zip -o /modulenav.zip \
-    && cp /modulenav.zip /var/www/html/local/ \
+    && cp /modulenav.zip /var/www/html/blocks/ \
     && cd /var/www/html/local \
     && unzip modulenav.zip \
     && rm modulenav.zip \
@@ -74,7 +74,7 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && rm configurable.zip \
 
     && curl -L https://moodle.org/plugins/download.php/21289/local_boostnavigation_moodle37_2020040100.zip -o /boostnavig.zip \
-    && cp /boostnavig.zip /var/www/html/blocks/ \
+    && cp /boostnavig.zip /var/www/html/local/ \
     && cd /var/www/html/blocks \
     && unzip boostnavig.zip \
     && rm boostnavig.zip
