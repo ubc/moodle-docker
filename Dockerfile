@@ -71,7 +71,7 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && cp /configurable.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
     && unzip configurable.zip \
-    && rm configurable.zip
+    && rm configurable.zip \
 
     && curl -L https://moodle.org/plugins/download.php/21289/local_boostnavigation_moodle37_2020040100.zip -o /boostnavig.zip \
     && cp /boostnavig.zip /var/www/html/blocks/ \
