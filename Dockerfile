@@ -73,11 +73,11 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && unzip configurable.zip \
     && rm configurable.zip
 
-    && curl -L https://moodle.org/plugins/download.php/21289/local_boostnavigation_moodle37_2020040100.zip -o /boostnav.zip \
-    && cp /boostnav.zip /var/www/html/blocks/ \
+    && curl -L https://moodle.org/plugins/download.php/21289/local_boostnavigation_moodle37_2020040100.zip -o /boostnavig.zip \
+    && cp /boostnavig.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
-    && unzip boostnav.zip \
-    && rm boostnav.zip
+    && unzip boostnavig.zip \
+    && rm boostnavig.zip
 	
 # add custom cert
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
