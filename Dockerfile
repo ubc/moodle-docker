@@ -49,5 +49,11 @@ RUN curl -L https://moodle.org/plugins/download.php/21114/mod_attendance_moodle3
     && cd /var/www/html/theme \
     && unzip fordson.zip \
     && rm fordson.zip
+	
+	&& curl -L https://moodle.org/plugins/download.php/20738/mod_scheduler_moodle39_2019120200.zip -o /scheduler.zip \
+    && cp /scheduler.zip /var/www/html/mod/ \
+    && cd /var/www/html/mod \
+    && unzip scheduler.zip \
+    && rm scheduler.zip
 
 RUN chown -R www-data /var/www/html
