@@ -77,7 +77,13 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && cp /boostnavig.zip /var/www/html/local/ \
     && cd /var/www/html/local \
     && unzip boostnavig.zip \
-    && rm boostnavig.zip
+    && rm boostnavig.zip \
+
+    && curl -L https://moodle.org/plugins/download.php/20236/local_lessonexport_moodle38_2019090900.zip -o /lessonexport.zip \
+    && cp /lessonexport.zip /var/www/html/local/ \
+    && cd /var/www/html/local \
+    && unzip lessonexport.zip \
+    && rm lessonexport.zip
 	
 # add custom cert
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
