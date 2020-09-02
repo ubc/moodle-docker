@@ -78,12 +78,6 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && cd /var/www/html/local \
     && unzip boostnavig.zip \
     && rm boostnavig.zip \
-
-    && curl -L https://moodle.org/plugins/download.php/20236/local_lessonexport_moodle38_2019090900.zip -o /lessonexport.zip \
-    && cp /lessonexport.zip /var/www/html/local/ \
-    && cd /var/www/html/local \
-    && unzip lessonexport.zip \
-    && rm lessonexport.zip \
 	
 	&& curl -L https://moodle.org/plugins/download.php/21929/enrol_arlo_moodle39_2020070613.zip -o /enrolarlo.zip \
     && cp /enrolarlo.zip /var/www/html/enrol/ \
