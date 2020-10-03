@@ -94,15 +94,16 @@ RUN cd /var/www/html/theme \
     && unzip maker-v5.1-moodle-3.8.zip \
     && rm maker-v5.1-moodle-3.8.zip
 
+COPY themes/bootstrapbase.zip /var/www/html/theme/ 
+RUN cd /var/www/html/theme \
+    && unzip bootstrapbase.zip \
+    && rm bootstrapbase.zip	
+	
 COPY themes/ubccpd.zip /var/www/html/theme/ 
 RUN cd /var/www/html/theme \
     && unzip ubccpd.zip \
     && rm ubccpd.zip
 	
-COPY themes/bootstrap.zip /var/www/html/theme/ 
-RUN cd /var/www/html/theme \
-    && unzip bootstrap.zip \
-    && rm bootstrap.zip	
 
 # add custom font
 COPY fonts /var/www/html/theme/maker/fonts
