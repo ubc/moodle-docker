@@ -99,10 +99,10 @@ RUN cd /var/www/html/theme \
     && unzip ubccpd.zip \
     && rm ubccpd.zip
 	
-COPY themes/theme_bootstrap_moodle31_2016080100.zip /var/www/html/theme/ 
+COPY themes/bootstrap.zip /var/www/html/theme/ 
 RUN cd /var/www/html/theme \
-    && unzip theme_bootstrap_moodle31_2016080100.zip \
-    && rm theme_bootstrap_moodle31_2016080100.zip	
+    && unzip bootstrap.zip \
+    && rm bootstrap.zip	
 
 # add custom font
 COPY fonts /var/www/html/theme/maker/fonts
