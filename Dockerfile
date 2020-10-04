@@ -93,17 +93,16 @@ COPY themes/maker-v5.1-moodle-3.8.zip /var/www/html/theme/
 RUN cd /var/www/html/theme \
     && unzip maker-v5.1-moodle-3.8.zip \
     && rm maker-v5.1-moodle-3.8.zip
-
-COPY themes/bootstrapbase.zip /var/www/html/theme/ 
-RUN cd /var/www/html/theme \
-    && unzip bootstrapbase.zip \
-    && rm bootstrapbase.zip	
+	
+RUN cd /var/www/html/theme/maker/pix/ \
+    && rm favicon.ico
 	
 COPY themes/ubccpd.zip /var/www/html/theme/ 
 RUN cd /var/www/html/theme \
     && unzip ubccpd.zip \
     && rm ubccpd.zip
 	
+COPY themes/favicon.ico /var/www/html/theme/maker/pix/ 
 
 # add custom font
 COPY fonts /var/www/html/theme/maker/fonts
