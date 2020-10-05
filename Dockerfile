@@ -97,11 +97,6 @@ RUN cd /var/www/html/theme \
 RUN cd /var/www/html/theme/maker/pix/ \
     && rm favicon.ico
 	
-COPY themes/ubccpd.zip /var/www/html/theme/ 
-RUN cd /var/www/html/theme \
-    && unzip ubccpd.zip \
-    && rm ubccpd.zip
-	
 COPY themes/favicon.ico /var/www/html/theme/maker/pix/ 
 
 # add custom font
