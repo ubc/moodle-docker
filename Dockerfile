@@ -88,6 +88,11 @@ RUN cd /var/www/html/theme \
     && unzip maker-v5.1-moodle-3.8.zip \
     && rm maker-v5.1-moodle-3.8.zip
 
+RUN cd /var/www/html/theme/maker/pix/ \
+    && rm favicon.ico
+	
+COPY themes/favicon.ico /var/www/html/theme/maker/pix/ 
+
 # add custom font
 COPY fonts /var/www/html/theme/maker/fonts
 	
