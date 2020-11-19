@@ -77,7 +77,7 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && cp /boostnavig.zip /var/www/html/local/ \
     && cd /var/www/html/local \
     && unzip boostnavig.zip \
-    && rm boostnavig.zip 
+    && rm boostnavig.zip \
 	
     && curl -L https://moodle.org/plugins/download.php/22379/enrol_arlo_moodle39_2020073111.zip -o /enrolarlo.zip \
     && cp /enrolarlo.zip /var/www/html/enrol/ \
