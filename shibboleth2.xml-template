@@ -1,0 +1,82 @@
+<SPConfig xmlns="urn:mace:shibboleth:3.0:native:sp:config"
+                  xmlns:conf="urn:mace:shibboleth:3.0:native:sp:config"
+                  xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+                  xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+                  xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+                  clockSkew="180">
+
+   <OutOfProcess logger="console.logger" tranLogFormat="%u|%s|%IDP|%i|%ac|%t|%attr|%n|%b|%E|%S|%SS|%L|%UA|%a">
+      <Extensions>
+         <Library path="${SHIBD_ODBC_LIB}" fatal="true"/>
+      </Extensions>
+   </OutOfProcess>
+
+   <TCPListener address="${SHIBD_SERVICE_IP}" port="${SHIBD_SERVICE_PORT}" acl="${SHIBD_LISTENER_ACL}"/>
+
+   <StorageService type="ODBC" id="db" cleanupInterval="900">
+      <ConnectionString>
+         DRIVER=${SHIBD_ODBC_DRIVER};SERVER=${SHIBD_ODBC_SERVER};PORT=${SHIBD_ODBC_PORT};DATABASE=${SHIBD_ODBC_DATABASE};USER=${SHIB_ODBC_USER};PASSWORD=${SHIB_ODBC_PASSWORD}
+      </ConnectionString>
+   </StorageService>
+
+   <SessionCache type="StorageService" StorageService="db" cacheAllowance="3600" inprocTimeout="900" cleanupInterval="900"/>
+
+   <ReplayCache StorageService="db"/>
+
+   <ArtifactMap StorageService="db" artifactTTL="180"/>
+
+   <ApplicationDefaults entityID="${SHIBBOLETH_SP_ENTITY_ID}"
+      signing="true" encryption="false"
+      REMOTE_USER="somerandomname">
+
+      <Sessions lifetime="7200" timeout="3600" relayState="ss:db"
+         idpHistory="true" idpHistoryDays="7"
+         checkAddress="false" handlerSSL="false" cookieProps="http">
+
+         <SSO entityID="${SHIBBOLETH_IDP_ENTITY_ID}" discoveryProtocol="SAMLDS"
+             discoveryURL="${SHIBBOLETH_IDP_DISCOVERY_URL}" >
+             SAML2 SAML1
+         </SSO>
+
+      <Logout>SAML2 Local</Logout>
+
+      <LogoutInitiator type="Admin" Location="/Logout/Admin" acl="127.0.0.1" />
+
+      <LogoutInitiator type="Local" Location="/Logout/Redirect" />
+
+      <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
+
+      <Handler type="Status" Location="/Status" acl="127.0.0.1"/>
+
+      <Handler type="Session" Location="/Session" showAttributeValues="false"/>
+
+      <Handler type="DiscoveryFeed" Location="/DiscoFeed"/>
+
+      </Sessions>
+
+      <Errors supportContact="Learning Technology (LT) Hub"
+          supportEmail="lt.hub@ubc.ca"/>
+
+      <MetadataProvider type="XML"
+         url="${SHIBBOLETH_IDP_METADATA_URL}"
+         backingFilePath="/etc/shibboleth/shibboleth-metadata-idp.xml"
+         reloadInterval="86400" />
+
+      <TrustEngine type="Chaining">
+         <TrustEngine type="ExplicitKey"/>
+         <TrustEngine type="PKIX"/>
+      </TrustEngine>
+
+      <AttributeExtractor type="XML" validate="true" reloadChanges="false" url="${SHIBD_ATTRIBUTE_MAP_URL}" backingFilePath="attribute-map.xml"/>
+
+      <AttributeFilter type="XML" validate="true" path="attribute-policy.xml"/>
+
+      <CredentialResolver type="File" key="cert/sp-key.pem" certificate="cert/sp-cert.pem"/>
+
+   </ApplicationDefaults>
+
+   <SecurityPolicyProvider type="XML" validate="true" path="security-policy.xml"/>
+
+   <ProtocolProvider type="XML" validate="true" reloadChanges="false" path="protocols.xml"/>
+
+</SPConfig>
