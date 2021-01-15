@@ -59,7 +59,7 @@ services:
       #- MOODLE_NOREPLY_ADDRESS=test@example.com
       - SHIBBOLETH_IDP_DISCOVERY_URL=https://dev.ubccpd.ca
       - SHIBBOLETH_IDP_METADATA_URL=https://dev.ubccpd.ca/simplesaml/saml2/idp/metadata.php
-      - SHIBBOLETH_IDP_ENTITY_ID=https://dev.ubccpd.ca
+      - SHIBBOLETH_IDP_ENTITY_ID=https://dev.ubccpd.ca/simplesaml/saml2/idp/metadata.php
       - SHIBBOLETH_SP_ENTITY_ID=https://moodle.ubc.ca
       - SHIBD_LISTENER_ACL=0.0.0.0/0
       - SHIBD_ODBC_DRIVER=MySql
@@ -69,7 +69,7 @@ services:
       - SHIBD_ODBC_DATABASE=moodle
       - SHIB_ODBC_USER=moodle
       - SHIB_ODBC_PASSWORD=password
-      - SHIBD_ATTRIBUTE_MAP_URL=https://sp1.shib3.id.ubc.ca/attribute-map.xml
+      - SHIBD_ATTRIBUTE_MAP_URL=
       - SHIBD_SERVICE_NAME=shibd
       - SHIBD_SERVICE_PORT=1600
       - PHP_MEMORY_LIMIT=256M
@@ -84,7 +84,7 @@ services:
     environment:
       - SHIBBOLETH_IDP_DISCOVERY_URL=https://dev.ubccpd.ca
       - SHIBBOLETH_IDP_METADATA_URL=https://dev.ubccpd.ca/simplesaml/saml2/idp/metadata.php
-      - SHIBBOLETH_IDP_ENTITY_ID=https://dev.ubccpd.ca
+      - SHIBBOLETH_IDP_ENTITY_ID=https://dev.ubccpd.ca/simplesaml/saml2/idp/metadata.php
       - SHIBBOLETH_SP_ENTITY_ID=https://moodle.ubc.ca
       - SHIBD_LISTENER_ACL=0.0.0.0/0
       - SHIBD_LISTENER_ADDRESS=0.0.0.0
@@ -95,6 +95,6 @@ services:
       - SHIBD_ODBC_DATABASE=moodle
       - SHIB_ODBC_USER=moodle
       - SHIB_ODBC_PASSWORD=password
-      - SHIBD_ATTRIBUTE_MAP_URL=https://sp1.shib3.id.ubc.ca/attribute-map.xml
+      - SHIBD_ATTRIBUTE_MAP_URL=
     volumes:
       - ./.data/cert:/etc/shibboleth/cert:rw
