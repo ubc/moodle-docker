@@ -117,3 +117,5 @@ RUN apt-get update && \
 COPY shibboleth2.xml-template /etc/shibboleth/
 COPY moodle-shib.conf /etc/apache2/conf-enabled/
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
+
+RUN chmod -R 755 /docker-entrypoint.d/
