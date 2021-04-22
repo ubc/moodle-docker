@@ -83,7 +83,13 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && cp /enrolarlo.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
     && unzip enrolarlo.zip \
-    && rm enrolarlo.zip
+    && rm enrolarlo.zip \
+	
+    && curl -L https://moodle.org/plugins/download.php/20137/tool_mergeusers_moodle37_2019082000.zip -o /mergeuser.zip \
+    && cp /mergeuser.zip /var/www/html/local/ \
+    && cd /var/www/html/local \
+    && unzip mergeuser.zip \
+    && rm mergeuser.zip 
 	
 # add custom cert
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
