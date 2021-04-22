@@ -86,8 +86,8 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && rm enrolarlo.zip \
 	
     && curl -L https://moodle.org/plugins/download.php/20137/tool_mergeusers_moodle37_2019082000.zip -o /mergeuser.zip \
-    && cp /mergeuser.zip /var/www/html/local/ \
-    && cd /var/www/html/local \
+    && cp /mergeuser.zip /var/www/html/admin/tool/ \
+    && cd /var/www/html/admin/tool \
     && unzip mergeuser.zip \
     && rm mergeuser.zip 
 	
