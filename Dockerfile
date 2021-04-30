@@ -84,6 +84,12 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && cd /var/www/html/admin/tool \
     && unzip mergeuser.zip \
     && rm mergeuser.zip \
+
+    && curl -L https://moodle.org/plugins/download.php/20505/auth_saml2_moodle37_2019110701.zip -o /saml2.zip \
+    && cp /saml2.zip /var/www/html/auth/ \
+    && cd /var/www/html/auth \
+    && unzip saml2.zip \
+    && rm saml2.zip \
 	
 	&& curl -L https://moodle.org/plugins/download.php/22379/enrol_arlo_moodle39_2020073111.zip -o /enrolarlo.zip \
     && cp /enrolarlo.zip /var/www/html/enrol/ \
@@ -112,18 +118,18 @@ COPY fonts /var/www/html/theme/maker/fonts
 RUN chown -R www-data /var/www/html
 
 # install odbc for shib sp
-RUN apt-get update && \
-    apt-get -y install unixodbc libapache2-mod-shib gettext && \
-    cd /usr && \
-    curl https://downloads.mariadb.com/Connectors/odbc/connector-odbc-3.1.1/mariadb-connector-odbc-3.1.1-ga-debian-x86_64.tar.gz | tar -xvz && \
-    echo "[MariaDB]" > MariaDB_odbc_driver_template.ini && \
-    echo "Description = MariaDB Connector/ODBC v.3.1" >> MariaDB_odbc_driver_template.ini && \
-    echo "Driver = /usr/lib/libmaodbc.so" >> MariaDB_odbc_driver_template.ini && \
-    odbcinst -i -d -f MariaDB_odbc_driver_template.ini
+#RUN apt-get update && \
+#    apt-get -y install unixodbc libapache2-mod-shib gettext && \
+#    cd /usr && \
+#    curl https://downloads.mariadb.com/Connectors/odbc/connector-odbc-3.1.1/mariadb-connector-odbc-3.1.1-ga-debian-x86_64.tar.gz | tar -xvz && \
+#    echo "[MariaDB]" > MariaDB_odbc_driver_template.ini && \
+#    echo "Description = MariaDB Connector/ODBC v.3.1" >> MariaDB_odbc_driver_template.ini && \
+#    echo "Driver = /usr/lib/libmaodbc.so" >> MariaDB_odbc_driver_template.ini && \
+#    odbcinst -i -d -f MariaDB_odbc_driver_template.ini
 	
-COPY shibboleth2.xml-template /etc/shibboleth/
-COPY moodle-shib.conf /etc/apache2/conf-enabled/
-COPY docker-entrypoint.d/* /docker-entrypoint.d/
-COPY 000-default.conf /etc/apache2/sites-available/
+#COPY shibboleth2.xml-template /etc/shibboleth/
+#COPY moodle-shib.conf /etc/apache2/conf-enabled/
+#COPY docker-entrypoint.d/* /docker-entrypoint.d/
+#COPY 000-default.conf /etc/apache2/sites-available/
 
-RUN chmod -R 755 /docker-entrypoint.d/
+#RUN chmod -R 755 /docker-entrypoint.d/
