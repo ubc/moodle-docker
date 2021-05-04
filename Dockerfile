@@ -116,7 +116,7 @@ COPY themes/favicon.ico /var/www/html/theme/maker/pix/
 COPY fonts /var/www/html/theme/maker/fonts
 
 # add config entries for SAML2 plugin
-RUN cat saml2.txt >> /var/www/html/config.php
+CAT saml2.txt >> /var/www/html/config.php
 
 	
 RUN chown -R www-data /var/www/html
