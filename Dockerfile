@@ -66,7 +66,7 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && cd /var/www/html/blocks \
     && unzip modulenav.zip \
     && rm modulenav.zip \
-	
+
     && curl -L https://moodle.org/plugins/download.php/20829/block_configurable_reports_moodle38_2019122000.zip -o /configurable.zip \
     && cp /configurable.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
@@ -96,29 +96,28 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && cd /var/www/html/enrol \
     && unzip enrolarlo.zip \
     && rm enrolarlo.zip
-	
-	
+
+
 # add custom cert
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
+
+# add config entries for SAML2 plugin
+RUN cat saml2.txt >> /var/www/html/config.php
 
 # add custom theme
 COPY themes/maker-v5.1-moodle-3.8.zip /var/www/html/theme/ 
 RUN cd /var/www/html/theme \
     && unzip maker-v5.1-moodle-3.8.zip \
     && rm maker-v5.1-moodle-3.8.zip
-	
+
 RUN cd /var/www/html/theme/maker/pix/ \
     && rm favicon.ico
-	
+
 COPY themes/favicon.ico /var/www/html/theme/maker/pix/ 
 
 # add custom font
 COPY fonts /var/www/html/theme/maker/fonts
 
-# add config entries for SAML2 plugin
-CAT saml2.txt >> /var/www/html/config.php
-
-	
 RUN chown -R www-data /var/www/html
 
 # install odbc for shib sp
@@ -130,7 +129,7 @@ RUN chown -R www-data /var/www/html
 #    echo "Description = MariaDB Connector/ODBC v.3.1" >> MariaDB_odbc_driver_template.ini && \
 #    echo "Driver = /usr/lib/libmaodbc.so" >> MariaDB_odbc_driver_template.ini && \
 #    odbcinst -i -d -f MariaDB_odbc_driver_template.ini
-	
+
 #COPY shibboleth2.xml-template /etc/shibboleth/
 #COPY moodle-shib.conf /etc/apache2/conf-enabled/
 #COPY docker-entrypoint.d/* /docker-entrypoint.d/
