@@ -90,7 +90,7 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && cd /var/www/html/auth \
     && unzip saml2.zip \
     && rm saml2.zip \
-	
+
 	&& curl -L https://moodle.org/plugins/download.php/22379/enrol_arlo_moodle39_2020073111.zip -o /enrolarlo.zip \
     && cp /enrolarlo.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
@@ -114,6 +114,11 @@ COPY themes/favicon.ico /var/www/html/theme/maker/pix/
 
 # add custom font
 COPY fonts /var/www/html/theme/maker/fonts
+
+# add config entries for SAML2 plugin
+RUN echo "$CFG->auth_saml2_disco_url = '';" >> /var/www/html/config.php
+RUN echo "$CFG->auth_saml2_store = '\\auth_saml2\\redis_store';" >> /var/www/html/config.php
+RUN echo "$CFG->auth_saml2_redis_server = '';" >> /var/www/html/config.php
 	
 RUN chown -R www-data /var/www/html
 
