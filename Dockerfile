@@ -116,9 +116,8 @@ COPY themes/favicon.ico /var/www/html/theme/maker/pix/
 COPY fonts /var/www/html/theme/maker/fonts
 
 # add config entries for SAML2 plugin
-RUN echo "$CFG->auth_saml2_disco_url = '';" >> /var/www/html/config.php
-RUN echo "$CFG->auth_saml2_store = '\\auth_saml2\\redis_store';" >> /var/www/html/config.php
-RUN echo "$CFG->auth_saml2_redis_server = '';" >> /var/www/html/config.php
+RUN cat saml2.txt >> /var/www/html/config.php
+
 	
 RUN chown -R www-data /var/www/html
 
