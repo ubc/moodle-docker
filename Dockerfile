@@ -66,7 +66,7 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && cd /var/www/html/blocks \
     && unzip modulenav.zip \
     && rm modulenav.zip \
-	
+
     && curl -L https://moodle.org/plugins/download.php/20829/block_configurable_reports_moodle38_2019122000.zip -o /configurable.zip \
     && cp /configurable.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
@@ -78,13 +78,19 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && cd /var/www/html/local \
     && unzip boostnavig.zip \
     && rm boostnavig.zip \
-	
+
+    && curl -L https://moodle.org/plugins/download.php/20137/tool_mergeusers_moodle37_2019082000.zip -o /mergeuser.zip \
+    && cp /mergeuser.zip /var/www/html/admin/tool/ \
+    && cd /var/www/html/admin/tool \
+    && unzip mergeuser.zip \
+    && rm mergeuser.zip \
+
     && curl -L https://moodle.org/plugins/download.php/22379/enrol_arlo_moodle39_2020073111.zip -o /enrolarlo.zip \
     && cp /enrolarlo.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
     && unzip enrolarlo.zip \
     && rm enrolarlo.zip
-	
+
 # add custom cert
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
 
