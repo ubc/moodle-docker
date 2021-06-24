@@ -1,5 +1,0 @@
-$CFG->auth_saml2_disco_url = '';
-
-$CFG->auth_saml2_store = '\\auth_saml2\\redis_store';
-
-$CFG->auth_saml2_redis_server = '';

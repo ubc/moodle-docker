@@ -107,10 +107,6 @@ RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_mood
 # add custom cert
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
 
-# add config entries for SAML2 plugin
-#COPY saml2.txt /var/www/html/
-#RUN cat /var/www/html/saml2.txt >> /var/www/html/config.php
-
 # add custom theme
 COPY themes/maker-v5.1-moodle-3.8.zip /var/www/html/theme/ 
 RUN cd /var/www/html/theme \
