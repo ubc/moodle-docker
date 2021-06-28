@@ -16,12 +16,12 @@ if [ -z "$MOODLE_DB_HOST" ]; then
 	if [ -n "$MYSQL_PORT_3306_TCP_ADDR" ]; then
 		MOODLE_DB_HOST=$MYSQL_PORT_3306_TCP_ADDR
 	elif [ -n "$POSTGRES_PORT_5432_TCP_ADDR" ]; then
-		MOODLE_DB_TYPE=postgres
+		MOODLE_DB_TYPE=pgsql
 		MOODLE_DB_HOST=$POSTGRES_PORT_5432_TCP_ADDR
 	elif [ -n "$DB_PORT_3306_TCP_ADDR" ]; then
 		MOODLE_DB_HOST=$DB_PORT_3306_TCP_ADDR
 	elif [ -n "$DB_PORT_5432_TCP_ADDR" ]; then
-		MOODLE_DB_TYPE=postgres
+		MOODLE_DB_TYPE=pgsql
 		MOODLE_DB_HOST=$DB_PORT_5432_TCP_ADDR
 	else
 		echo >&2 'error: missing MOODLE_DB_HOST environment variable'
@@ -34,7 +34,7 @@ if [ -z "$MOODLE_DB_USER" ]; then
 	if [ "$MOODLE_DB_TYPE" = "mysql" -o "$MOODLE_DB_TYPE" = "mariadb" ]; then
 		echo >&2 'info: missing MOODLE_DB_USER environment variable, defaulting to "root"'
 		MOODLE_DB_USER=root
-	elif [ "$MOODLE_DB_TYPE" = "postgres" ]; then
+	elif [ "$MOODLE_DB_TYPE" = "pgsql" ]; then
 		echo >&2 'info: missing MOODLE_DB_USER environment variable, defaulting to "postgres"'
 		MOODLE_DB_USER=postgres
 	else
@@ -74,7 +74,7 @@ if [ -z "$MOODLE_DB_PORT" ]; then
 		MOODLE_DB_PORT=$DB_PORT_5432_TCP_PORT
 	elif [ "$MOODLE_DB_TYPE" = "mysql" -o "$MOODLE_DB_TYPE" = "mariadb" ]; then
 		MOODLE_DB_PORT="3306"
-	elif [ "$MOODLE_DB_TYPE" = "postgres" ]; then
+	elif [ "$MOODLE_DB_TYPE" = "pgsql" ]; then
 		MOODLE_DB_PORT="5432"
 	fi
 fi
