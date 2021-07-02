@@ -44,6 +44,7 @@ services:
       #- MOODLE_ADMIN_PASS=
       #- MOODLE_ADMIN_EMAIL=
       #- MOODLE_UPDATE=
+      #- MOODLE_REVERSE_PROXY=false
       #- MOODLE_SSL_PROXY=false
       - MOODLE_REDIS_HOST=redis
       - MOODLE_REDIS_PORT=6379

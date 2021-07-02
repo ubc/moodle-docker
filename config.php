@@ -318,7 +318,7 @@ if (getenv('REDIS_HOST')) {
 //
 // Enable when setting up advanced reverse proxy load balancing configurations,
 // it may be also necessary to enable this when using port forwarding.
-//      $CFG->reverseproxy = true;
+$CFG->reverseproxy = filter_var(loadenv('MOODLE_REVERSE_PROXY', false), FILTER_VALIDATE_BOOLEAN);
 //
 // Enable when using external SSL appliance for performance reasons.
 // Please note that site may be accessible via http: or https:, but not both!
