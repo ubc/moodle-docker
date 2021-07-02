@@ -282,7 +282,7 @@ if (getenv('REDIS_HOST')) {
     $CFG->session_redis_port = loadenv('REDIS_PORT', 6379);  // Optional.
     $CFG->session_redis_database = loadenv('REDIS_DB', 0);  // Optional, default is db 0.
     $CFG->session_redis_auth = ''; // Optional, default is don't set one.
-    $CFG->session_redis_prefix = loadenv('REDIS_PREFIX', '');; // Optional, default is don't set one.
+    $CFG->session_redis_prefix = loadenv('REDIS_PREFIX', ''); // Optional, default is don't set one.
     $CFG->session_redis_acquire_lock_timeout = 120;
     $CFG->session_redis_lock_expire = 7200;
 }
@@ -318,7 +318,7 @@ if (getenv('REDIS_HOST')) {
 //
 // Enable when setting up advanced reverse proxy load balancing configurations,
 // it may be also necessary to enable this when using port forwarding.
-//      $CFG->reverseproxy = true;
+$CFG->reverseproxy = filter_var(loadenv('MOODLE_REVERSE_PROXY', false), FILTER_VALIDATE_BOOLEAN);
 //
 // Enable when using external SSL appliance for performance reasons.
 // Please note that site may be accessible via http: or https:, but not both!
