@@ -282,7 +282,7 @@ if (getenv('REDIS_HOST')) {
     $CFG->session_redis_port = loadenv('REDIS_PORT', 6379);  // Optional.
     $CFG->session_redis_database = loadenv('REDIS_DB', 0);  // Optional, default is db 0.
     $CFG->session_redis_auth = ''; // Optional, default is don't set one.
-    $CFG->session_redis_prefix = loadenv('REDIS_PREFIX', '');; // Optional, default is don't set one.
+    $CFG->session_redis_prefix = loadenv('REDIS_PREFIX', ''); // Optional, default is don't set one.
     $CFG->session_redis_acquire_lock_timeout = 120;
     $CFG->session_redis_lock_expire = 7200;
 }
