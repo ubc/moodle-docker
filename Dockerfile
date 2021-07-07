@@ -84,6 +84,18 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && cd /var/www/html/admin/tool \
     && unzip mergeuser.zip \
     && rm mergeuser.zip \
+
+    && curl -L https://moodle.org/plugins/download.php/22662/filter_multilang2_moodle310_2020101300.zip -o /multi.zip \
+    && cp /multi.zip /var/www/html/filter/ \
+    && cd /var/www/html/filter \
+    && unzip multi.zip \
+    && rm multi.zip \
+
+    && curl -L https://moodle.org/plugins/download.php/22982/availability_language_moodle310_2020112700.zip -o /avail.zip \
+    && cp /avail.zip /var/www/html/availability/condition/ \
+    && cd /var/www/html/availability/condition \
+    && unzip avail.zip \
+    && rm avail.zip \
 	
     && curl -L https://moodle.org/plugins/download.php/22379/enrol_arlo_moodle39_2020073111.zip -o /enrolarlo.zip \
     && cp /enrolarlo.zip /var/www/html/enrol/ \
