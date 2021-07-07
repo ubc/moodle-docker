@@ -97,6 +97,12 @@ RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_mood
     && unzip avail.zip \
     && rm avail.zip \
 
+    && curl -L https://moodle.org/plugins/download.php/23089/block_panopto_moodle310_2020121100.zip -o /panopto.zip \
+    && cp /panopto.zip /var/www/html/blocks/ \
+    && cd /var/www/html/blocks \
+    && unzip panopto.zip \
+    && rm panopto.zip \
+
 	&& curl -L https://moodle.org/plugins/download.php/22379/enrol_arlo_moodle39_2020073111.zip -o /enrolarlo.zip \
     && cp /enrolarlo.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
@@ -113,6 +119,12 @@ RUN cd /var/www/html/theme \
     && unzip maker-v5.1-moodle-3.8.zip \
     && rm maker-v5.1-moodle-3.8.zip
 
+# add tinymce for panopto
+COPY plugin/panoptobutton.zip /var/www/html/lib/editor/tinymce/plugins/ 
+RUN cd /var/www/html/lib/editor/tinymce/plugins/ \
+    && unzip panoptobutton.zip \
+    && rm panoptobutton.zip
+	
 RUN cd /var/www/html/theme/maker/pix/ \
     && rm favicon.ico
 
