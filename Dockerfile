@@ -114,10 +114,10 @@ RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_mood
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
 
 # add custom theme
-COPY themes/maker-v5.1-moodle-3.8.zip /var/www/html/theme/ 
+COPY themes/maker-v6.1-moodle-3.9.zip /var/www/html/theme/ 
 RUN cd /var/www/html/theme \
-    && unzip maker-v5.1-moodle-3.8.zip \
-    && rm maker-v5.1-moodle-3.8.zip
+    && unzip maker-v6.1-moodle-3.9.zip \
+    && rm maker-v6.1-moodle-3.9.zip
 
 # add tinymce for panopto
 COPY plugin/panoptobutton.zip /var/www/html/lib/editor/tinymce/plugins/ 
