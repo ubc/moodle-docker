@@ -1,7 +1,7 @@
-FROM lthub/moodle:3.8.3
+FROM lthub/moodle:3.9.8
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
-RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_moodle39_2020011508.zip -o /questionnaire.zip \
+RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_moodle310_2020062302.zip -o /questionnaire.zip \
     && cp /questionnaire.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip questionnaire.zip \
@@ -13,13 +13,13 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && unzip certificate.zip \
     && rm certificate.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/21208/mod_customcert_moodle38_2019111804.zip -o /customcert.zip \
+    && curl -L https://moodle.org/plugins/download.php/24447/mod_customcert_moodle39_2020061502.zip -o /customcert.zip \
     && cp /customcert.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip customcert.zip \
     && rm customcert.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/21001/mod_hvp_moodle39_2020020500.zip -o /hvp.zip \
+    && curl -L https://moodle.org/plugins/download.php/24438/mod_hvp_moodle311_2021061100.zip -o /hvp.zip \
     && cp /hvp.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip hvp.zip \
@@ -37,7 +37,7 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && unzip customsql.zip \
     && rm customsql.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/20641/format_grid_moodle38_2019111700.zip -o /grid.zip \
+    && curl -L https://moodle.org/plugins/download.php/23795/format_grid_moodle38_2019111704.zip -o /grid.zip \
     && cp /grid.zip /var/www/html/course/format/ \
     && cd /var/www/html/course/format \
     && unzip grid.zip \
@@ -67,13 +67,13 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && unzip modulenav.zip \
     && rm modulenav.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/20829/block_configurable_reports_moodle38_2019122000.zip -o /configurable.zip \
+    && curl -L https://moodle.org/plugins/download.php/22758/block_configurable_reports_moodle310_2020110300.zip -o /configurable.zip \
     && cp /configurable.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
     && unzip configurable.zip \
     && rm configurable.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/21289/local_boostnavigation_moodle37_2020040100.zip -o /boostnavig.zip \
+    && curl -L https://moodle.org/plugins/download.php/22161/local_boostnavigation_moodle38_2020080400.zip -o /boostnavig.zip \
     && cp /boostnavig.zip /var/www/html/local/ \
     && cd /var/www/html/local \
     && unzip boostnavig.zip \
@@ -96,7 +96,13 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
     && cd /var/www/html/availability/condition \
     && unzip avail.zip \
     && rm avail.zip \
-	
+
+    && curl -L https://moodle.org/plugins/download.php/23089/block_panopto_moodle310_2020121100.zip -o /panopto.zip \
+    && cp /panopto.zip /var/www/html/blocks/ \
+    && cd /var/www/html/blocks \
+    && unzip panopto.zip \
+    && rm panopto.zip \
+
     && curl -L https://moodle.org/plugins/download.php/22379/enrol_arlo_moodle39_2020073111.zip -o /enrolarlo.zip \
     && cp /enrolarlo.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
@@ -107,10 +113,16 @@ RUN curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_mood
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
 
 # add custom theme
-COPY themes/maker-v5.1-moodle-3.8.zip /var/www/html/theme/ 
+COPY themes/maker-v6.1-moodle-3.9.zip /var/www/html/theme/ 
 RUN cd /var/www/html/theme \
-    && unzip maker-v5.1-moodle-3.8.zip \
-    && rm maker-v5.1-moodle-3.8.zip
+    && unzip maker-v6.1-moodle-3.9.zip \
+    && rm maker-v6.1-moodle-3.9.zip
+
+# add tinymce for panopto
+COPY plugin/panoptobutton.zip /var/www/html/lib/editor/tinymce/plugins/ 
+RUN cd /var/www/html/lib/editor/tinymce/plugins/ \
+    && unzip panoptobutton.zip \
+    && rm panoptobutton.zip
 
 RUN cd /var/www/html/theme/maker/pix/ \
     && rm favicon.ico
