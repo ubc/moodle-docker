@@ -31,13 +31,13 @@ RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_mood
     && unzip poll.zip \
     && rm poll.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/21871/report_customsql_moodle39_2020062800.zip -o /customsql.zip \
+    && curl -L https://moodle.org/plugins/download.php/24644/report_customsql_moodle311_2021070700.zip -o /customsql.zip \
     && cp /customsql.zip /var/www/html/report/ \
     && cd /var/www/html/report \
     && unzip customsql.zip \
     && rm customsql.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/23795/format_grid_moodle38_2019111704.zip -o /grid.zip \
+    && curl -L https://moodle.org/plugins/download.php/24594/format_grid_moodle39_2020070705.zip -o /grid.zip \
     && cp /grid.zip /var/www/html/course/format/ \
     && cd /var/www/html/course/format \
     && unzip grid.zip \
@@ -49,7 +49,7 @@ RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_mood
     && unzip flex.zip \
     && rm flex.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/18183/mod_facetoface_moodle35_2018110900.zip -o /facetoface.zip \
+    && curl -L https://moodle.org/plugins/download.php/23458/mod_facetoface_moodle39_2020080400.zip -o /facetoface.zip \
     && cp /facetoface.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip facetoface.zip \
@@ -61,7 +61,7 @@ RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_mood
     && unzip mass.zip \
     && rm mass.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/20585/block_course_modulenavigation_moodle38_2019052015.zip -o /modulenav.zip \
+    && curl -L https://moodle.org/plugins/download.php/21761/block_course_modulenavigation_moodle39_2020061615.zip -o /modulenav.zip \
     && cp /modulenav.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
     && unzip modulenav.zip \
@@ -126,12 +126,12 @@ RUN cd /var/www/html/lib/editor/tinymce/plugins/ \
 
 RUN cd /var/www/html/theme/maker/pix/ \
     && rm favicon.ico
-	
+
 COPY themes/favicon.ico /var/www/html/theme/maker/pix/ 
 
 # add custom font
 COPY fonts /var/www/html/theme/maker/fonts
-	
+
 RUN chown -R www-data /var/www/html
 
 # install odbc for shib sp
