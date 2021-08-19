@@ -34,7 +34,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-         images: ubcctlt/mediawiki
+         images: lthub/moodle
          # generate Docker tags based on the following events/attributes
          tags: |
            type=schedule
@@ -42,10 +42,7 @@ jobs:
            type=ref,event=pr
            type=ref,event=tag
            type=semver,pattern={{version}}
-           type=semver,pattern={{major}}.{{minor}}
-           type=semver,pattern={{major}}
            type=sha
-
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
