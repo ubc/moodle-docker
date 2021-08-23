@@ -103,11 +103,18 @@ RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_mood
     && unzip panopto.zip \
     && rm panopto.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/22379/enrol_arlo_moodle39_2020073111.zip -o /enrolarlo.zip \
+    && curl -L https://moodle.org/plugins/download.php/21850/local_recompletion_moodle39_2020062500.zip -o /recomplete.zip \
+    && cp /recomplete.zip /var/www/html/local/ \
+    && cd /var/www/html/local \
+    && unzip recomplete.zip \
+    && rm recomplete.zip \
+
+	&& curl -L https://moodle.org/plugins/download.php/22379/enrol_arlo_moodle39_2020073111.zip -o /enrolarlo.zip \
     && cp /enrolarlo.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
     && unzip enrolarlo.zip \
     && rm enrolarlo.zip
+
 
 # add custom cert
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
@@ -123,7 +130,7 @@ COPY plugin/panoptobutton.zip /var/www/html/lib/editor/tinymce/plugins/
 RUN cd /var/www/html/lib/editor/tinymce/plugins/ \
     && unzip panoptobutton.zip \
     && rm panoptobutton.zip
-
+	
 RUN cd /var/www/html/theme/maker/pix/ \
     && rm favicon.ico
 
