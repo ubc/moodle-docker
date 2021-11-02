@@ -54,6 +54,12 @@ RUN curl -L https://moodle.org/plugins/download.php/21114/mod_attendance_moodle3
     && cp /scheduler.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip scheduler.zip \
-    && rm scheduler.zip
+    && rm scheduler.zip \
+	
+	&& curl -L https://moodle.org/plugins/download.php/14412/message_slack_moodle33_2017040403.zip -o /slack.zip \
+    && cp /slack.zip /var/www/html/mod/ \
+    && cd /var/www/html/mod \
+    && unzip slack.zip \
+    && rm slack.zip
 
 RUN chown -R www-data /var/www/html
