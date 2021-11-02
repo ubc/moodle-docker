@@ -130,7 +130,10 @@ COPY plugin/panoptobutton.zip /var/www/html/lib/editor/tinymce/plugins/
 RUN cd /var/www/html/lib/editor/tinymce/plugins/ \
     && unzip panoptobutton.zip \
     && rm panoptobutton.zip
-	
+
+# add new config file for mergeuser plugin 
+COPY plugin/config.local.php /var/www/html/admin/tool/mergeusers/confg/
+
 RUN cd /var/www/html/theme/maker/pix/ \
     && rm favicon.ico
 
