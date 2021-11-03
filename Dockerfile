@@ -131,7 +131,7 @@ RUN cd /var/www/html/lib/editor/tinymce/plugins/ \
     && unzip panoptobutton.zip \
     && rm panoptobutton.zip
 
-# add new config file for mergeuser plugin 
+# add new config file for mergeusers plugin 
 COPY plugin/config.local.php /var/www/html/admin/tool/mergeusers/config/
 
 RUN cd /var/www/html/theme/maker/pix/ \
