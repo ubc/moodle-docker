@@ -57,8 +57,8 @@ RUN curl -L https://moodle.org/plugins/download.php/21114/mod_attendance_moodle3
     && rm scheduler.zip \
 	
 	&& curl -L https://moodle.org/plugins/download.php/14412/message_slack_moodle33_2017040403.zip -o /slack.zip \
-    && cp /slack.zip /var/www/html/mod/ \
-    && cd /var/www/html/mod \
+    && cp /slack.zip /var/www/html/message/output/ \
+    && cd /var/www/html/message/output \
     && unzip slack.zip \
     && rm slack.zip
 
