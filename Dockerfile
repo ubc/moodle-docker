@@ -32,7 +32,7 @@ RUN curl -L https://moodle.org/plugins/download.php/21114/mod_attendance_moodle3
     && unzip multichoiceset.zip \
     && rm multichoiceset.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/20616/enrol_autoenrol_moodle38_2019111800.zip -o /autoenrol.zip \
+    && curl -L https://moodle.org/plugins/download.php/25412/enrol_autoenrol_moodle311_2021101800.zip -o /autoenrol.zip \
     && cp /autoenrol.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
     && unzip autoenrol.zip \
