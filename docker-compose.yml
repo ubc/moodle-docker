@@ -73,7 +73,7 @@ services:
       - SHIBD_ATTRIBUTE_MAP_URL=https://sp1.shib3.id.ubc.ca/attribute-map.xml
       - SHIBD_SERVICE_NAME=shibd
       - SHIBD_SERVICE_PORT=1600
-      - PHP_MEMORY_LIMIT=256M
+      - PHP_MEMORY_LIMIT=512M
   redis:
     image: redis:5.0-alpine
     volumes:
