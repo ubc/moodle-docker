@@ -32,7 +32,7 @@ RUN curl -L https://moodle.org/plugins/download.php/21114/mod_attendance_moodle3
     && unzip multichoiceset.zip \
     && rm multichoiceset.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/25412/enrol_autoenrol_moodle311_2021101800.zip -o /autoenrol.zip \
+    && curl -L https://moodle.org/plugins/download.php/25539/enrol_autoenrol_moodle311_2021112600.zip -o /autoenrol.zip \
     && cp /autoenrol.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
     && unzip autoenrol.zip \
@@ -43,23 +43,17 @@ RUN curl -L https://moodle.org/plugins/download.php/21114/mod_attendance_moodle3
     && cd /var/www/html/course/format \
     && unzip buttons.zip \
     && rm buttons.zip \
-	
-	&& curl -L https://moodle.org/plugins/download.php/21132/theme_fordson_moodle38_2020030200.zip -o /fordson.zip \
+
+    && curl -L https://moodle.org/plugins/download.php/21132/theme_fordson_moodle38_2020030200.zip -o /fordson.zip \
     && cp /fordson.zip /var/www/html/theme/ \
     && cd /var/www/html/theme \
     && unzip fordson.zip \
     && rm fordson.zip \
-	
-	&& curl -L https://moodle.org/plugins/download.php/20738/mod_scheduler_moodle39_2019120200.zip -o /scheduler.zip \
+
+    && curl -L https://moodle.org/plugins/download.php/20738/mod_scheduler_moodle39_2019120200.zip -o /scheduler.zip \
     && cp /scheduler.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip scheduler.zip \
-    && rm scheduler.zip \
-	
-	&& curl -L https://moodle.org/plugins/download.php/14412/message_slack_moodle33_2017040403.zip -o /slack.zip \
-    && cp /slack.zip /var/www/html/message/output/ \
-    && cd /var/www/html/message/output \
-    && unzip slack.zip \
-    && rm slack.zip
+    && rm scheduler.zip
 
 RUN chown -R www-data /var/www/html
