@@ -177,8 +177,8 @@ if [ ! -e "$MOODLE_SHARED/installed" -a ! -f "$MOODLE_SHARED/install.lock" ]; th
         --adminuser=$MOODLE_ADMIN_USER \
         --adminpass=$MOODLE_ADMIN_PASS \
         --adminemail=$MOODLE_ADMIN_EMAIL \
-        --fullname=$MOODLE_SITE_FULLNAME \
-        --shortname=$MOODLE_SITE_SHORTNAME
+        --fullname="$MOODLE_SITE_FULLNAME" \
+        --shortname="$MOODLE_SITE_SHORTNAME"
     if [ -n $SMTP_HOST ]; then
         sudo -E -u www-data php admin/cli/cfg.php --name=smtphosts --set=$SMTP_HOST
     fi
