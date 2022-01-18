@@ -56,6 +56,6 @@ RUN curl -L https://moodle.org/plugins/download.php/21114/mod_attendance_moodle3
     && unzip scheduler.zip \
     && rm scheduler.zip
 
-COPY favicon.ico /var/www/html/theme/fordson/pix
+COPY favicon.ico /var/www/html/theme/boost/pix
 
 RUN chown -R www-data /var/www/html
