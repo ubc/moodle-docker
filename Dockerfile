@@ -1,4 +1,4 @@
-FROM lthub/moodle:3.9.11
+FROM lthub/moodle:3.9.12
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 RUN curl -L https://moodle.org/plugins/download.php/21114/mod_attendance_moodle38_2019112500.zip -o /attendance.zip \
@@ -32,7 +32,7 @@ RUN curl -L https://moodle.org/plugins/download.php/21114/mod_attendance_moodle3
     && unzip multichoiceset.zip \
     && rm multichoiceset.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/25412/enrol_autoenrol_moodle311_2021101800.zip -o /autoenrol.zip \
+    && curl -L https://moodle.org/plugins/download.php/25539/enrol_autoenrol_moodle311_2021112600.zip -o /autoenrol.zip \
     && cp /autoenrol.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
     && unzip autoenrol.zip \
