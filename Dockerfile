@@ -1,4 +1,4 @@
-FROM lthub/moodle:3.9.15
+FROM lthub/moodle:3.9.16
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_moodle310_2020062302.zip -o /questionnaire.zip \
@@ -115,24 +115,24 @@ RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_mood
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
 
 # add custom theme
-COPY themes/maker-v6.1-moodle-3.9.zip /var/www/html/theme/ 
+COPY themes/maker-v6.1-moodle-3.9.zip /var/www/html/theme/
 RUN cd /var/www/html/theme \
     && unzip maker-v6.1-moodle-3.9.zip \
     && rm maker-v6.1-moodle-3.9.zip
 
 # add tinymce for panopto
-COPY plugin/panoptobutton.zip /var/www/html/lib/editor/tinymce/plugins/ 
+COPY plugin/panoptobutton.zip /var/www/html/lib/editor/tinymce/plugins/
 RUN cd /var/www/html/lib/editor/tinymce/plugins/ \
     && unzip panoptobutton.zip \
     && rm panoptobutton.zip
 
-# add new config file for mergeusers plugin 
+# add new config file for mergeusers plugin
 COPY plugin/config.local.php /var/www/html/admin/tool/mergeusers/config/
 
 RUN cd /var/www/html/theme/maker/pix/ \
     && rm favicon.ico
 
-COPY themes/favicon.ico /var/www/html/theme/maker/pix/ 
+COPY themes/favicon.ico /var/www/html/theme/maker/pix/
 
 # add custom font
 COPY fonts /var/www/html/theme/maker/fonts
