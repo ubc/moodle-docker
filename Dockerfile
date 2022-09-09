@@ -1,7 +1,7 @@
 FROM lthub/moodle:3.9.16
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
-RUN curl -L https://moodle.org/plugins/download.php/26900/mod_questionnaire_moodle40_2021062301.zip -o /questionnaire.zip \
+RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_moodle310_2020062302.zip -o /questionnaire.zip \
     && cp /questionnaire.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip questionnaire.zip \
@@ -13,7 +13,7 @@ RUN curl -L https://moodle.org/plugins/download.php/26900/mod_questionnaire_mood
     && unzip certificate.zip \
     && rm certificate.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/25878/mod_hvp_moodle40_2022012000.zip -o /hvp.zip \
+    && curl -L https://moodle.org/plugins/download.php/24438/mod_hvp_moodle311_2021061100.zip -o /hvp.zip \
     && cp /hvp.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip hvp.zip \
@@ -103,7 +103,7 @@ RUN curl -L https://moodle.org/plugins/download.php/26900/mod_questionnaire_mood
     && unzip recomplete.zip \
     && rm recomplete.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/27469/enrol_arlo_moodle311_2022090100.zip -o /enrolarlo.zip \
+    && curl -L https://github.com/ubc/moodle-enrol_arlo/archive/refs/heads/master.zip -o /enrolarlo.zip \
     && cp /enrolarlo.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
     && unzip enrolarlo.zip \
