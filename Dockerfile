@@ -103,7 +103,7 @@ RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_mood
     && unzip recomplete.zip \
     && rm recomplete.zip \
 
-    && curl -L https://github.com/ubc/moodle-enrol_arlo/archive/refs/heads/master.zip -o /enrolarlo.zip \
+    && curl -L https://moodle.org/plugins/download.php/27469/enrol_arlo_moodle311_2022090100.zip -o /enrolarlo.zip \
     && cp /enrolarlo.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
     && unzip enrolarlo.zip \
