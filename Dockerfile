@@ -1,4 +1,4 @@
-FROM lthub/moodle:3.9.20
+FROM lthub/moodle:3.9.21
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_moodle310_2020062302.zip -o /questionnaire.zip \
