@@ -13,7 +13,7 @@ RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_mood
     && unzip certificate.zip \
     && rm certificate.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/25878/mod_hvp_moodle40_2022012000.zip -o /hvp.zip \
+    && curl -L https://moodle.org/plugins/download.php/28179/mod_hvp_moodle41_2022121200.zip -o /hvp.zip \
     && cp /hvp.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip hvp.zip \
