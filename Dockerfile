@@ -107,6 +107,7 @@ RUN curl -L https://moodle.org/plugins/download.php/22949/mod_questionnaire_mood
     && cp /enrolarlo.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
     && unzip enrolarlo.zip \
+    && mv moodle-enrol_arlo-3.11.3 arlo \
     && rm enrolarlo.zip
 
 
