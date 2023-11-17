@@ -1,8 +1,7 @@
 ## MoodleCPD 4.1LTS 
 * Documentation in progress....
 
-<img width="351" alt="moodleCPDDesign1" src="https://github.com/ubc/moodle-docker/assets/86985864/acb614d9-cdb2-470c-a816-4095b96e987a">
-
+<img width="847" alt="MoodleCPD_L2" src="https://github.com/ubc/moodle-docker/assets/86985864/bb61e8a3-866d-4f5e-8a62-1a900e874511">
 
 
 ## Known Issues
