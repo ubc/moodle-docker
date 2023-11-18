@@ -3,6 +3,7 @@
 
 <img width="351" alt="moodleCPDDesign1" src="https://github.com/ubc/moodle-docker/assets/86985864/acb614d9-cdb2-470c-a816-4095b96e987a">
 
+* Source: https://moodledev.io/general/releases/4.1
 
 ## Known Issues
 
