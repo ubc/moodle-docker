@@ -9,33 +9,33 @@
 
 * HOW-TO Build Moodle CPD from MoodleCore 4.1-LTS with Github > Codespace
 
-** - (optional) fork "moodlecore-4.1LTS" branch
+*** - (optional) fork "moodlecore-4.1LTS" branch
 
-** - From "moodlecore-4.1LTS" branch:
+*** - From "moodlecore-4.1LTS" branch:
     - click on the (green button) "<> CODE" 
     - select "Codespaces" tab 
     - click the + to launch Codespaces instance
 
-** - This will launch a default Codespaces instance with 2-core 8GB RAM, 32GB (sufficient to build this image)
+*** - This will launch a default Codespaces instance with 2-core 8GB RAM, 32GB (sufficient to build this image)
 
-** - The browser navigates to the codespace instance: something like this... <some random name>gp.github.dev
+*** - The browser navigates to the codespace instance: something like this... <some random name>gp.github.dev
 
-** - At bottom, select tab "Terminal" - this is bash shell 
+*** - At bottom, select tab "Terminal" - this is bash shell 
     - Edit Dockerfile or other 
     - After completed the change (if any), then do build image
 
-** - Execute > docker-compose build
+*** - Execute > docker-compose build
     - After build completed, tag the image. 
 
-** - (optional) docker login -u <your hub.docker.com accout>
+*** - (optional) docker login -u <your hub.docker.com accout>
 
-** - Execute > docker tag <some image ID> <your hub.docker.com accout>/moodlecore:4.1.6-<unique id>
+*** - Execute > docker tag <some image ID> <your hub.docker.com accout>/moodlecore:4.1.6-<unique id>
     - example, docker tag eb73e7a5c010 hubdocker2020/moodlecore:4.1.6-eb73e7a5c010
 
-** - Execute > docker push <your hub.docker.com accout>/moodlecore:4.1.6-<unique id>
+*** - Execute > docker push <your hub.docker.com accout>/moodlecore:4.1.6-<unique id>
     - example, docker push hubdocker2020/moodlecore:4.1.6-eb73e7a5c010
 
-** - DONE with MoodleCore 4.1 LTS, on your hub.docker.com account. 
+*** - DONE with MoodleCore 4.1 LTS, on your hub.docker.com account. 
 
 
 
@@ -43,17 +43,17 @@
 
 * After completion of Option 1 above:
 
-** - commit the change back to main repo branch "moodlecore-4.1LTS"
+*** - commit the change back to main repo branch "moodlecore-4.1LTS"
 
-** - this action will trigger auto build of image and it should be ready for next step
+*** - this action will trigger auto build of image and it should be ready for next step
 
-** - DONE with MoodleCore 4.1 LTS, but on LTHub: https://hub.docker.com/u/lthub
+*** - DONE with MoodleCore 4.1 LTS, but on LTHub: https://hub.docker.com/u/lthub
 
 
 
 * Step 3: for building Moodle CPD with images from Step 1 or Step 2 above:
 
-** Link here: https://github.com/ubc/moodle-docker/tree/moodlecpd-4.1LTS
+*** Link here: https://github.com/ubc/moodle-docker/tree/moodlecpd-4.1LTS
 
 -----------------------
 
