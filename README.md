@@ -13,6 +13,7 @@
 * Step 3: for development 
 
 * HOW-TO Build MoodleCPD from MoodleCore 4.1-LTS with Github > Codespace
+
 * - (optional) fork "moodlecpd-4.1LTS" branch
   - From "moodlecpd-4.1LTS" branch:
   - click on the (green button) "<> CODE"
@@ -58,13 +59,13 @@
     - Check value_stg2.yaml about line 16, for repo location and tag
       - image:
         - repository: lthub/moodlecore
-        - tag: medicinecore-4.1.6
+        - tag: moodlecore-4.1.6
 
   - value_stg2.yaml about line 102, for database name: 
     - db:
       - type: mysqli
     - auth:
-      - database: mdl_ubccpd2
+      - database: mdl_ubccpd_stg2
 
   - value_stg2.yaml about line 254, for NFS moodledata folder location: 
     - resources:
