@@ -1,5 +1,4 @@
-
-FROM lthub/moodle:4.1.0
+FROM lthub/moodle:moodlecore-4.1LTS
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 
@@ -111,16 +110,16 @@ RUN curl -L https://moodle.org/plugins/download.php/26900/mod_questionnaire_mood
     && cp /recomplete.zip /var/www/html/local/ \
     && cd /var/www/html/local \
     && unzip recomplete.zip \
-    && rm recomplete.zip \
+    && rm recomplete.zip 
 
 
 #This is the latest version of this plugin moodle311 - checked again on 11Jan2023 16:38: 
 #ARLO plugin requires Arlo_connection setting.
-    && curl -L https://moodle.org/plugins/download.php/27469/enrol_arlo_moodle311_2022090100.zip -o /enrolarlo.zip \
-    && cp /enrolarlo.zip /var/www/html/enrol/ \
-    && cd /var/www/html/enrol \
-    && unzip enrolarlo.zip \
-    && rm enrolarlo.zip
+#    && curl -L https://moodle.org/plugins/download.php/27469/enrol_arlo_moodle311_2022090100.zip -o /enrolarlo.zip \
+#    && cp /enrolarlo.zip /var/www/html/enrol/ \
+#    && cd /var/www/html/enrol \
+#    && unzip enrolarlo.zip \
+#    && rm enrolarlo.zip
 
 
 # add custom cert
