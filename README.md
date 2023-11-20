@@ -24,7 +24,7 @@
 
   - (optional) docker login -u <your hub.docker.com accout>
 
-  - Execute > docker tag <some image ID> <your hub.docker.com accout>/moodlecore:4.1.6-<unique id>
+  - Execute > docker tag [some image ID] [your hub.docker.com accout]/moodlecore:4.1.6-[some unique id] 
     - example, docker tag eb73e7a5c010 hubdocker2020/moodlecore:4.1.6-eb73e7a5c010
 
   - Execute > docker push <your hub.docker.com accout>/moodlecore:4.1.6-<unique id>
