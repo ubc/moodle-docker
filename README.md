@@ -40,7 +40,7 @@
 
   - commit the change back to main repo branch "moodlecore-4.1LTS"
 
-  - this action will trigger auto build of image and it should be ready for next step
+  - this "commit" step will initiate the automatic building of the image to LTHub, making it ready for the next step 3: building Moodle CPD.
 
   - DONE with MoodleCore 4.1 LTS, but on LTHub: https://hub.docker.com/u/lthub
 
