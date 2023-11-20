@@ -53,6 +53,26 @@
 
 * Step 5: for building MoodleCPD with MoodleCore image from Step 3 OR Step 4 above:
 
+
+  - Update values_stg2.yaml with the following:
+    - Check value_stg2.yaml about line 16, for repo location and tag
+      - image:
+        - repository: lthub/moodlecore
+        - tag: medicinecore-4.1.6
+
+  - value_stg2.yaml about line 102, for database name: 
+    - db:
+      - type: mysqli
+    - auth:
+      - database: mdl_ubccpd2
+
+  - value_stg2.yaml about line 254, for NFS moodledata folder location: 
+    - resources:
+      - nfs:
+        - server: storageverf.lthub.ubc.ca
+        - path: "/medicinemoodlestg2"
+
+
   - Launch HELM: 
 
     - helm INSTALL -n default -f ./configuration/moodle/values_stg2.yaml  moodle-medicine-stg2 ./charts/moodle/
