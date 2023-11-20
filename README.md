@@ -57,7 +57,12 @@
 
     - helm UPGRADE -n default -f ./configuration/moodle/values_stg2.yaml  moodle-medicine-stg2 ./charts/moodle/
 
+-----------------------
 
+* Optional Moodle CLI commands:
+
+  - upgrade command: php ./admin/cli/upgrade.php
+  - clear cache command: php ./admin/cli/purge_cache.php
 
 -----------------------
 
