@@ -30,7 +30,7 @@
   - Execute > docker push <your hub.docker.com accout>/moodlecore:4.1.6-<unique id>
     - example, docker push hubdocker2020/moodlecore:4.1.6-eb73e7a5c010
 
-  - DONE with MoodleCore 4.1 LTS, on your hub.docker.com account. 
+  - DONE with buidling MoodleCore 4.1 LTS image to your hub.docker.com account. 
 
 
 
@@ -38,17 +38,18 @@
 
 * After completion of Option 1 above:
 
-*** - commit the change back to main repo branch "moodlecore-4.1LTS"
+  - commit the change back to main repo branch "moodlecore-4.1LTS"
 
-*** - this action will trigger auto build of image and it should be ready for next step
+  - this action will trigger auto build of image and it should be ready for next step
 
-*** - DONE with MoodleCore 4.1 LTS, but on LTHub: https://hub.docker.com/u/lthub
+  - DONE with MoodleCore 4.1 LTS, but on LTHub: https://hub.docker.com/u/lthub
 
 
 
 * Step 3: for building Moodle CPD with images from Step 1 or Step 2 above:
 
-*** Link here: https://github.com/ubc/moodle-docker/tree/moodlecpd-4.1LTS
+  - To build Moodle CPD click here for next steps: https://github.com/ubc/moodle-docker/tree/moodlecpd-4.1LTS
+
 
 -----------------------
 
