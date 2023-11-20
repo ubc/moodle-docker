@@ -8,13 +8,11 @@
 * Step 1: for development 
 
 * HOW-TO Build Moodle CPD from MoodleCore 4.1-LTS with Github > Codespace
-
-*** - (optional) fork "moodlecore-4.1LTS" branch
-
-*** - From "moodlecore-4.1LTS" branch:
-    - click on the (green button) "<> CODE" 
-    - select "Codespaces" tab 
-    - click the + to launch Codespaces instance
+* - (optional) fork "moodlecore-4.1LTS" branch
+  - From "moodlecore-4.1LTS" branch:
+  - click on the (green button) "<> CODE"
+  - select "Codespaces" tab
+  - click the + to launch Codespaces instance
 
 *** - This will launch a default Codespaces instance with 2-core 8GB RAM, 32GB (sufficient to build this image)
 
