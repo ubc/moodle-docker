@@ -6,6 +6,10 @@
 
 ## Build MoodleCPD Image
 
+* Step 1-2: build MoodleCore 4.1-LTS
+  - Source to build MoodleCore https://github.com/ubc/moodle-docker/tree/moodlecore-4.1LTS 
+
+
 * Step 3: for development 
 
 * HOW-TO Build MoodleCPD from MoodleCore 4.1-LTS with Github > Codespace
