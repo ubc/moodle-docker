@@ -46,7 +46,7 @@
 
 
 
-* Step 3: for building Moodle CPD with images from Step 1 or Step 2 above:
+* Step 3: for building Moodle CPD with core image from Step 1 OR Step 2 above:
 
   - To build Moodle CPD click here for next steps: https://github.com/ubc/moodle-docker/tree/moodlecpd-4.1LTS
 
