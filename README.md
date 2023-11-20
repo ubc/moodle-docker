@@ -22,12 +22,12 @@
   - Execute > docker-compose build
     - After build completed, tag the image. 
 
-  - (optional) docker login -u <your hub.docker.com accout>
+  - (optional) docker login -u [your hub.docker.com accout]
 
   - Execute > docker tag [some image ID] [your hub.docker.com accout]/moodlecore:4.1.6-[some unique id] 
     - example, docker tag eb73e7a5c010 hubdocker2020/moodlecore:4.1.6-eb73e7a5c010
 
-  - Execute > docker push <your hub.docker.com accout>/moodlecore:4.1.6-<unique id>
+  - Execute > docker push [your hub.docker.com accout]/moodlecore:4.1.6-[some unique id]
     - example, docker push hubdocker2020/moodlecore:4.1.6-eb73e7a5c010
 
   - DONE with buidling MoodleCore 4.1 LTS image to your hub.docker.com account. 
@@ -54,6 +54,8 @@
 -----------------------
 
 * Source: https://moodledev.io/general/releases/4.1
+
+-----------------------
 
 ## Known Issues
 
