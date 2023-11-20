@@ -8,7 +8,7 @@
 
 * Step 3: for development 
 
-* HOW-TO Build MoodleCPD from MoodleCPD 4.1-LTS with Github > Codespace
+* HOW-TO Build MoodleCPD from MoodleCore 4.1-LTS with Github > Codespace
 * - (optional) fork "moodlecpd-4.1LTS" branch
   - From "moodlecpd-4.1LTS" branch:
   - click on the (green button) "<> CODE"
@@ -49,7 +49,14 @@
 
 * Step 5: for building MoodleCPD with MoodleCore image from Step 3 OR Step 4 above:
 
-  - To launch with HELM
+  - Launch HELM: 
+
+    - helm INSTALL -n default -f ./configuration/moodle/values_stg2.yaml  moodle-medicine-stg2 ./charts/moodle/
+
+  - OR 
+
+    - helm UPGRADE -n default -f ./configuration/moodle/values_stg2.yaml  moodle-medicine-stg2 ./charts/moodle/
+
 
 
 -----------------------
