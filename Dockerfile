@@ -125,6 +125,12 @@ RUN curl -L https://moodle.org/plugins/download.php/26900/mod_questionnaire_mood
 # add custom cert
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
 
+# add custom moove theme
+COPY themes/moove_premium.zip /var/www/html/theme/
+RUN cd /var/www/html/theme \
+    && unzip moove_premium.zip \
+    && rm moove_premium.zip 
+
 # add custom theme
 COPY themes/maker-v10.0-moodle-4.1.zip /var/www/html/theme/
 RUN cd /var/www/html/theme \
@@ -141,13 +147,20 @@ RUN cd /var/www/html/lib/editor/tinymce/plugins/ \
 # add new config file for mergeusers plugin
 COPY plugin/config.local.php /var/www/html/admin/tool/mergeusers/config/
 
+
 RUN cd /var/www/html/theme/maker/pix/ \
     && rm favicon.ico
 
 COPY themes/favicon.ico /var/www/html/theme/maker/pix/
 
+# add favicon to moove
+COPY themes/favicon.ico /var/www/html/theme/moove/pix/
+
 # add custom font
 COPY fonts /var/www/html/theme/maker/fonts
+
+# add custom font to moove
+COPY fonts /var/www/html/theme/moove/fonts
 
 RUN chown -R www-data /var/www/html
 
