@@ -1,8 +1,8 @@
 FROM lthub/moodle:moodlecore-4.1LTS
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
-
-RUN curl -L https://moodle.org/plugins/download.php/26900/mod_questionnaire_moodle40_2021062301.zip -o /questionnaire.zip \
+#Updated to newer questionnaire 10Dec2023
+RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_moodle42_2022092202.zip -o /questionnaire.zip \
     && cp /questionnaire.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip questionnaire.zip \
