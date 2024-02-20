@@ -1,7 +1,7 @@
-FROM lthub/moodle:3.9.24
+FROM lthub/moodle:4.1.6
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
-RUN curl -L https://moodle.org/plugins/download.php/21114/mod_attendance_moodle38_2019112500.zip -o /attendance.zip \
+RUN curl -L https://moodle.org/plugins/download.php/28807/mod_attendance_moodle41_2023020107.zip -o /attendance.zip \
     && cp /attendance.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip attendance.zip \
@@ -14,43 +14,49 @@ RUN curl -L https://moodle.org/plugins/download.php/21114/mod_attendance_moodle3
 #     && unzip collaborate.zip \
 #     && rm collaborate.zip
 
-    && curl -L https://moodle.org/plugins/download.php/21849/mod_questionnaire_moodle39_2020011508.zip -o /questionnaire.zip \
+    && curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_moodle42_2022092202.zip -o /questionnaire.zip \
     && cp /questionnaire.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip questionnaire.zip \
     && rm questionnaire.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/14021/block_accessibility_moodle31_2017051700.zip -o /accessibility.zip \
+    && curl -L https://moodle.org/plugins/download.php/25162/block_accessibility_moodle311_2021092202.zip -o /accessibility.zip \
     && cp /accessibility.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
     && unzip accessibility.zip \
     && rm accessibility.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/19504/qtype_multichoiceset_moodle38_2019050800.zip -o /multichoiceset.zip \
+    && curl -L https://moodle.org/plugins/download.php/27343/qtype_multichoiceset_moodle40_2022081100.zip -o /multichoiceset.zip \
     && cp /multichoiceset.zip /var/www/html/question/type/ \
     && cd /var/www/html/question/type \
     && unzip multichoiceset.zip \
     && rm multichoiceset.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/26874/enrol_autoenrol_moodle40_2022062000.zip -o /autoenrol.zip \
+    && curl -L https://moodle.org/plugins/download.php/31161/enrol_autoenrol_moodle43_2024021900.zip -o /autoenrol.zip \
     && cp /autoenrol.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
     && unzip autoenrol.zip \
     && rm autoenrol.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/20381/format_buttons_moodle38_2019100702.zip -o /buttons.zip \
+    && curl -L https://moodle.org/plugins/download.php/28551/format_buttons_moodle41_2022020801.zip -o /buttons.zip \
     && cp /buttons.zip /var/www/html/course/format/ \
     && cd /var/www/html/course/format \
     && unzip buttons.zip \
     && rm buttons.zip \
 
-	&& curl -L https://moodle.org/plugins/download.php/21132/theme_fordson_moodle38_2020030200.zip -o /fordson.zip \
+	&& curl -L https://moodle.org/plugins/download.php/24737/theme_fordson_moodle311_2021072100.zip -o /fordson.zip \
     && cp /fordson.zip /var/www/html/theme/ \
     && cd /var/www/html/theme \
     && unzip fordson.zip \
     && rm fordson.zip \
+	
+	&& curl -L https://moodle.org/plugins/download.php/29744/theme_learnr_moodle42_2023071008.zip -o /learnr.zip \
+    && cp /learnr.zip /var/www/html/theme/ \
+    && cd /var/www/html/theme \
+    && unzip learnr.zip \
+    && rm learnr.zip \
 
-	&& curl -L https://moodle.org/plugins/download.php/20738/mod_scheduler_moodle39_2019120200.zip -o /scheduler.zip \
+	&& curl -L https://moodle.org/plugins/download.php/29293/mod_scheduler_moodle42_2023052300.zip -o /scheduler.zip \
     && cp /scheduler.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip scheduler.zip \
