@@ -43,7 +43,7 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && unzip multichoiceset.zip \
     && rm multichoiceset.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/26874/enrol_autoenrol_moodle42_2022062000.zip -o /autoenrol.zip \
+    && curl -L https://moodle.org/plugins/download.php/31161/enrol_autoenrol_moodle43_2024021900.zip -o /autoenrol.zip \
     && cp /autoenrol.zip /var/www/html/enrol/ \
     && cd /var/www/html/enrol \
     && unzip autoenrol.zip \
