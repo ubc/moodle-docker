@@ -14,7 +14,7 @@ WORKDIR /var/www/html
 RUN apt-get update \
     && apt-get -qq install graphviz aspell ghostscript libpspell-dev libpng-dev libicu-dev libxml2-dev libldap2-dev sudo netcat unzip libssl-dev zlib1g-dev libjpeg-dev libfreetype6-dev libzip-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pspell gd intl xml xmlrpc ldap zip soap mysqli opcache \
+    && docker-php-ext-install -j$(nproc) pspell gd intl xml xmlrpc ldap zip soap mysqli opcache exif \
     && pecl install redis \
     && docker-php-ext-enable redis \
     && docker-php-ext-enable exif \
