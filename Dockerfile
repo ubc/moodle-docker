@@ -17,6 +17,7 @@ RUN apt-get update \
     && docker-php-ext-install -j$(nproc) pspell gd intl xml xmlrpc ldap zip soap mysqli opcache \
     && pecl install redis \
     && docker-php-ext-enable redis \
+    && docker-php-ext-enable exif \
     && curl -L https://github.com/moodle/moodle/archive/v${MOODLE_VERSION}.tar.gz | tar xz --strip=1 \
     && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && mkdir -p /moodledata /var/local/cache \
