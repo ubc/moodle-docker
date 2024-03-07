@@ -1,4 +1,4 @@
-FROM lthub/moodle:4.1.9
+FROM lthub/moodle:4.1.9-1
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 RUN curl -L https://moodle.org/plugins/download.php/28807/mod_attendance_moodle41_2023020107.zip -o /attendance.zip \
