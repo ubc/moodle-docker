@@ -1,5 +1,8 @@
-FROM lthub/moodle:moodlecore-4.1LTS
-MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
+##FROM lthub/moodle:moodlecore-4.1LTS
+##FROM dangtue2020/moodlecore:417stg2-f6d8db1187fe
+##FROM dangtue2020/moodlecore:418stg2-4c9b99230294
+##FROM dangtue2020/moodlecore:418stg2-4432ea1f4024
+FROM dangtue2020/moodlecore:419stg2-bb4b231d8e23
 
 #Updated to newer questionnaire 10Dec2023
 RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_moodle42_2022092202.zip -o /questionnaire.zip \
@@ -15,8 +18,8 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && unzip certificate.zip \
     && rm certificate.zip \
 
-#Updated to newer hvp 10Dec2023
-    && curl -L https://moodle.org/plugins/download.php/29419/mod_hvp_moodle42_2023061200.zip -o /hvp.zip \
+#Updated to newer hvp 10Dec2023 and 18Apr2024
+    && curl -L https://moodle.org/plugins/download.php/30739/mod_hvp_moodle43_2023122500.zip -o /hvp.zip \
     && cp /hvp.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip hvp.zip \
@@ -37,15 +40,15 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && unzip customsql.zip \
     && rm customsql.zip \ 
 
-#Updated as of 11Dec2023
-    && curl -L https://moodle.org/plugins/download.php/30206/format_grid_moodle41_2022112607.zip -o /grid.zip \
+#Updated as of 11Dec2023 and 18Apr2024
+    && curl -L https://moodle.org/plugins/download.php/31635/format_grid_moodle41_2022112609.zip -o /grid.zip \
     && cp /grid.zip /var/www/html/course/format/ \
     && cd /var/www/html/course/format \
     && unzip grid.zip \
     && rm grid.zip \
  
- #Updated as of 11Dec2023
-    && curl -L https://moodle.org/plugins/download.php/29754/format_flexsections_moodle42_2023080800.zip -o /flex.zip \
+ #Updated as of 11Dec2023 and 18Apr2024
+    && curl -L https://moodle.org/plugins/download.php/30735/format_flexsections_moodle43_2023122300.zip -o /flex.zip \
     && cp /flex.zip /var/www/html/course/format/ \
     && cd /var/www/html/course/format \
     && unzip flex.zip \
@@ -87,15 +90,14 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && unzip boostnavig.zip \
     && rm boostnavig.zip \ 
 
-
-    && curl -L https://moodle.org/plugins/download.php/24764/tool_mergeusers_moodle311_2021072200.zip -o /mergeuser.zip \
+    && curl -L https://moodle.org/plugins/download.php/28943/tool_mergeusers_moodle41_2023040402.zip -o /mergeuser.zip \
     && cp /mergeuser.zip /var/www/html/admin/tool/ \
     && cd /var/www/html/admin/tool \
     && unzip mergeuser.zip \
     && rm mergeuser.zip \ 
 
-#Updated as of 11Dec2023
-    && curl -L https://moodle.org/plugins/download.php/29794/filter_multilang2_moodle42_2022120900.zip -o /multi.zip \
+#Updated as of 11Dec2023 and 18Apr2024
+    && curl -L https://moodle.org/plugins/download.php/31000/filter_multilang2_moodle43_2024013101.zip -o /multi.zip \
     && cp /multi.zip /var/www/html/filter/ \
     && cd /var/www/html/filter \
     && unzip multi.zip \
@@ -116,21 +118,20 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && unzip panopto.zip \
     && rm panopto.zip \
 
-#Updated as of 11Dec2023
-    && curl -L https://moodle.org/plugins/download.php/30492/local_recompletion_moodle42_2023111402.zip -o /recomplete.zip \
+#Updated as of 11Dec2023 and 18Apr2024
+    && curl -L https://moodle.org/plugins/download.php/31207/local_recompletion_moodle42_2023112702.zip -o /recomplete.zip \
     && cp /recomplete.zip /var/www/html/local/ \
     && cd /var/www/html/local \
     && unzip recomplete.zip \
-    && rm recomplete.zip 
+    && rm recomplete.zip \
 
-
-#This is the latest version of this plugin moodle311 - checked again on 11Jan2023 16:38: 
+#This is the latest version of this plugin ARLO v4.1.4 - checked again on 23Jan2024 12:38: 
 #ARLO plugin requires Arlo_connection setting.
-#    && curl -L https://moodle.org/plugins/download.php/27469/enrol_arlo_moodle311_2022090100.zip -o /enrolarlo.zip \
-#    && cp /enrolarlo.zip /var/www/html/enrol/ \
-#    && cd /var/www/html/enrol \
-#    && unzip enrolarlo.zip \
-#    && rm enrolarlo.zip
+    && curl -L https://moodle.org/plugins/download.php/30634/enrol_arlo_moodle42_2023110900.zip -o /enrolarlo.zip \
+    && cp /enrolarlo.zip /var/www/html/enrol/ \
+    && cd /var/www/html/enrol \
+    && unzip enrolarlo.zip \
+    && rm enrolarlo.zip
 
 
 # add custom cert
@@ -189,5 +190,10 @@ COPY shibboleth2.xml-template /etc/shibboleth/
 COPY moodle-shib.conf /etc/apache2/conf-enabled/
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
 COPY 000-default.conf /etc/apache2/sites-available/
+
+# add modified files for Language Icon
+COPY themes/maker-header.mustache /var/www/html/theme/maker/templates/header.mustache
+COPY themes/boost-language_menu.mustache /var/www/html/theme/boost/templates/language_menu.mustache
+
 
 RUN chmod -R 755 /docker-entrypoint.d/
