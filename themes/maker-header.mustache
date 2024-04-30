@@ -18,6 +18,7 @@
     Page header.
 }}
 
+
 <header id="header" class="page-header page-header-top-bar navbar" role="banner">
 	<div class="top-bar">
 		<div class="container-fluid">
@@ -43,27 +44,54 @@
 				    <div id="usernavigation" class="navbar-nav ml-auto">
 
 
+
 <div class="divider border-left h-75 align-self-center mx-1"></div>
 
-<div class="langmenu" style="width:120px; margin:10 auto;">
+
+
+<div class="langmenu" style="width:200px; margin:10 auto;">
     <div class="dropdown show">
-        <a href="#" role="button" id="lang-menu-toggle" data-toggle="dropdown" aria-label="Language" aria-haspopup="true" aria-controls="lang-action-menu" class="btn dropdown-toggle">
+        <a href="/moodle-4.1.8/?lang=en" role="button" id="lang-menu-toggle" data-toggle="dropdown" aria-label="Language" aria-haspopup="true" aria-controls="lang-action-menu" class="btn dropdown-toggle">
             <i class="icon fa fa-language fa-fw mr-1" aria-hidden="true"></i>
-            <span class="langbutton">
-                Language
-            </span>
+            <span class="langbutton">Language</span>
             <b class="caret"></b>
         </a>
         <div role="menu" aria-labelledby="lang-menu-toggle" id="lang-action-menu" class="dropdown-menu dropdown-menu-right">
-                    <a id="dynamic-link-en" href="#" class="dropdown-item pl-5" lang="en">
-                        English
-                    </a>
-                    <a id="dynamic-link-fr-ca" href="#" class="dropdown-item pl-5" role="menuitem" lang="fr_ca">
-                        Français (Canada)
-                    </a>
+            <a id="dynamic-link-en" class="dropdown-item pl-5" lang="en">English</a>
+            <a id="dynamic-link-fr-ca" class="dropdown-item pl-5" role="menuitem" lang="fr_ca">Français (Canada)</a>
         </div>
     </div>
 </div>
+
+<script>
+function updateLanguageLinks() {
+    const currentUrl = new URL(window.location.href);
+
+    // Check if there's a 'lang' parameter in the URL or use the page's language attribute
+    const currentLang = currentUrl.searchParams.get('lang') || document.documentElement.lang;
+
+    const dropdownItems = document.querySelectorAll('#lang-action-menu .dropdown-item');
+
+    dropdownItems.forEach(item => {
+        const lang = item.getAttribute('lang');
+        if (lang) {
+            // Update the 'href' to include the correct 'lang' parameter
+            currentUrl.searchParams.set('lang', lang);
+            item.href = currentUrl.toString();
+
+            // Add or remove checkmarks based on the current language
+            if (lang === currentLang) {
+                item.innerText = `✔️ ${item.innerText.trim().replace('✔️', '')}`;
+            } else {
+                item.innerText = item.innerText.trim().replace('✔️', '');
+            }
+        }
+    });
+}
+
+// Run the function to update the language links and set the checkmark
+updateLanguageLinks();
+</script>
 
 
 
@@ -74,11 +102,10 @@
 				            {{{ output.search_box }}}
 				            <div class="divider border-left h-75 align-self-center mx-1"></div>
 				        {{/output.search_box}}
-				        {{#langmenu}}
-				            {{> theme_boost/language_menu }}
-				            <div class="divider border-left h-75 align-self-center mx-1"></div>
-				        {{/langmenu}}
-				        {{{ output.navbar_plugin_output }}}
+
+
+{{{ output.navbar_plugin_output }}}
+
 				        <div class="d-flex align-items-stretch usermenu-container" data-region="usermenu">
 				            {{#usermenu}}
 				                {{> core/user_menu }}
@@ -132,98 +159,9 @@
 	</div><!--//container-fluid-->
 </div><!--//branding-->
 
-<script>
-
-document.addEventListener('DOMContentLoaded', function () {
-  const currentUrl = window.location.href;
-  const urlParams = new URLSearchParams(currentUrl.split('?')[1]); // Get query parameters
-
-  // Determine if the 'lang' parameter is present in the URL
-  let currentLang = urlParams.get('lang');
-
-  // If there's no 'lang' parameter, determine the default language from the browser settings
-  if (!currentLang) {
-    const browserLang = (navigator.language || navigator.userLanguage).toLowerCase(); // Browser's default language
-    currentLang = browserLang.startsWith('en') ? 'en' :
-                  browserLang.startsWith('fr') ? 'fr_ca' :
-                  'en'; // Default to English if the browser language is ambiguous
-
-    // Add 'lang' to the URL and force page reload
-    const newUrl = currentUrl.includes('?')
-      ? currentUrl + '&lang=' + currentLang
-      : currentUrl + '?lang=' + currentLang;
-
-    window.location.replace(newUrl); // Reload the page with the correct language
-    return; // Exit early because the page will reload
-  }
-
-  // Set the document's language attribute
-  document.documentElement.lang = currentLang;
-
-  // Get the new URLs with updated language parameters
-  const newHrefEn = currentUrl.replace(/lang=[^&]+/, 'lang=en');
-  const newHrefFrCa = currentUrl.replace(/lang=[^&]+/, 'lang=fr_ca');
-  const newHrefFr = currentUrl.replace(/lang=[^&]+/, 'lang=fr');
-
-  // Get the link elements
-  const dynamicLinkEn = document.getElementById('dynamic-link-en');
-  const dynamicLinkFrCa = document.getElementById('dynamic-link-fr-ca');
-  const dynamicLinkFr = document.getElementById('dynamic-link-fr');
-
-  // Update the href attributes for language switching
-  if (dynamicLinkEn) {
-    dynamicLinkEn.href = newHrefEn;
-  }
-  if (dynamicLinkFrCa) {
-    dynamicLinkFrCa.href = newHrefFrCa;
-  }
-  if (dynamicLinkFr) {
-    dynamicLinkFr.href = newHrefFr;
-  }
-
-  // Function to add check marks
-  function addCheckMark(element) {
-    if (element) {
-      element.innerHTML = '<strong>✔️</strong> ' + element.innerHTML.replace('<strong>✔️</strong> ', ''); 
-    }
-  }
-
-  // Function to remove check marks
-  function removeCheckMark(element) {
-    if (element) {
-      element.innerHTML.replace('<strong>✔️</strong> ', ''); // Ensure single check mark
-    }
-  }
-
-  // Clear all check marks
-  removeCheckMark(dynamicLinkEn);
-  removeCheckMark(dynamicLinkFrCa);
-  removeCheckMark(dynamicLinkFr);
-
-  // Add a check mark based on the current language
-  if (currentLang === 'en') {
-    addCheckMark(dynamicLinkEn);
-  } else if (currentLang === 'fr_ca') {
-    addCheckMark(dynamicLinkFrCa);
-  } else if (currentLang === 'fr') {
-    addCheckMark(dynamicLinkFr);
-  }
-});
-
-
-
-// Get the current language of the browser
-const browserLang = navigator.language || navigator.userLanguage;
-
-// Log the browser language to the console
-console.log("Current browser language:", browserLang);
-
-
-</script>
-
-
 {{!--//moodle_validator (theme class function)--}}
 {{{ output.moodle_validator}}} 
 
 {{> theme_boost/primary-drawer-mobile }}
 
+<!--//modified:30Apr2024-->
