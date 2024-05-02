@@ -72,21 +72,25 @@ function updateLanguageLinks() {
 
     const dropdownItems = document.querySelectorAll('#lang-action-menu .dropdown-item');
 
-    dropdownItems.forEach(item => {
-        const lang = item.getAttribute('lang');
-        if (lang) {
-            // Update the 'href' to include the correct 'lang' parameter
-            currentUrl.searchParams.set('lang', lang);
-            item.href = currentUrl.toString();
+dropdownItems.forEach((item) => {
+    const lang = item.getAttribute("lang");
+    if (lang) {
+        // Update the 'href' to include the correct 'lang' parameter
+        currentUrl.searchParams.set("lang", lang);
+        item.href = currentUrl.toString();
 
-            // Add or remove checkmarks based on the current language
-            if (lang === currentLang) {
-                item.innerText = `✔️ ${item.innerText.trim().replace('✔️', '')}`;
-            } else {
-                item.innerText = item.innerText.trim().replace('✔️', '');
-            }
-        }
-    });
+        // Add or remove checkmarks based on the current language
+        const checkmark = lang === currentLang ? "&#x2713;" : "&nbsp;";  // Unicode checkmark or empty space
+        item.innerHTML = `
+            <div class="dropdown-item">
+                <span class="checkmark-column">${checkmark}</span>
+                <span class="language-column">${item.innerText.trim().replace(/✔️|&#x2713;/g, "")}</span>
+            </div>
+        `;
+    }
+});
+
+
 }
 
 // Run the function to update the language links and set the checkmark
@@ -164,4 +168,4 @@ updateLanguageLinks();
 
 {{> theme_boost/primary-drawer-mobile }}
 
-<!--//modified:30Apr2024-->
+<!--//TUE:modified:30Apr2024-->

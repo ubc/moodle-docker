@@ -1,6 +1,8 @@
 ##FROM lthub/moodle:moodlecore-4.1LTS
 ##FROM dangtue2020/moodlecore:419stg2-bb4b231d8e23
-FROM dangtue2020/moodlecore:419stg2-7f3ef6e86ac4
+##FROM dangtue2020/moodlecore:419stg2-7f3ef6e86ac4
+FROM dangtue2020/moodlecore:419stg2-41ec0380b10f
+
 
 #Updated to newer questionnaire 10Dec2023
 RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_moodle42_2022092202.zip -o /questionnaire.zip \
@@ -190,8 +192,11 @@ COPY docker-entrypoint.d/* /docker-entrypoint.d/
 COPY 000-default.conf /etc/apache2/sites-available/
 
 # add modified files for Language Icon
-##COPY themes/maker-header.mustache /var/www/html/theme/maker/templates/header.mustache
-##COPY themes/boost-language_menu.mustache /var/www/html/theme/boost/templates/language_menu.mustache
-COPY themes/updated-icon-designs-4.1/* /var/www/html/theme/maker/pix
+COPY themes/maker-header.mustache /var/www/html/theme/maker/templates/header.mustache
+COPY themes/boost-language_menu.mustache /var/www/html/theme/boost/templates/language_menu.mustache
+COPY themes/updated-icon-designs-4.1/mod/ /var/www/html/theme/maker/pix_plugins/mod
+
+RUN sleep 3 && echo "\$THEME->removedprimarynavitems = ['courses'];" >> /var/www/html/theme/maker/config.php
+##RUN sleep 3 && sed -i "\$a\\n\\n\$THEME->removedprimarynavitems = ['courses'];" /var/www/html/theme/maker/config.php
 
 RUN chmod -R 755 /docker-entrypoint.d/
