@@ -97,7 +97,10 @@ $CFG->dboptions = array(
 // If you need both intranet and Internet access please read
 // http://docs.moodle.org/en/masquerading
 
-$CFG->wwwroot   = loadenv('MOODLE_URL', 'http://example.com/moodle');
+//$CFG->wwwroot   = loadenv('MOODLE_URL', 'http://example.com/moodle');
+//$CFG->wwwroot   = 'https://moodle-ubccpd-stg2.apps.ctlt.ubc.ca';
+//$CFG->wwwroot   = loadenv('MOODLE_URL', 'https://moodle-ubccpd-stg2.apps.ctlt.ubc.ca');
+$CFG->wwwroot   = loadenv('MOODLE_URL', 'https://elearning.ubccpd.ca');
 
 
 //=========================================================================
