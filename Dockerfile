@@ -196,6 +196,9 @@ COPY themes/maker-header.mustache /var/www/html/theme/maker/templates/header.mus
 COPY themes/boost-language_menu.mustache /var/www/html/theme/boost/templates/language_menu.mustache
 COPY themes/updated-icon-designs-4.1/mod/ /var/www/html/theme/maker/pix_plugins/mod
 
+COPY themes/updated-icon-designs-4.1/core/f/ /var/www/html/pix/f/
+
+
 RUN sleep 3 && echo "\$THEME->removedprimarynavitems = ['courses'];" >> /var/www/html/theme/maker/config.php
 ##RUN sleep 3 && sed -i "\$a\\n\\n\$THEME->removedprimarynavitems = ['courses'];" /var/www/html/theme/maker/config.php
 
