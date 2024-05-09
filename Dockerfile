@@ -1,8 +1,8 @@
-##FROM lthub/moodle:moodlecore-4.1LTS
+FROM lthub/moodle:moodlecore-4.1LTS
 
 ##6May2024: production release
 ##Version 4.1.9
-FROM dangtue2020/moodlecore:419stg2-41ec0380b10f 
+##FROM dangtue2020/moodlecore:419stg2-41ec0380b10f 
 
 ##Version 4.1.10
 ##FROM dangtue2020/moodlecore:4110-2d9b62e726d4 
@@ -202,8 +202,8 @@ COPY themes/updated-icon-designs-4.1/mod/ /var/www/html/theme/maker/pix_plugins/
 
 COPY themes/updated-icon-designs-4.1/core/f/ /var/www/html/pix/f/
 
-COPY themes/lib/outputrenderers.php /var/www/html/lib/
-
+##COPY themes/lib/outputrenderers.php /var/www/html/lib/
+RUN sed -i.bak '/public function lang_menu/ i\ public function get_language() {return current_language();}\n' /var/www/html/lib/outputrenderers.php
 
 RUN sleep 3 && echo "\$THEME->removedprimarynavitems = ['courses'];" >> /var/www/html/theme/maker/config.php
 ##RUN sleep 3 && sed -i "\$a\\n\\n\$THEME->removedprimarynavitems = ['courses'];" /var/www/html/theme/maker/config.php
