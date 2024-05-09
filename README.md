@@ -1,8 +1,9 @@
 ## MoodleCPD 4.1LTS 
-* Documentation in progress....
 
-<img width="847" alt="MoodleCPD_L2" src="https://github.com/ubc/moodle-docker/assets/86985864/bb61e8a3-866d-4f5e-8a62-1a900e874511">
 
+<!--img width="847" alt="MoodleCPD_L2" src="https://github.com/ubc/moodle-docker/assets/86985864/bb61e8a3-866d-4f5e-8a62-1a900e874511"-->
+
+![alt text](image-1.png)
 
 ## Build MoodleCPD Image
 

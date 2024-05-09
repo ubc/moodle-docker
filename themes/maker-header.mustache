@@ -68,7 +68,10 @@ function updateLanguageLinks() {
     const currentUrl = new URL(window.location.href);
 
     // Determine the current language from the URL or document's language attribute
-    const currentLang = currentUrl.searchParams.get('lang') || document.documentElement.lang;
+    //const currentLang = currentUrl.searchParams.get('lang') || document.documentElement.lang;
+
+    // Use the server-side variable to determine the current language
+    const currentLang = '{{output.get_language}}';
 
     const langButton = document.querySelector('.langbutton'); // The span for the language button
     const dropdownItems = document.querySelectorAll('#lang-action-menu .dropdown-item');
@@ -95,7 +98,7 @@ function updateLanguageLinks() {
             // Ensure text without existing checkmarks and update with checkmark
             item.innerHTML = `
                 <div class="dropdown-item">
-                    <span class="checkmark-column">${checkmark}</span>
+                    <span class="checkmark-column" style="color: black;">${isCurrentLang ? '✓' : '&nbsp;'}</span>
                     <span class="language-column">${item.innerText.trim().replace(/✔️|&#x2713;/g, "")}</span>
                 </div>
             `;
