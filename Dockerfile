@@ -1,4 +1,4 @@
-FROM php:7.4-apache
+FROM php:8.0-apache
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 ENV MOODLE_VERSION=4.1.10
@@ -12,9 +12,9 @@ ARG DEBIAN_FRONTEND=noninteractive
 WORKDIR /var/www/html
 
 RUN apt-get update \
-    && apt-get -qq install graphviz aspell ghostscript libpspell-dev libpng-dev libicu-dev libxml2-dev libldap2-dev sudo netcat unzip libssl-dev zlib1g-dev libjpeg-dev libfreetype6-dev libzip-dev \
+    && apt-get -qq install graphviz aspell ghostscript libpspell-dev libpng-dev libicu-dev libxml2-dev libldap2-dev sudo netcat-traditional unzip libssl-dev zlib1g-dev libjpeg-dev libfreetype6-dev libzip-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pspell gd intl xml xmlrpc ldap zip soap mysqli opcache exif \
+    && docker-php-ext-install -j$(nproc) pspell gd intl xml ldap zip soap mysqli opcache exif \
     && pecl install redis \
     && docker-php-ext-enable redis \
     && docker-php-ext-enable exif \
