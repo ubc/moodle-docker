@@ -15,7 +15,14 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && unzip questionnaire.zip \
     && rm questionnaire.zip \ 
 
-#This is the latest version of plugin moodle33 as of 20Dec2022 and 11Dec2023
+    #This is the latest version of choicegroup plugin 18Jun2024
+    && curl -L https://moodle.org/plugins/download.php/30464/mod_choicegroup_moodle43_2023110900.zip -o /choicegroup.zip \
+    && cp /choicegroup.zip /var/www/html/mod/ \
+    && cd /var/www/html/mod \
+    && unzip choicegroup.zip \
+    && rm choicegroup.zip \
+
+    #This is the latest version of plugin moodle33 as of 20Dec2022 and 11Dec2023
     && curl -L https://moodle.org/plugins/download.php/11565/mod_certificate_moodle33_2016052300.zip -o /certificate.zip \
     && cp /certificate.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
