@@ -1,13 +1,13 @@
 FROM lthub/moodle:4.1.13
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
-RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_moodle42_2022092202.zip -o /questionnaire.zip \
+RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_moodle44_2022121601.zip -o /questionnaire.zip \
     && cp /questionnaire.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip questionnaire.zip \
     && rm questionnaire.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/30581/block_xp_moodle43_2023100803.zip -o /xp.zip \
+    && curl -L https://moodle.org/plugins/download.php/31773/block_xp_moodle44_2024042104.zip -o /xp.zip \
     && cp /xp.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
     && unzip xp.zip \
@@ -25,7 +25,7 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && unzip topcoll.zip \
     && rm topcoll.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/28807/mod_attendance_moodle41_2023020107.zip -o /attendance.zip \
+    && curl -L https://moodle.org/plugins/download.php/32671/mod_attendance_moodle41_2023020108.zip -o /attendance.zip \
     && cp /attendance.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip attendance.zip \
@@ -91,7 +91,7 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && unzip scheduler.zip \
     && rm scheduler.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/22758/block_configurable_reports_moodle311_2020110300.zip -o /configurable.zip \
+    && curl -L https://moodle.org/plugins/download.php/31973/block_configurable_reports_moodle42_2023121803.zip -o /configurable.zip \
     && cp /configurable.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
     && unzip configurable.zip \
