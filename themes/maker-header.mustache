@@ -1,0 +1,184 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    Page header.
+}}
+
+
+<header id="header" class="page-header page-header-top-bar navbar" role="banner">
+	<div class="top-bar">
+		<div class="container-fluid">
+			<div class="top-bar-inner">
+              
+               <nav class="navbar fixed-top navbar-expand boost-navbar" aria-label="{{#str}}sitemenubar, admin{{/str}}">
+		        
+			       <div class="flex-wrapper d-flex align-items-center">
+				        {{!--//header_dropdownmenu (theme class function)--}}
+						{{{ output.header_dropdownmenu}}}
+	
+						{{!--//header_socialmedia (theme class function)--}}
+						{{{ output.header_socialmedia}}}
+						
+					</div><!--//d-flex-->
+					 
+		           
+		            <ul class="navbar-nav d-none d-md-flex my-1 px-1">
+				        <!-- page_heading_menu -->
+				        {{{ output.page_heading_menu }}}
+				    </ul>
+				
+				    <div id="usernavigation" class="navbar-nav ml-auto">
+
+
+
+<div class="divider border-left h-75 align-self-center mx-1"></div>
+
+
+
+<div class="langmenu">
+    <div class="dropdown show">
+        <a href="/moodle-4.1.8/?lang=en" role="button" id="lang-menu-toggle" data-toggle="dropdown" aria-label="Language" aria-haspopup="true" aria-controls="lang-action-menu" class="btn dropdown-toggle">
+            <i class="icon fa fa-language fa-fw mr-1" aria-hidden="true"></i>
+            <span class="langbutton">Language</span>
+            <b class="caret"></b>
+        </a>
+        <div role="menu" aria-labelledby="lang-menu-toggle" id="lang-action-menu" class="dropdown-menu dropdown-menu-right">
+            <a id="dynamic-link-en" class="dropdown-item pl-5" lang="en">English</a>
+            <a id="dynamic-link-fr-ca" class="dropdown-item pl-5" role="menuitem" lang="fr_ca">Français (Canada)</a>
+        </div>
+    </div>
+</div>
+
+<script>
+function updateLanguageLinks() {
+    const currentUrl = new URL(window.location.href);
+
+    // Determine the current language from the URL or document's language attribute
+    //const currentLang = currentUrl.searchParams.get('lang') || document.documentElement.lang;
+
+    // Use the server-side variable to determine the current language
+    const currentLang = '{{output.get_language}}';
+
+    const langButton = document.querySelector('.langbutton'); // The span for the language button
+    const dropdownItems = document.querySelectorAll('#lang-action-menu .dropdown-item');
+
+    // Update language button based on the current language
+    if (currentLang === 'en') {
+        langButton.innerText = 'English';
+    } else if (currentLang === 'fr_ca') {
+        langButton.innerText = 'Français';
+    }
+
+    // Update dropdown items with the correct 'href' and checkmarks
+    dropdownItems.forEach((item) => {
+        const lang = item.getAttribute('lang');
+        if (lang) {
+            // Update 'href' to include the correct 'lang' parameter
+            currentUrl.searchParams.set('lang', lang);
+            item.href = currentUrl.toString();
+
+            // Set checkmark based on the current language
+            const isCurrentLang = lang === currentLang;
+            const checkmark = isCurrentLang ? '✔️' : '&nbsp;'; // Unicode checkmark or empty space
+
+            // Ensure text without existing checkmarks and update with checkmark
+            item.innerHTML = `
+                <div class="dropdown-item">
+                    <span class="checkmark-column" style="color: black;">${isCurrentLang ? '✓' : '&nbsp;'}</span>
+                    <span class="language-column">${item.innerText.trim().replace(/✔️|&#x2713;/g, "")}</span>
+                </div>
+            `;
+        }
+    });
+}
+
+// Run the function to update the language links, set checkmarks, and change the label
+updateLanguageLinks();
+</script>
+
+
+
+<div class="divider border-left h-75 align-self-center mx-1"></div>
+
+
+				        {{# output.search_box }}
+				            {{{ output.search_box }}}
+				            <div class="divider border-left h-75 align-self-center mx-1"></div>
+				        {{/output.search_box}}
+
+
+{{{ output.navbar_plugin_output }}}
+
+				        <div class="d-flex align-items-stretch usermenu-container" data-region="usermenu">
+				            {{#usermenu}}
+				                {{> core/user_menu }}
+				            {{/usermenu}}
+				        </div>
+				        {{{ output.edit_switch }}}
+				    </div>
+				    
+               </nav>
+              
+
+			</div><!--//top-bar-inner-->
+		</div>
+	</div><!--//top-bar-->
+	
+</header><!--//header-->
+
+
+<div class="branding" >
+	<div class="container-fluid">
+		<div class="branding-inner">
+            <div class="d-flex justify-content-between">
+	        
+		        <a href="{{{ config.wwwroot }}}" class="site-name {{# output.site_logo }}has-logo{{/ output.site_logo }}">
+			        {{^ output.site_logo }}
+			           {{{ sitename }}}
+			        {{/ output.site_logo }}
+			        
+		            {{# output.site_logo }}
+	
+		                <img class="site-logo" src="{{{ output.site_logo }}}" alt="{{sitename}}">
+	
+		            {{/ output.site_logo }}
+		        </a>
+	            <div class="moremenu-wrapper navbar navbar-expand">
+		            
+		        <!-- custom_menu -->
+	            {{#primarymoremenu}}
+			        {{> core/moremenu }}
+			    {{/primarymoremenu}}
+	            </div><!--//moremenu-wrapper-->
+   
+	            <!-- page_heading_menu -->
+	            {{{ output.page_heading_menu }}}
+		       
+	      
+            </div><!--//d-flex-->
+		   
+		</div><!--//branding-inner-->
+		
+	</div><!--//container-fluid-->
+</div><!--//branding-->
+
+{{!--//moodle_validator (theme class function)--}}
+{{{ output.moodle_validator}}} 
+
+{{> theme_boost/primary-drawer-mobile }}
+
+<!--//TUE:modified:30Apr2024-->
