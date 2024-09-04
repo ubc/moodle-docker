@@ -1,4 +1,5 @@
 FROM lthub/moodle:4.1.13
+MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 ##6May2024: production release
 ##Version 4.1.9
