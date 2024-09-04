@@ -1,4 +1,4 @@
-FROM lthub/moodle:moodlecore-4.1LTS
+FROM lthub/moodle:4.1.13
 
 ##6May2024: production release
 ##Version 4.1.9
@@ -135,15 +135,21 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && cp /recomplete.zip /var/www/html/local/ \
     && cd /var/www/html/local \
     && unzip recomplete.zip \
-    && rm recomplete.zip \
+    && rm recomplete.zip 
 
 #This is the latest version of this plugin ARLO v4.1.4 - checked again on 23Jan2024 12:38: 
 #ARLO plugin requires Arlo_connection setting.
-    && curl -L https://moodle.org/plugins/download.php/30634/enrol_arlo_moodle42_2023110900.zip -o /enrolarlo.zip \
-    && cp /enrolarlo.zip /var/www/html/enrol/ \
-    && cd /var/www/html/enrol \
+#    && curl -L https://moodle.org/plugins/download.php/30634/enrol_arlo_moodle42_2023110900.zip -o /enrolarlo.zip \
+#    && cp /enrolarlo.zip /var/www/html/enrol/ \
+#    && cd /var/www/html/enrol \
+#    && unzip enrolarlo.zip \
+#    && rm enrolarlo.zip
+
+# add arlo version 4.1.4
+COPY plugin/enrol_arlo_moodle42_2023110900.zip /var/www/html/enrol/enrolarlo.zip
+RUN cd /var/www/html/enrol \
     && unzip enrolarlo.zip \
-    && rm enrolarlo.zip
+    && rm enrolarlo.zip 
 
 
 # add custom cert
