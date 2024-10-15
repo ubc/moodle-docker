@@ -95,6 +95,12 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && cp /configurable.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
     && unzip configurable.zip \
-    && rm configurable.zip
+    && rm configurable.zip \
+	
+    && curl -L https://moodle.org/plugins/download.php/33143/mod_hvp_moodle44_2024091200.zip -o /hvp.zip \
+    && cp /hvp.zip /var/www/html/mod/ \
+    && cd /var/www/html/mod \
+    && unzip hvp.zip \
+    && rm hvp.zip
 
 RUN chown -R www-data /var/www/html
