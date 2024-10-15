@@ -13,7 +13,7 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && unzip certificate.zip \
     && rm certificate.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/30739/mod_hvp_moodle43_2023122500.zip -o /hvp.zip \
+    && curl -L https://moodle.org/plugins/download.php/33143/mod_hvp_moodle44_2024091200.zip -o /hvp.zip \
     && cp /hvp.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip hvp.zip \
@@ -95,13 +95,7 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && cp /recomplete.zip /var/www/html/local/ \
     && cd /var/www/html/local \
     && unzip recomplete.zip \
-    && rm recomplete.zip \
-	
-    && curl -L https://moodle.org/plugins/download.php/33143/mod_hvp_moodle44_2024091200.zip -o /hvp.zip \
-    && cp /hvp.zip /var/www/html/mod/ \
-    && cd /var/www/html/mod \
-    && unzip hvp.zip \
-    && rm hvp.zip
+    && rm recomplete.zip
 	
 # add arlo version 4.1.4
 COPY plugin/enrol_arlo_moodle42_2023110900.zip /var/www/html/enrol/enrolarlo.zip
