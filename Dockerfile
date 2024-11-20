@@ -146,7 +146,7 @@ RUN chown -R www-data /var/www/html
 
 # install odbc for shib sp
 RUN apt-get update && \
-    apt-get -y install unixodbc libapache2-mod-shib gettext && \
+    apt-get -y install unixodbc odbcinst libapache2-mod-shib gettext && \
     cd /usr && \
     curl https://downloads.mariadb.com/Connectors/odbc/connector-odbc-3.1.1/mariadb-connector-odbc-3.1.1-ga-debian-x86_64.tar.gz | tar -xvz && \
     echo "[MariaDB]" > MariaDB_odbc_driver_template.ini && \
