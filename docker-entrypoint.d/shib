@@ -1,7 +1,12 @@
 #!/bin/bash
 set -e
 
-export SHIBD_SERVICE_IP=`getent hosts ${SHIBD_SERVICE_NAME} | awk '{ print $1  }'`
+if [[ -z "${SHIBBOLETH_SP_ENTITY_ID}" ]]; then
+  # disable mod_shib
+  a2dismod shib
+else
+  export SHIBD_SERVICE_IP=`getent hosts ${SHIBD_SERVICE_NAME} | awk '{ print $1  }'`
 
-envsubst < /etc/shibboleth/shibboleth2.xml-template > /etc/shibboleth/shibboleth2.xml
-chmod 644 /etc/shibboleth/shibboleth2.xml
+  envsubst < /etc/shibboleth/shibboleth2.xml-template > /etc/shibboleth/shibboleth2.xml
+  chmod 644 /etc/shibboleth/shibboleth2.xml
+fi
