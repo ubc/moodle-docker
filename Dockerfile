@@ -19,12 +19,6 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && unzip hvp.zip \
     && rm hvp.zip \ 
 
-    && curl -L https://moodle.org/plugins/download.php/16906/block_poll_moodle37_2018052500.zip -o /poll.zip \
-    && cp /poll.zip /var/www/html/blocks/ \
-    && cd /var/www/html/blocks \
-    && unzip poll.zip \
-    && rm poll.zip \
-
     && curl -L https://moodle.org/plugins/download.php/26177/report_customsql_moodle40_2022031800.zip -o /customsql.zip \
     && cp /customsql.zip /var/www/html/report/ \
     && cd /var/www/html/report \
@@ -42,12 +36,6 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && cd /var/www/html/course/format \
     && unzip flex.zip \
     && rm flex.zip \ 
-
-    && curl -L https://moodle.org/plugins/download.php/30331/local_mass_enroll_moodle43_2023102300.zip -o /mass.zip \
-    && cp /mass.zip /var/www/html/local/ \
-    && cd /var/www/html/local \
-    && unzip mass.zip \
-    && rm mass.zip \
 
     && curl -L https://moodle.org/plugins/download.php/30267/block_course_modulenavigation_moodle43_2023101700.zip -o /modulenav.zip \
     && cp /modulenav.zip /var/www/html/blocks/ \
@@ -79,12 +67,6 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && unzip avail.zip \
     && rm avail.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/32527/block_panopto_moodle44_2024070900.zip -o /panopto.zip \
-    && cp /panopto.zip /var/www/html/blocks/ \
-    && cd /var/www/html/blocks \
-    && unzip panopto.zip \
-    && rm panopto.zip \
-
     && curl -L https://moodle.org/plugins/download.php/31207/local_recompletion_moodle42_2023112702.zip -o /recomplete.zip \
     && cp /recomplete.zip /var/www/html/local/ \
     && cd /var/www/html/local \
@@ -103,9 +85,6 @@ RUN cd /var/www/html/theme \
 RUN mkdir -p /var/www/html/enrol/arlo \
     && curl -L https://github.com/ArloSoftware/moodle-enrol_arlo/tarball/v4.2.0 | tar zx --strip-components=1 -C /var/www/html/enrol/arlo
 	
-RUN mkdir -p /var/www/html/lib/editor/tinymce/plugins/panoptobutton \
-    && curl -L https://github.com/Panopto/Add-Panopto-Video--button-for-moodle-tinyMCE-editor/tarball/2023083100 | tar zx --strip-components=1 -C /var/www/html/lib/editor/tinymce/plugins/panoptobutton
-
 # add new config file for mergeusers plugin
 COPY plugin/config.local.php /var/www/html/admin/tool/mergeusers/config/
 
@@ -114,14 +93,8 @@ RUN cd /var/www/html/theme/maker/pix/ \
 
 COPY themes/favicon.ico /var/www/html/theme/maker/pix/
 
-# add favicon to moove
-COPY themes/favicon.ico /var/www/html/theme/moove/pix/
-
 # add custom font
 COPY fonts /var/www/html/theme/maker/fonts
-
-# add custom font to moove
-COPY fonts /var/www/html/theme/moove/fonts
 
 RUN chown -R www-data /var/www/html
 
