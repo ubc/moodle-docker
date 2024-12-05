@@ -1,7 +1,7 @@
-FROM lthub/moodle:4.1.14-php8.1
+FROM lthub/moodle:4.1.14-php8.1-1
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
-RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_moodle42_2022092202.zip -o /questionnaire.zip \
+RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_moodle44_2022121601.zip -o /questionnaire.zip \
     && cp /questionnaire.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip questionnaire.zip \
@@ -37,7 +37,7 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && unzip grid.zip \
     && rm grid.zip \
  
-    && curl -L https://moodle.org/plugins/download.php/30735/format_flexsections_moodle43_2023122300.zip -o /flex.zip \
+    && curl -L https://moodle.org/plugins/download.php/33307/format_flexsections_moodle45_2024100600.zip -o /flex.zip \
     && cp /flex.zip /var/www/html/course/format/ \
     && cd /var/www/html/course/format \
     && unzip flex.zip \
@@ -55,17 +55,11 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && unzip modulenav.zip \
     && rm modulenav.zip \ 
 
-    && curl -L https://moodle.org/plugins/download.php/22758/block_configurable_reports_moodle310_2020110300.zip -o /configurable.zip \
+    && curl -L https://moodle.org/plugins/download.php/33800/block_configurable_reports_moodle45_2024051300.zip -o /configurable.zip \
     && cp /configurable.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
     && unzip configurable.zip \
     && rm configurable.zip \
-
-    && curl -L https://moodle.org/plugins/download.php/27010/local_boostnavigation_moodle311_2021071501.zip -o /boostnavig.zip \
-    && cp /boostnavig.zip /var/www/html/local/ \
-    && cd /var/www/html/local \
-    && unzip boostnavig.zip \
-    && rm boostnavig.zip \ 
 
     && curl -L https://moodle.org/plugins/download.php/28943/tool_mergeusers_moodle41_2023040402.zip -o /mergeuser.zip \
     && cp /mergeuser.zip /var/www/html/admin/tool/ \
@@ -73,7 +67,7 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && unzip mergeuser.zip \
     && rm mergeuser.zip \ 
 
-    && curl -L https://moodle.org/plugins/download.php/31000/filter_multilang2_moodle43_2024013101.zip -o /multi.zip \
+    && curl -L https://moodle.org/plugins/download.php/34033/filter_multilang2_moodle45_2024112701.zip -o /multi.zip \
     && cp /multi.zip /var/www/html/filter/ \
     && cd /var/www/html/filter \
     && unzip multi.zip \
@@ -85,7 +79,7 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && unzip avail.zip \
     && rm avail.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/29980/block_panopto_moodle42_2023091800.zip -o /panopto.zip \
+    && curl -L https://moodle.org/plugins/download.php/32527/block_panopto_moodle44_2024070900.zip -o /panopto.zip \
     && cp /panopto.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
     && unzip panopto.zip \
@@ -97,20 +91,8 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && unzip recomplete.zip \
     && rm recomplete.zip
 	
-# add arlo version 4.1.4
-COPY plugin/enrol_arlo_moodle42_2023110900.zip /var/www/html/enrol/enrolarlo.zip
-RUN cd /var/www/html/enrol \
-    && unzip enrolarlo.zip \
-    && rm enrolarlo.zip 
-
 # add custom cert
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
-
-# add custom moove theme
-COPY themes/moove_premium.zip /var/www/html/theme/
-RUN cd /var/www/html/theme \
-    && unzip moove_premium.zip \
-    && rm moove_premium.zip 
 
 # add custom theme
 COPY themes/maker-v10.0-moodle-4.1.zip /var/www/html/theme/
@@ -118,12 +100,11 @@ RUN cd /var/www/html/theme \
     && unzip maker-v10.0-moodle-4.1.zip \
     && rm maker-v10.0-moodle-4.1.zip 
 
-# add tinymce for panopto
-COPY plugin/panoptobutton.zip /var/www/html/lib/editor/tinymce/plugins/
-
-RUN cd /var/www/html/lib/editor/tinymce/plugins/ \
-    && unzip panoptobutton.zip \
-    && rm panoptobutton.zip
+RUN mkdir -p /var/www/html/enrol/arlo \
+    && curl -L https://github.com/ArloSoftware/moodle-enrol_arlo/tarball/v4.2.0 | tar zx --strip-components=1 -C /var/www/html/enrol/arlo
+	
+RUN mkdir -p /var/www/html/lib/editor/tinymce/plugins/panoptobutton \
+    && curl -L https://github.com/Panopto/Add-Panopto-Video--button-for-moodle-tinyMCE-editor/tarball/2023083100 | tar zx --strip-components=1 -C /var/www/html/lib/editor/tinymce/plugins/panoptobutton
 
 # add new config file for mergeusers plugin
 COPY plugin/config.local.php /var/www/html/admin/tool/mergeusers/config/
