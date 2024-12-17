@@ -60,7 +60,7 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 COPY custom-php.ini $PHP_INI_DIR/conf.d/
 
 RUN mkdir -p /var/www/html/admin/tool/heartbeat \
-    && curl -L https://github.com/catalyst/moodle-tool_heartbeat/tarball/master | tar zx --strip-components=1 -C /var/www/html/admin/tool/heartbeat
+    && curl -L https://github.com/catalyst/moodle-tool_heartbeat/tarball/MOODLE_39_STABLE | tar zx --strip-components=1 -C /var/www/html/admin/tool/heartbeat
 
 VOLUME /moodledata
 EXPOSE 80
