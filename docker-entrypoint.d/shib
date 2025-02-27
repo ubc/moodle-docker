@@ -4,7 +4,6 @@ set -e
 if [[ -z "${SHIBBOLETH_SP_ENTITY_ID}" ]]; then
   # disable mod_shib
   a2dismod shib
-  rm /etc/apache2/conf-enabled/shib.conf /etc/apache2/conf-enabled/moodle-shib.conf
 else
   export SHIBD_SERVICE_IP=`getent hosts ${SHIBD_SERVICE_NAME} | awk '{ print $1  }'`
 
