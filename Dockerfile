@@ -71,7 +71,19 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && cp /recomplete.zip /var/www/html/local/ \
     && cd /var/www/html/local \
     && unzip recomplete.zip \
-    && rm recomplete.zip
+    && rm recomplete.zip \
+
+    && curl -L https://moodle.org/plugins/download.php/32664/mod_subcourse_moodle41_2023103003.zip -o /subcourse.zip \
+    && cp /subcourse.zip /var/www/html/mod/ \
+    && cd /var/www/html/mod \
+    && unzip subcourse.zip \
+    && rm subcourse.zip \
+
+    && curl -L https://moodle.org/plugins/download.php/33493/mod_zoom_moodle45_2024101000.zip -o /zoom.zip \
+    && cp /zoom.zip /var/www/html/mod/ \
+    && cd /var/www/html/mod \
+    && unzip zoom.zip \
+    && rm zoom.zip
 	
 # add custom cert
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
