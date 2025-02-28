@@ -37,6 +37,12 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && unzip flex.zip \
     && rm flex.zip \ 
 
+    && curl -L https://moodle.org/plugins/download.php/30331/local_mass_enroll_moodle43_2023102300.zip -o /mass.zip \
+    && cp /mass.zip /var/www/html/local/ \
+    && cd /var/www/html/local \
+    && unzip mass.zip \
+    && rm mass.zip \
+	
     && curl -L https://moodle.org/plugins/download.php/30267/block_course_modulenavigation_moodle43_2023101700.zip -o /modulenav.zip \
     && cp /modulenav.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
