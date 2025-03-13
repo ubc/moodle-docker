@@ -28,3 +28,5 @@ return [
         'enrol_arlo_emailqueue',
     ]
 ];
+
+$CFG->site_is_public = false;
