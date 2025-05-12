@@ -89,7 +89,13 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && cp /zoom.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip zoom.zip \
-    && rm zoom.zip
+    && rm zoom.zip \
+
+    && curl -L https://moodle.org/plugins/download.php/34996/mod_customcert_moodle41_2022112815.zip -o /customcertificate.zip \
+    && cp /customcertificate.zip /var/www/html/mod/ \
+    && cd /var/www/html/mod \
+    && unzip customcertificate.zip \
+    && rm customcertificate.zip
 	
 # add custom cert
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
