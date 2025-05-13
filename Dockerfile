@@ -113,7 +113,13 @@ RUN curl -L https://moodle.org/plugins/download.php/29228/mod_questionnaire_mood
     && cp /customcertificate.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip customcertificate.zip \
-    && rm customcertificate.zip
+    && rm customcertificate.zip \
+
+    && curl -L https://moodle.org/plugins/download.php/20236/local_lessonexport_moodle38_2019090900.zip -o /lessonexport.zip \
+    && cp /lessonexport.zip /var/www/html/local/ \
+    && cd /var/www/html/local \
+    && unzip lessonexport.zip \
+    && rm lessonexport.zip
 	
 # add arlo version 4.1.4
 COPY plugin/enrol_arlo_moodle42_2023110900.zip /var/www/html/enrol/enrolarlo.zip
