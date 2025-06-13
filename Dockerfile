@@ -89,7 +89,13 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && cp /zoom.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip zoom.zip \
-    && rm zoom.zip
+    && rm zoom.zip \
+
+    && curl -L https://moodle.org/plugins/download.php/34996/mod_customcert_moodle41_2022112815.zip -o /customcertificate.zip \
+    && cp /customcertificate.zip /var/www/html/mod/ \
+    && cd /var/www/html/mod \
+    && unzip customcertificate.zip \
+    && rm customcertificate.zip
 	
 # add custom cert
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
@@ -140,6 +146,9 @@ COPY themes/updated-icon-designs-4.1/core/f/ /var/www/html/pix/f/
 
 ##COPY themes/lib/outputrenderers.php /var/www/html/lib/
 RUN sed -i.bak '/public function lang_menu/ i\ public function get_language() {return current_language();}\n' /var/www/html/lib/outputrenderers.php
+
+# supress "your site not registered" message
+RUN sed -i 's|echo $adminrenderer->warn_if_not_registered();|//echo $adminrenderer->warn_if_not_registered();|g' /var/www/html/admin/search.php 
 
 RUN sleep 3 && echo "\$THEME->removedprimarynavitems = ['courses'];" >> /var/www/html/theme/maker/config.php
 
