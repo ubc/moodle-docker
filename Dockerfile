@@ -117,10 +117,10 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
 
 # add custom theme
-COPY themes/maker-v10.0-moodle-4.1.zip /var/www/html/theme/
+COPY themes/maker-v14.2-moodle-4.5.zip /var/www/html/theme/
 RUN cd /var/www/html/theme \
-    && unzip maker-v10.0-moodle-4.1.zip \
-    && rm maker-v10.0-moodle-4.1.zip 
+    && unzip maker-v14.2-moodle-4.5.zip \
+    && rm maker-v14.2-moodle-4.5.zip 
 
 RUN mkdir -p /var/www/html/enrol/arlo \
     && curl -L https://github.com/ArloSoftware/moodle-enrol_arlo/tarball/V4.2.1 | tar zx --strip-components=1 -C /var/www/html/enrol/arlo
