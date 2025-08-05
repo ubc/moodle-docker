@@ -8,13 +8,6 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && unzip questionnaire.zip \
     && rm questionnaire.zip \ 
 
-# https://moodle.org/plugins/mod_certificate
-    && curl -L https://moodle.org/plugins/download.php/11565/mod_certificate_moodle33_2016052300.zip -o /certificate.zip \
-    && cp /certificate.zip /var/www/html/mod/ \
-    && cd /var/www/html/mod \
-    && unzip certificate.zip \
-    && rm certificate.zip \
-
 # https://moodle.org/plugins/mod_hvp
     && curl -L https://moodle.org/plugins/download.php/34151/mod_hvp_moodle45_2024120900.zip -o /hvp.zip \
     && cp /hvp.zip /var/www/html/mod/ \
@@ -56,13 +49,6 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && cd /var/www/html/blocks \
     && unzip modulenav.zip \
     && rm modulenav.zip \ 
-
-# https://moodle.org/plugins/block_configurable_reports
-    && curl -L https://moodle.org/plugins/download.php/33800/block_configurable_reports_moodle45_2024051300.zip -o /configurable.zip \
-    && cp /configurable.zip /var/www/html/blocks/ \
-    && cd /var/www/html/blocks \
-    && unzip configurable.zip \
-    && rm configurable.zip \
 
 # https://moodle.org/plugins/tool_mergeusers
     && curl -L https://moodle.org/plugins/download.php/34768/tool_mergeusers_moodle45_2025020505.zip -o /mergeuser.zip \
