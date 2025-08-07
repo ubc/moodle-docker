@@ -86,7 +86,7 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && rm subcourse.zip \
 
 # https://moodle.org/plugins/mod_zoom
-    && curl -L https://moodle.org/plugins/download.php/36269/mod_zoom_moodle50_2025052000.zip -o /zoom.zip \
+    && curl -L https://moodle.org/plugins/download.php/37189/mod_zoom_moodle50_2025080700.zip -o /zoom.zip \
     && cp /zoom.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip zoom.zip \
@@ -99,9 +99,6 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && unzip customcertificate.zip \
     && rm customcertificate.zip
 	
-# add custom cert
-COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
-
 # add custom theme
 COPY themes/maker-v14.2-moodle-4.5.zip /var/www/html/theme/
 RUN cd /var/www/html/theme \
