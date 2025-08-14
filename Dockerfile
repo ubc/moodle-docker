@@ -1,97 +1,106 @@
-FROM lthub/moodle:4.1.19
+FROM lthub/moodle:4.5.5
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
+# https://moodle.org/plugins/mod_questionnaire
 RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_moodle44_2022121601.zip -o /questionnaire.zip \
     && cp /questionnaire.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip questionnaire.zip \
     && rm questionnaire.zip \ 
 
+# https://moodle.org/plugins/mod_certificate
     && curl -L https://moodle.org/plugins/download.php/11565/mod_certificate_moodle33_2016052300.zip -o /certificate.zip \
     && cp /certificate.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip certificate.zip \
     && rm certificate.zip \
-
-    && curl -L https://moodle.org/plugins/download.php/33143/mod_hvp_moodle44_2024091200.zip -o /hvp.zip \
+	
+# https://moodle.org/plugins/mod_hvp
+    && curl -L https://moodle.org/plugins/download.php/34151/mod_hvp_moodle45_2024120900.zip -o /hvp.zip \
     && cp /hvp.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip hvp.zip \
     && rm hvp.zip \ 
 
+# https://moodle.org/plugins/report_customsql
     && curl -L https://moodle.org/plugins/download.php/26177/report_customsql_moodle40_2022031800.zip -o /customsql.zip \
     && cp /customsql.zip /var/www/html/report/ \
     && cd /var/www/html/report \
     && unzip customsql.zip \
     && rm customsql.zip \ 
 
-    && curl -L https://moodle.org/plugins/download.php/31635/format_grid_moodle41_2022112609.zip -o /grid.zip \
+# https://moodle.org/plugins/format_grid
+    && curl -L https://moodle.org/plugins/download.php/36458/format_grid_moodle45_2024101503.zip -o /grid.zip \
     && cp /grid.zip /var/www/html/course/format/ \
     && cd /var/www/html/course/format \
     && unzip grid.zip \
     && rm grid.zip \
- 
-    && curl -L https://moodle.org/plugins/download.php/33307/format_flexsections_moodle45_2024100600.zip -o /flex.zip \
+
+# https://moodle.org/plugins/format_flexsections
+    && curl -L https://moodle.org/plugins/download.php/36158/format_flexsections_moodle45_2024120801.zip -o /flex.zip \
     && cp /flex.zip /var/www/html/course/format/ \
     && cd /var/www/html/course/format \
     && unzip flex.zip \
     && rm flex.zip \ 
 
-    && curl -L https://moodle.org/plugins/download.php/30331/local_mass_enroll_moodle43_2023102300.zip -o /mass.zip \
+# https://moodle.org/plugins/local_mass_enroll
+    && curl -L https://moodle.org/plugins/download.php/34306/local_mass_enroll_moodle45_2024121600.zip -o /mass.zip \
     && cp /mass.zip /var/www/html/local/ \
     && cd /var/www/html/local \
     && unzip mass.zip \
     && rm mass.zip \
-	
-    && curl -L https://moodle.org/plugins/download.php/30267/block_course_modulenavigation_moodle43_2023101700.zip -o /modulenav.zip \
+
+# https://moodle.org/plugins/block_course_modulenavigation
+    && curl -L https://moodle.org/plugins/download.php/33478/block_course_modulenavigation_moodle45_2024101401.zip -o /modulenav.zip \
     && cp /modulenav.zip /var/www/html/blocks/ \
     && cd /var/www/html/blocks \
     && unzip modulenav.zip \
     && rm modulenav.zip \ 
 
-    && curl -L https://moodle.org/plugins/download.php/33800/block_configurable_reports_moodle45_2024051300.zip -o /configurable.zip \
-    && cp /configurable.zip /var/www/html/blocks/ \
-    && cd /var/www/html/blocks \
-    && unzip configurable.zip \
-    && rm configurable.zip \
-
-    && curl -L https://moodle.org/plugins/download.php/28943/tool_mergeusers_moodle41_2023040402.zip -o /mergeuser.zip \
+# https://moodle.org/plugins/tool_mergeusers
+    && curl -L https://moodle.org/plugins/download.php/34768/tool_mergeusers_moodle45_2025020505.zip -o /mergeuser.zip \
     && cp /mergeuser.zip /var/www/html/admin/tool/ \
     && cd /var/www/html/admin/tool \
     && unzip mergeuser.zip \
     && rm mergeuser.zip \ 
 
-    && curl -L https://moodle.org/plugins/download.php/34033/filter_multilang2_moodle45_2024112701.zip -o /multi.zip \
+# https://moodle.org/plugins/filter_multilang2
+    && curl -L https://moodle.org/plugins/download.php/35750/filter_multilang2_moodle50_2025041701.zip -o /multi.zip \
     && cp /multi.zip /var/www/html/filter/ \
     && cd /var/www/html/filter \
     && unzip multi.zip \
     && rm multi.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/30198/availability_language_moodle43_2023101400.zip -o /avail.zip \
+# https://moodle.org/plugins/availability_language
+    && curl -L https://moodle.org/plugins/download.php/33331/availability_language_moodle45_2024100700.zip -o /avail.zip \
     && cp /avail.zip /var/www/html/availability/condition/ \
     && cd /var/www/html/availability/condition \
     && unzip avail.zip \
     && rm avail.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/31207/local_recompletion_moodle42_2023112702.zip -o /recomplete.zip \
+# https://moodle.org/plugins/local_recompletion
+    && curl -L https://moodle.org/plugins/download.php/35657/local_recompletion_moodle45_2025041400.zip -o /recomplete.zip \
     && cp /recomplete.zip /var/www/html/local/ \
     && cd /var/www/html/local \
     && unzip recomplete.zip \
     && rm recomplete.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/32664/mod_subcourse_moodle41_2023103003.zip -o /subcourse.zip \
+# https://moodle.org/plugins/mod_subcourse
+    && curl -L https://moodle.org/plugins/download.php/35371/mod_subcourse_moodle45_2025032000.zip -o /subcourse.zip \
     && cp /subcourse.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip subcourse.zip \
     && rm subcourse.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/33493/mod_zoom_moodle45_2024101000.zip -o /zoom.zip \
+# https://moodle.org/plugins/mod_zoom
+    && curl -L https://moodle.org/plugins/download.php/37189/mod_zoom_moodle50_2025080700.zip -o /zoom.zip \
     && cp /zoom.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip zoom.zip \
     && rm zoom.zip \
 
-    && curl -L https://moodle.org/plugins/download.php/34996/mod_customcert_moodle41_2022112815.zip -o /customcertificate.zip \
+# https://moodle.org/plugins/mod_customcert
+    && curl -L https://moodle.org/plugins/download.php/36496/mod_customcert_moodle45_2024042212.zip -o /customcertificate.zip \
     && cp /customcertificate.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip customcertificate.zip \
@@ -101,13 +110,13 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
 COPY certificate.php /var/www/html/mod/certificate/type/letter_non_embedded/
 
 # add custom theme
-COPY themes/maker-v10.0-moodle-4.1.zip /var/www/html/theme/
+COPY themes/maker-v14.2-moodle-4.5.zip /var/www/html/theme/
 RUN cd /var/www/html/theme \
-    && unzip maker-v10.0-moodle-4.1.zip \
-    && rm maker-v10.0-moodle-4.1.zip 
+    && unzip maker-v14.2-moodle-4.5.zip \
+    && rm maker-v14.2-moodle-4.5.zip 
 
 RUN mkdir -p /var/www/html/enrol/arlo \
-    && curl -L https://github.com/ArloSoftware/moodle-enrol_arlo/tarball/v4.2.0 | tar zx --strip-components=1 -C /var/www/html/enrol/arlo
+    && curl -L https://github.com/ArloSoftware/moodle-enrol_arlo/tarball/V4.2.1 | tar zx --strip-components=1 -C /var/www/html/enrol/arlo
 	
 # add new config file for mergeusers plugin
 COPY plugin/config.local.php /var/www/html/admin/tool/mergeusers/config/
