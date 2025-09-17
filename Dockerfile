@@ -1,4 +1,4 @@
-FROM lthub/moodle:4.1.19
+FROM lthub/moodle:4.5.5
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 # https://moodle.org/plugins/mod_questionnaire
