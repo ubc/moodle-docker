@@ -15,13 +15,6 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && unzip xp.zip \
     && rm xp.zip \
 
-# https://moodle.org/plugins/format_socialwall
-    && curl -L https://moodle.org/plugins/download.php/16327/format_socialwall_moodle33_2018030700.zip -o /socialwall.zip \
-    && cp /socialwall.zip /var/www/html/course/format/ \
-    && cd /var/www/html/course/format \
-    && unzip socialwall.zip \
-    && rm socialwall.zip \
-
 # https://moodle.org/plugins/format_topcoll
     && curl -L https://moodle.org/plugins/download.php/36758/format_topcoll_moodle45_2024092206.zip -o /topcoll.zip \
     && cp /topcoll.zip /var/www/html/course/format/ \
