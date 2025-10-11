@@ -1,4 +1,4 @@
-FROM lthub/moodle:4.5.5
+FROM lthub/moodle:4.5.7
 MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 # https://moodle.org/plugins/mod_questionnaire
@@ -116,7 +116,7 @@ RUN cd /var/www/html/theme \
     && rm maker-v14.2-moodle-4.5.zip 
 
 RUN mkdir -p /var/www/html/enrol/arlo \
-    && curl -L https://github.com/ArloSoftware/moodle-enrol_arlo/tarball/V4.2.1 | tar zx --strip-components=1 -C /var/www/html/enrol/arlo
+    && curl -L https://github.com/ArloSoftware/moodle-enrol_arlo/tarball/V4.2.2 | tar zx --strip-components=1 -C /var/www/html/enrol/arlo
 	
 # add new config file for mergeusers plugin
 COPY plugin/config.local.php /var/www/html/admin/tool/mergeusers/config/
