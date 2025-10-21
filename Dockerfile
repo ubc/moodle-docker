@@ -30,7 +30,7 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && rm customsql.zip \ 
 
 # https://moodle.org/plugins/format_grid
-    && curl -L https://moodle.org/plugins/download.php/36458/format_grid_moodle45_2024101503.zip -o /grid.zip \
+    && curl -L https://moodle.org/plugins/download.php/37815/format_grid_moodle45_2024101508.zip -o /grid.zip \
     && cp /grid.zip /var/www/html/course/format/ \
     && cd /var/www/html/course/format \
     && unzip grid.zip \
@@ -58,7 +58,7 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && rm modulenav.zip \ 
 
 # https://moodle.org/plugins/tool_mergeusers
-    && curl -L https://moodle.org/plugins/download.php/34768/tool_mergeusers_moodle45_2025020505.zip -o /mergeuser.zip \
+    && curl -L https://moodle.org/plugins/download.php/38323/tool_mergeusers_moodle51_2025102100.zip -o /mergeuser.zip \
     && cp /mergeuser.zip /var/www/html/admin/tool/ \
     && cd /var/www/html/admin/tool \
     && unzip mergeuser.zip \
@@ -93,7 +93,7 @@ RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_mood
     && rm subcourse.zip \
 
 # https://moodle.org/plugins/mod_zoom
-    && curl -L https://moodle.org/plugins/download.php/37189/mod_zoom_moodle50_2025080700.zip -o /zoom.zip \
+    && curl -L https://moodle.org/plugins/download.php/38270/mod_zoom_moodle51_2025101600.zip -o /zoom.zip \
     && cp /zoom.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip zoom.zip \
