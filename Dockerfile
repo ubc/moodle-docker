@@ -3,6 +3,9 @@ MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
 
 # https://moodle.org/plugins/mod_questionnaire
 RUN curl -L https://moodle.org/plugins/download.php/33023/mod_questionnaire_moodle44_2022121601.zip -o /questionnaire.zip \
+    && echo "--- FILE TYPE ---" \
+    && file /questionnaire.zip \
+    && echo "--- HEAD OF FILE ---" \
     && cp /questionnaire.zip /var/www/html/mod/ \
     && cd /var/www/html/mod \
     && unzip questionnaire.zip \
