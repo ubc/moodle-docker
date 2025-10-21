@@ -51,10 +51,10 @@ COPY customizations/mergeuser/config.local.php /var/www/html/admin/tool/mergeuse
 RUN chown -R www-data /var/www/html
 
 # Installing odbc for shib sp
+COPY mariadb-connector /usr/
 RUN apt-get update && \
     apt-get -y install unixodbc odbcinst libapache2-mod-shib gettext && \
     cd /usr && \
-    curl https://downloads.mariadb.com/Connectors/odbc/connector-odbc-3.1.1/mariadb-connector-odbc-3.1.1-ga-debian-x86_64.tar.gz | tar -xvz && \
     echo "[MariaDB]" > MariaDB_odbc_driver_template.ini && \
     echo "Description = MariaDB Connector/ODBC v.3.1" >> MariaDB_odbc_driver_template.ini && \
     echo "Driver = /usr/lib/libmaodbc.so" >> MariaDB_odbc_driver_template.ini && \
