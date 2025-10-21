@@ -1,5 +1,5 @@
 FROM lthub/moodle:4.5.7
-MAINTAINER Tyler Cinkant <tyler.cinkant@ubc.ca>
+LABEL maintainer="Tyler Cinkant <tyler.cinkant@ubc.ca>"
 
 # Fetching and unzipping all plugins
 COPY plugins/ /plugins/
