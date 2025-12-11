@@ -1,4 +1,4 @@
-FROM php:8.1-apache
+FROM php:8.3-apache
 LABEL maintainer="Tyler Cinkant <tyler.cinkant@ubc.ca>"
 
 ENV MOODLE_VERSION=4.5.7
