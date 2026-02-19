@@ -29,7 +29,7 @@
       signing="true" encryption="false"
       REMOTE_USER="somerandomname">
 
-      <Sessions lifetime="7200" timeout="3600" relayState="ss:db"
+      <Sessions lifetime="7200" timeout="7200" relayState="ss:db"
          idpHistory="true" idpHistoryDays="7"
          checkAddress="false" handlerSSL="false" cookieProps="http">
 
