@@ -19,4 +19,4 @@ The Dockerfile expects the plugin ZIP files to follow a specific naming pattern:
 
 | Plugin                   | Link                                                     |
 |--------------------------|----------------------------------------------------------|
-| Heartbeat check          | https://moodle.org/plugins/tool_heartbeat                |
+|                          |                                                          |
