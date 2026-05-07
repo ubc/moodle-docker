@@ -6,6 +6,7 @@ COPY plugins/ /plugins/
 RUN set -eux; \
     cd /plugins; \
     for zip in *.zip; do \
+        [ -f "$zip" ] || continue; \
         echo "Processing $zip..."; \
         type="${zip%%_*}"; \
         name="${zip#*_}"; \
