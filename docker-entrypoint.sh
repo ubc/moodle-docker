@@ -173,7 +173,7 @@ if [ ! -e "$MOODLE_SHARED/installed" -a ! -f "$MOODLE_SHARED/install.lock" ]; th
     touch $MOODLE_SHARED/install.lock
     sudo -E -H -u www-data php admin/cli/install_database.php \
         --agree-license \
-        --lang "$MOODLE_SITE_LANG" \
+        --lang="$MOODLE_SITE_LANG" \
         --adminuser=$MOODLE_ADMIN_USER \
         --adminpass=$MOODLE_ADMIN_PASS \
         --adminemail=$MOODLE_ADMIN_EMAIL \
