@@ -1,4 +1,4 @@
-FROM lthub/moodle:4.5.11-2
+FROM lthub/moodle:4.5.11-3
 LABEL maintainer="Tyler Cinkant <tyler.cinkant@ubc.ca>"
 
 # PostgreSQL PHP extensions. The base lthub/moodle image only installs mysqli;
