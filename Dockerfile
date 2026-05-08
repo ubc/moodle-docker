@@ -19,6 +19,7 @@ RUN set -eux; \
         [ -f "$zip" ] || continue; \
         echo "Processing $zip..."; \
         type="${zip%%_*}"; \
+        type=$(echo "$type" | tr '[:upper:]' '[:lower:]'); \
         name="${zip#*_}"; \
         name="${name%.zip}"; \
         \
@@ -55,6 +56,8 @@ RUN set -eux; \
             gradereport) dest="/var/www/html/grade/report";; \
             gradingform) dest="/var/www/html/grade/grading/form";; \
             h5plib) dest="/var/www/html/h5p/h5plib";; \
+            kaltura) dest="/var/www/html";; \
+            lib) dest="/var/www/html/lib";; \
             local) dest="/var/www/html/local";; \
             logstore) dest="/var/www/html/admin/tool/log/store";; \
             ltiservice) dest="/var/www/html/mod/lti/service";; \
