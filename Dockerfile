@@ -91,4 +91,40 @@ RUN set -eux; \
     done; \
     rm -rf /plugins
 
+# Patch auth_saml2 to use SimpleSAMLphp's optional accessors. Catalyst's
+# bundled SSP made getArray/getString/getBoolean/getLocalizedString strict —
+# they now throw "Could not retrieve the required option ..." even when
+# called with a default value. The plugin's intent (and the surrounding
+# `if (!== NULL)` guards) show these reads were always meant to be optional.
+# Without this:
+#   - /auth/saml2/sp/metadata.php (View SP Metadata) blows up when an
+#     authsource key like `description` is absent (locallib.php hunk).
+#   - SAML signing/decryption flows can blow up reading
+#     assertion.encryption / sharedKey / privatekey_pass etc. (vendor hunk).
+#
+# Mirrors upstream PR https://github.com/catalyst/moodle-auth_saml2/pull/915
+# (still OPEN at the time of writing). The PR's vendor hunk has a typo
+# (`getOptinalBoolean`, sic) on line 81; we use the correct
+# `getOptionalBoolean` here.
+RUN set -eux; \
+    sed -i \
+        -e "s|\$spconfig->getLocalizedString('name', NULL)|\$spconfig->getOptionalLocalizedString('name', NULL)|" \
+        -e "s|\$spconfig->getArray('attributes', array())|\$spconfig->getOptionalArray('attributes', array())|" \
+        -e "s|\$spconfig->getArray('attributes.required', array())|\$spconfig->getOptionalArray('attributes.required', array())|" \
+        -e "s|\$spconfig->getArray('description', NULL)|\$spconfig->getOptionalArray('description', NULL)|" \
+        -e "s|\$spconfig->getString('attributes.NameFormat', NULL)|\$spconfig->getOptionalString('attributes.NameFormat', NULL)|" \
+        -e "s|\$spconfig->getLocalizedString('OrganizationName', NULL)|\$spconfig->getOptionalLocalizedString('OrganizationName', NULL)|" \
+        -e "s|\$spconfig->getLocalizedString('OrganizationDisplayName', NULL)|\$spconfig->getOptionalLocalizedString('OrganizationDisplayName', NULL)|" \
+        -e "s|\$spconfig->getLocalizedString('OrganizationURL', NULL)|\$spconfig->getOptionalLocalizedString('OrganizationURL', NULL)|" \
+        -e "s|\$config->getString('technicalcontact_email', 'na@example.org', FALSE)|\$config->getOptionalString('technicalcontact_email', 'na@example.org')|" \
+        -e "s|\$config->getString('technicalcontact_name', NULL)|\$config->getOptionalString('technicalcontact_name', NULL)|" \
+        /var/www/html/auth/saml2/locallib.php; \
+    find /var/www/html/auth/saml2 -name SimpleSAMLConverter.php -exec sed -i \
+        -e "s|getBoolean('assertion.encryption', false)|getOptionalBoolean('assertion.encryption', false)|" \
+        -e "s|getBoolean('base64attributes', false)|getOptionalBoolean('base64attributes', false)|" \
+        -e "s|getString('sharedKey', null)|getOptionalString('sharedKey', null)|" \
+        -e "s|getString('new_privatekey_pass', null)|getOptionalString('new_privatekey_pass', null)|" \
+        -e "s|getString('privatekey_pass', null)|getOptionalString('privatekey_pass', null)|" \
+        {} +
+
 RUN chown -R www-data /var/www/html
