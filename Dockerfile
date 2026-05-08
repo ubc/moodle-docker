@@ -1,6 +1,16 @@
 FROM lthub/moodle:4.5.11
 LABEL maintainer="Tyler Cinkant <tyler.cinkant@ubc.ca>"
 
+# PostgreSQL PHP extensions. The base lthub/moodle image only installs mysqli;
+# Moodle on Postgres needs `pgsql` (Moodle's $CFG->dbtype=pgsql consumes the
+# procedural extension) and `pdo_pgsql` (used by some PDO code paths).
+ARG DEBIAN_FRONTEND=noninteractive
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends libpq-dev; \
+    docker-php-ext-install -j"$(nproc)" pgsql pdo_pgsql; \
+    rm -rf /var/lib/apt/lists/*
+
 # Fetching and unzipping all plugins
 COPY plugins/ /plugins/
 RUN set -eux; \
