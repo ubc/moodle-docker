@@ -179,28 +179,43 @@ if [ ! -e "$MOODLE_SHARED/installed" -a ! -f "$MOODLE_SHARED/install.lock" ]; th
         --adminemail=$MOODLE_ADMIN_EMAIL \
         --fullname="$MOODLE_SITE_FULLNAME" \
         --shortname="$MOODLE_SITE_SHORTNAME"
-    if [ -n $SMTP_HOST ]; then
-        sudo -E -H -u www-data php admin/cli/cfg.php --name=smtphosts --set=$SMTP_HOST
-    fi
-    if [ -n $SMTP_USER ]; then
-        sudo -E -H -u www-data php admin/cli/cfg.php --name=smtpuser --set=$SMTP_USER
-    fi
-    if [ -n $SMTP_PASS ]; then
-        sudo -E -H -u www-data php admin/cli/cfg.php --name=smtppass --set=$SMTP_PASS
-    fi
-    if [ -n $SMTP_SECURITY ]; then
-        sudo -E -H -u www-data php admin/cli/cfg.php --name=smtpsecure --set=$SMTP_SECURITY
-    fi
-    if [ -n $SMTP_AUTH_TYPE ]; then
-        sudo -E -H -u www-data php admin/cli/cfg.php --name=smtpauthtype --set=$SMTP_AUTH_TYPE
-    fi
-    if [ -n $MOODLE_NOREPLY_ADDRESS ]; then
-        sudo -E -H -u www-data php admin/cli/cfg.php --name=noreplyaddress --set=$MOODLE_NOREPLY_ADDRESS
-    fi
 
     touch $MOODLE_SHARED/installed
     rm $MOODLE_SHARED/install.lock
     echo "Done."
+fi
+
+# Sync SMTP / noreply settings from env into Moodle's mdl_config on every
+# container start so that changes to chart values propagate to existing
+# deployments. Previously these calls lived inside the install-once block,
+# which meant SMTP_HOST changes had no effect after the first boot. Each
+# cfg.php call is idempotent (no-op when value already matches).
+#
+# Only runs if Moodle has been installed — mdl_config doesn't exist before
+# install_database.php has run.
+if [ -e "$MOODLE_SHARED/installed" ]; then
+    if [ -n "$SMTP_HOST" ]; then
+        smtphosts="$SMTP_HOST"
+        if [ -n "$SMTP_PORT" ]; then
+            smtphosts="$SMTP_HOST:$SMTP_PORT"
+        fi
+        sudo -E -H -u www-data php admin/cli/cfg.php --name=smtphosts --set="$smtphosts"
+    fi
+    if [ -n "$SMTP_USER" ]; then
+        sudo -E -H -u www-data php admin/cli/cfg.php --name=smtpuser --set="$SMTP_USER"
+    fi
+    if [ -n "$SMTP_PASSWORD" ]; then
+        sudo -E -H -u www-data php admin/cli/cfg.php --name=smtppass --set="$SMTP_PASSWORD"
+    fi
+    if [ -n "$SMTP_PROTOCOL" ]; then
+        sudo -E -H -u www-data php admin/cli/cfg.php --name=smtpsecure --set="$SMTP_PROTOCOL"
+    fi
+    if [ -n "$SMTP_AUTH" ]; then
+        sudo -E -H -u www-data php admin/cli/cfg.php --name=smtpauthtype --set="$SMTP_AUTH"
+    fi
+    if [ -n "$MOODLE_NOREPLY_ADDRESS" ]; then
+        sudo -E -H -u www-data php admin/cli/cfg.php --name=noreplyaddress --set="$MOODLE_NOREPLY_ADDRESS"
+    fi
 fi
 
 # Install extensions
