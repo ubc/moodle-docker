@@ -7,4 +7,4 @@
   3. Set **Application** -> `redis_app` (and **Request** -> `redis_app` if desired). Sessions already use Redis automatically via `$CFG->session_handler_class`.
   4. Save changes and **Purge all caches**.
 
-  Mode mappings can't be auto-wired from `config.php` in Moodle 4.5 — they live in `moodledata/muc/config.php` and must be set via the admin UI on first install. The redis store predefinition above just means you don't need to "Add instance" yourself.
+  The store is registered by the docker-entrypoint via `cache_config_writer::add_store_instance()` (the only API that actually persists to `moodledata/muc/config.php` — `$CFG->cachestores` in `config.php` looks plausible but is silently ignored by Moodle's cache framework). Mode mappings still need the admin UI step on first install — Moodle has no reliable programmatic API for default mode mappings.

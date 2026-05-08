@@ -139,11 +139,12 @@ RUN set -eux; \
     done; \
     rm -rf /plugins
 
-# Predefine a Redis cache store in Moodle's config so it shows up in
-# Site admin > Plugins > Caching > Configuration. Mode mappings are still
-# done once via the admin UI (Moodle stores those in moodledata/muc/config.php).
-COPY redis-cache-config.php /var/www/html/redis-cache-config.php
-RUN sed -i "s|^require_once(__DIR__ . '/lib/setup\\.php');|require_once(__DIR__ . '/redis-cache-config.php');\\nrequire_once(__DIR__ . '/lib/setup.php');|" /var/www/html/config.php
+# One-shot script the entrypoint runs to register a "redis_app" cache
+# store via cache_config_writer (the only API that actually writes to
+# moodledata/muc/config.php — $CFG->cachestores in config.php is ignored
+# by Moodle's cache framework). Mode mappings (Application/Request ->
+# redis_app) still need to be set once via the admin UI.
+COPY register-redis-cache-store.php /var/www/html/register-redis-cache-store.php
 
 RUN chown -R www-data /var/www/html
 

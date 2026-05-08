@@ -216,6 +216,13 @@ if [ -e "$MOODLE_SHARED/installed" ]; then
     if [ -n "$MOODLE_NOREPLY_ADDRESS" ]; then
         sudo -E -H -u www-data php admin/cli/cfg.php --name=noreplyaddress --set="$MOODLE_NOREPLY_ADDRESS"
     fi
+
+    # Register the redis_app cache store via cache_config_writer when redis
+    # is available. Idempotent — script no-ops if already registered.
+    # Mode mappings (Application/Request -> redis_app) are still admin-UI only.
+    if [ -n "$REDIS_HOST" ]; then
+        sudo -E -H -u www-data php /var/www/html/register-redis-cache-store.php
+    fi
 fi
 
 # Install extensions
