@@ -486,7 +486,7 @@ $CFG->localcachedir = '/var/local/cache';      // Intended for local node cachin
 // features (such as cancelling the plugin installation or upgrade) via the
 // server administration web interface.
 //
-$CFG->disableupdateautodeploy = filter_var(loadenv('MOODLE_DISABLE_UPDATE_AUTODEPLOY', false), FILTER_VALIDATE_BOOLEAN);
+$CFG->disableupdateautodeploy = filter_var(loadenv('MOODLE_DISABLE_UPDATE_AUTODEPLOY', true), FILTER_VALIDATE_BOOLEAN);
 //
 // Use the following flag to disable the warning on the system notifications page
 // about present development libraries. This flag will not disable the warning within
