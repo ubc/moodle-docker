@@ -324,6 +324,11 @@ $CFG->reverseproxy = filter_var(loadenv('MOODLE_REVERSE_PROXY', false), FILTER_V
 // Please note that site may be accessible via http: or https:, but not both!
 $CFG->sslproxy = filter_var(loadenv('MOODLE_SSL_PROXY', false), FILTER_VALIDATE_BOOLEAN);
 //
+// When true, Moodle will not send any emails. Use on staging/test
+// environments to prevent accidental notifications to real users.
+// MUST stay false (the default) on production.
+$CFG->noemailever = filter_var(loadenv('MOODLE_NOEMAILEVER', false), FILTER_VALIDATE_BOOLEAN);
+//
 // This setting will cause the userdate() function not to fix %d in
 // date strings, and just let them show with a zero prefix.
 //      $CFG->nofixday = true;
