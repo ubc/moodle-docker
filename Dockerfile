@@ -28,12 +28,18 @@ RUN apt-get update \
     && mkdir /docker-entrypoint.d
 
 # see https://secure.php.net/manual/en/opcache.installation.php
+# Sized for Moodle 4.5 (~15k PHP files). validate_timestamps=0 is safe because
+# this image is immutable — each new release rebuilds and restarts the pod, which
+# resets OPcache automatically. JIT in PHP 8.3 defaults to tracing mode but
+# requires an explicit jit_buffer_size to actually allocate; without it JIT is
+# enabled in name only.
 RUN { \
-        echo 'opcache.memory_consumption=128'; \
-        echo 'opcache.interned_strings_buffer=8'; \
-        echo 'opcache.max_accelerated_files=4000'; \
-        echo 'opcache.revalidate_freq=2'; \
-        echo 'opcache.fast_shutdown=1'; \
+        echo 'opcache.memory_consumption=384'; \
+        echo 'opcache.interned_strings_buffer=32'; \
+        echo 'opcache.max_accelerated_files=24000'; \
+        echo 'opcache.validate_timestamps=0'; \
+        echo 'opcache.jit=tracing'; \
+        echo 'opcache.jit_buffer_size=128M'; \
      } > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 RUN set -eux; \
