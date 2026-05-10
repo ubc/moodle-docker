@@ -258,4 +258,16 @@ then
     /bin/run-parts --verbose "$DIR"
 fi
 
+# Start php-fpm in the background before exec'ing Apache. PHP execution is
+# proxied from Apache to fpm on 127.0.0.1:9000 via mod_proxy_fcgi, so fpm
+# must be listening before the Apache vhost starts accepting requests.
+#
+# If fpm dies after startup, Apache will serve 502s and the Moodle liveness
+# probe (/login/index.php) and readiness probe (/admin/tool/heartbeat/) will
+# fail, triggering a pod restart from kubelet. No in-container supervisor.
+if command -v php-fpm >/dev/null 2>&1; then
+    echo "Starting php-fpm..."
+    php-fpm --daemonize
+fi
+
 exec "$@"

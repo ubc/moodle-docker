@@ -1,6 +1,12 @@
 # syntax=docker/dockerfile:1.7
-FROM php:8.3-apache
+FROM php:8.3-fpm-bookworm
 LABEL maintainer="Tyler Cinkant <tyler.cinkant@ubc.ca>"
+
+# Switched from php:8.3-apache (mod_php + mpm_prefork) to php:8.3-fpm + Apache
+# (mpm_event + mod_proxy_fcgi). mod_php only works under prefork because the
+# PHP runtime is not thread-safe in the embedded SAPI; moving PHP into a
+# separate fpm pool lets Apache use the event MPM, which handles idle
+# keep-alive connections without dedicating a worker thread to each one.
 
 ENV UPLOAD_MAX_FILESIZE=20M
 ENV PHP_MEMORY_LIMIT=128M
@@ -21,8 +27,9 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     rm -f /etc/apt/apt.conf.d/docker-clean; \
     apt-get update; \
     # Runtime tools used by Moodle / entrypoint at runtime — kept in final image.
+    # apache2 fronts php-fpm via mod_proxy_fcgi.
     apt-get install -y --no-install-recommends \
-        graphviz aspell ghostscript sudo netcat-traditional unzip; \
+        apache2 graphviz aspell ghostscript sudo netcat-traditional unzip; \
     # Snapshot manual-mark BEFORE installing -dev packages so they're preserved.
     savedAptMark="$(apt-mark showmanual)"; \
     apt-get install -y --no-install-recommends \
@@ -62,8 +69,11 @@ RUN { \
      } > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 # Layer 3 (stable): Apache modules + remoteip + client-IP-aware LogFormat.
+# Switch from prefork to event MPM and enable the modules needed to proxy
+# PHP requests to fpm. status is exposed for the apache-exporter sidecar.
 RUN set -eux; \
-    a2enmod rewrite expires remoteip; \
+    a2dismod mpm_prefork; \
+    a2enmod mpm_event proxy proxy_fcgi rewrite expires remoteip status; \
     { \
         echo 'RemoteIPHeader X-Forwarded-For'; \
         echo 'RemoteIPTrustedProxy 10.0.0.0/8'; \
@@ -75,7 +85,15 @@ RUN set -eux; \
     a2enconf remoteip; \
 # https://github.com/docker-library/wordpress/issues/383#issuecomment-507886512
 # (replace all instances of "%h" with "%a" in LogFormat)
-    find /etc/apache2 -type f -name '*.conf' -exec sed -ri 's/([[:space:]]*LogFormat[[:space:]]+"[^"]*)%h([^"]*")/\1%a\2/g' '{}' +
+    find /etc/apache2 -type f -name '*.conf' -exec sed -ri 's/([[:space:]]*LogFormat[[:space:]]+"[^"]*)%h([^"]*")/\1%a\2/g' '{}' +; \
+# Replace the default site with the Moodle vhost (handles fpm proxying and /server-status).
+    a2dissite 000-default.conf
+
+COPY apache-moodle.conf /etc/apache2/sites-available/moodle.conf
+COPY mpm-event.conf     /etc/apache2/conf-available/mpm-event.conf
+COPY fpm-pool.conf      /usr/local/etc/php-fpm.d/zz-moodle.conf
+
+RUN a2ensite moodle.conf && a2enconf mpm-event
 
 # Layer 4 (volatile): Moodle source. Isolated so MOODLE_VERSION bumps don't
 # invalidate the apt/extensions layers above.
