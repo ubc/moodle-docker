@@ -91,6 +91,7 @@ RUN set -eux; \
         echo " → Installing into $dest"; \
         mkdir -p "$dest"; \
         unzip -q "$zip" -d "$dest"; \
+        chown -R www-data:www-data "$dest"; \
     done; \
     rm -rf /plugins
 
@@ -128,6 +129,5 @@ RUN set -eux; \
         -e "s|getString('sharedKey', null)|getOptionalString('sharedKey', null)|" \
         -e "s|getString('new_privatekey_pass', null)|getOptionalString('new_privatekey_pass', null)|" \
         -e "s|getString('privatekey_pass', null)|getOptionalString('privatekey_pass', null)|" \
-        {} +
-
-RUN chown -R www-data /var/www/html
+        {} +; \
+    chown -R www-data:www-data /var/www/html/auth/saml2
