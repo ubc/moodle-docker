@@ -1,7 +1,7 @@
+# syntax=docker/dockerfile:1.7
 FROM php:8.3-apache
 LABEL maintainer="Tyler Cinkant <tyler.cinkant@ubc.ca>"
 
-ENV MOODLE_VERSION=4.5.11
 ENV UPLOAD_MAX_FILESIZE=20M
 ENV PHP_MEMORY_LIMIT=128M
 ENV PHP_MAX_EXECUTION_TIME=30
@@ -11,23 +11,42 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /var/www/html
 
-RUN apt-get update \
-    && apt-get -qq install graphviz aspell ghostscript libpspell-dev libpng-dev libicu-dev libxml2-dev libldap2-dev sudo netcat-traditional unzip libssl-dev zlib1g-dev libjpeg-dev libfreetype6-dev libzip-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pspell gd intl xml ldap zip soap mysqli opcache exif \
-    && pecl install redis \
-    && docker-php-ext-enable redis \
-    && docker-php-ext-enable exif \
-    && curl -L https://github.com/moodle/moodle/archive/v${MOODLE_VERSION}.tar.gz | tar xz --strip=1 \
-    && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
-    && mkdir -p /moodledata /var/local/cache \
-    && chown -R www-data /moodledata \
-    && chmod -R 777 /moodledata /var/local/cache \
-    && chmod -R 0755 /var/www/html \
-    && chown -R www-data /var/www/html \
-    && mkdir /docker-entrypoint.d
+# Layer 1 (stable across Moodle bumps): runtime tools, PHP extensions, pecl redis.
+# Dev/-dev packages are purged after compilation via the savedAptMark pattern:
+# runtime libs needed by the compiled .so files are discovered with ldd and
+# re-marked manual, then apt-get autoremove drops the build-only headers.
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt/lists,sharing=locked \
+    set -eux; \
+    rm -f /etc/apt/apt.conf.d/docker-clean; \
+    apt-get update; \
+    # Runtime tools used by Moodle / entrypoint at runtime — kept in final image.
+    apt-get install -y --no-install-recommends \
+        graphviz aspell ghostscript sudo netcat-traditional unzip; \
+    # Snapshot manual-mark BEFORE installing -dev packages so they're preserved.
+    savedAptMark="$(apt-mark showmanual)"; \
+    apt-get install -y --no-install-recommends \
+        libpspell-dev libpng-dev libicu-dev libxml2-dev libldap2-dev \
+        libssl-dev zlib1g-dev libjpeg-dev libfreetype6-dev libzip-dev; \
+    docker-php-ext-configure gd --with-freetype --with-jpeg; \
+    docker-php-ext-install -j"$(nproc)" pspell gd intl xml ldap zip soap mysqli opcache exif; \
+    pecl install redis && docker-php-ext-enable redis; \
+    # Auto-mark everything, restore the runtime-tool manual list, then re-mark
+    # any shared lib pulled in by a compiled extension so it survives autoremove.
+    apt-mark auto '.*' > /dev/null; \
+    [ -z "$savedAptMark" ] || apt-mark manual $savedAptMark; \
+    find /usr/local -type f -executable -exec ldd '{}' ';' 2>/dev/null \
+      | awk '/=>/ { so = $(NF-1); if (index(so, "/usr/local/") == 1) { next }; gsub("^/(usr/)?", "", so); print so }' \
+      | sort -u \
+      | xargs -r dpkg-query -S 2>/dev/null \
+      | grep -v '^diversion by ' \
+      | cut -d: -f1 \
+      | sort -u \
+      | xargs -r apt-mark manual; \
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+    mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-# see https://secure.php.net/manual/en/opcache.installation.php
+# Layer 2 (stable): OPcache config.
 # Sized for Moodle 4.5 (~15k PHP files). validate_timestamps=0 is safe because
 # this image is immutable — each new release rebuilds and restarts the pod, which
 # resets OPcache automatically. JIT in PHP 8.3 defaults to tracing mode but
@@ -42,14 +61,11 @@ RUN { \
         echo 'opcache.jit_buffer_size=128M'; \
      } > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
+# Layer 3 (stable): Apache modules + remoteip + client-IP-aware LogFormat.
 RUN set -eux; \
-    a2enmod rewrite expires; \
-    \
-# https://httpd.apache.org/docs/2.4/mod/mod_remoteip.html
-    a2enmod remoteip; \
+    a2enmod rewrite expires remoteip; \
     { \
         echo 'RemoteIPHeader X-Forwarded-For'; \
-# these IP ranges are reserved for "private" use and should thus *usually* be safe inside Docker
         echo 'RemoteIPTrustedProxy 10.0.0.0/8'; \
         echo 'RemoteIPTrustedProxy 172.16.0.0/12'; \
         echo 'RemoteIPTrustedProxy 192.168.0.0/16'; \
@@ -61,11 +77,25 @@ RUN set -eux; \
 # (replace all instances of "%h" with "%a" in LogFormat)
     find /etc/apache2 -type f -name '*.conf' -exec sed -ri 's/([[:space:]]*LogFormat[[:space:]]+"[^"]*)%h([^"]*")/\1%a\2/g' '{}' +
 
-COPY config.php /var/www/html/
+# Layer 4 (volatile): Moodle source. Isolated so MOODLE_VERSION bumps don't
+# invalidate the apt/extensions layers above.
+ARG MOODLE_VERSION=4.5.11
+ENV MOODLE_VERSION=${MOODLE_VERSION}
+RUN set -eux; \
+    curl -fL "https://github.com/moodle/moodle/archive/v${MOODLE_VERSION}.tar.gz" | tar xz --strip=1; \
+    mkdir -p /moodledata /var/local/cache /docker-entrypoint.d; \
+    chmod -R 0755 /var/www/html; \
+    chmod 0777 /moodledata /var/local/cache; \
+    chown -R www-data:www-data /var/www/html /moodledata
+
+# Drop-in config and entrypoint. --chown avoids a follow-up recursive chown.
+COPY --chown=www-data:www-data config.php register-redis-cache-store.php /var/www/html/
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 COPY custom-php.ini $PHP_INI_DIR/conf.d/
 
-# Fetching and unzipping all plugins
+# Plugins: extract each plugins/<type>_<name>_<version>.zip into the Moodle
+# subtree the type expects, then chown only the destination (avoids a global
+# recursive chown of /var/www/html in a second layer).
 COPY plugins/ /plugins/
 RUN set -eux; \
     cd /plugins; \
@@ -142,17 +172,9 @@ RUN set -eux; \
         echo " → Installing into $dest"; \
         mkdir -p "$dest"; \
         unzip -q "$zip" -d "$dest"; \
+        chown -R www-data:www-data "$dest"; \
     done; \
     rm -rf /plugins
-
-# One-shot script the entrypoint runs to register a "redis_app" cache
-# store via cache_config_writer (the only API that actually writes to
-# moodledata/muc/config.php — $CFG->cachestores in config.php is ignored
-# by Moodle's cache framework). Mode mappings (Application/Request ->
-# redis_app) still need to be set once via the admin UI.
-COPY register-redis-cache-store.php /var/www/html/register-redis-cache-store.php
-
-RUN chown -R www-data /var/www/html
 
 VOLUME /moodledata
 EXPOSE 80
