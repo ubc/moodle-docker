@@ -43,6 +43,7 @@ SETTINGS_FILE="$MOODLE_ROOT/local/kaltura/settings.php"
 LOCALLIB_FILE="$MOODLE_ROOT/local/kaltura/locallib.php"
 
 # ── 1. Language strings (append to end of file) ──────────────────────────────
+printf '\n' >> "$LANG_FILE"
 cat >> "$LANG_FILE" << 'EOF'
 $string['custom_params'] = 'Custom LTI parameters';
 $string['custom_params_desc'] = 'Enter custom parameters to send to Kaltura on every LTI launch. One parameter per line in <code>key=value</code> format. Keys are automatically prefixed with <code>custom_</code> if not already present. Supported substitution variables: $Context.id, $Person.ubc.puid, $Person.ubc.cwl, and more.';
@@ -70,6 +71,7 @@ $insert = <<<'PHP'
     $settings->add($adminsetting);
 
 PHP;
+$content = str_replace("\r\n", "\n", $content);
 $anchor = "\$settings->hide_if(KALTURA_PLUGIN_NAME.'/adminsecret'";
 $content = str_replace($anchor, $insert . $anchor, $content);
 file_put_contents($file, $content);
@@ -85,12 +87,15 @@ cat > /tmp/_kaltura_patch_locallib.php << 'EOF'
 <?php
 $file = $argv[1];
 $content = file_get_contents($file);
+$content = str_replace("\r\n", "\n", $content);
 $anchor = "\$requestparams['custom_moodle_plugin_version'] = local_kaltura_get_config()->version;";
 $insert = <<<'PHP'
 
     $rawparams = get_config(KALTURA_PLUGIN_NAME, 'custom_params');
     if (!empty($rawparams)) {
-        $course = $ltirequest['course'];
+        if (isset($ltirequest['course'])) {
+            $course = $ltirequest['course'];
+        }
         profile_load_data($USER);
         $substitutions = [
             '$Context.id'           => $course->id,
