@@ -1,13 +1,22 @@
 FROM lthub/moodle:moodle-fpm
 LABEL maintainer="Tyler Cinkant <tyler.cinkant@ubc.ca>"
 
-# PostgreSQL PHP extensions. The base lthub/moodle image only installs mysqli;
-# Moodle on Postgres needs `pgsql` (Moodle's $CFG->dbtype=pgsql consumes the
-# procedural extension) and `pdo_pgsql` (used by some PDO code paths).
+# OS-level dependencies:
+#  - libpq-dev: build-time only; needed to compile pgsql/pdo_pgsql below.
+#    The base lthub/moodle image only installs mysqli; Moodle on Postgres
+#    needs `pgsql` ($CFG->dbtype=pgsql consumes the procedural extension)
+#    and `pdo_pgsql` (used by some PDO code paths).
+#  - libimage-exiftool-perl: ships /usr/bin/exiftool, used by Moodle 4.5's
+#    core_files\redactor\services\exifremover_service to strip EXIF metadata
+#    out-of-process. Without it the service falls back to GD, which
+#    decompresses every image into PHP RAM during course restores and OOMs
+#    the cron pod (~28% progress on image-heavy courses). Must be paired
+#    with $CFG->file_redactor_exifremovertoolpath = /usr/bin/exiftool in
+#    Moodle config (the helm chart's exiftool-config-job Hook sets this).
 ARG DEBIAN_FRONTEND=noninteractive
 RUN set -eux; \
     apt-get update; \
-    apt-get install -y --no-install-recommends libpq-dev; \
+    apt-get install -y --no-install-recommends libpq-dev libimage-exiftool-perl; \
     docker-php-ext-install -j"$(nproc)" pgsql pdo_pgsql; \
     rm -rf /var/lib/apt/lists/*
 
