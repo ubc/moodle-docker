@@ -121,6 +121,9 @@ RUN set -eux; \
     done; \
     rm -rf /plugins
 
+COPY kalturapatch.sh /tmp/
+RUN sh /tmp/kalturapatch.sh && rm /tmp/kalturapatch.sh
+
 # Patch auth_saml2 to use SimpleSAMLphp's optional accessors. Catalyst's
 # bundled SSP made getArray/getString/getBoolean/getLocalizedString strict —
 # they now throw "Could not retrieve the required option ..." even when
