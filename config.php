@@ -963,6 +963,15 @@ $CFG->pathtodot = '/usr/bin/dot';
 // ALL DONE!  To continue installation, visit your main page with a browser
 //=========================================================================
 
+// Optional environment-specific PHP snippet provided at deploy time (e.g. via
+// a Kubernetes ConfigMap mounted by the Helm chart's .Values.extraConfig as
+// extra-config.php alongside this file). Placed before lib/setup.php so $CFG
+// overrides take effect; placed at the bottom so it can override anything
+// declared above. No-op when the file is not mounted.
+if (is_readable(__DIR__ . '/extra-config.php')) {
+    require_once(__DIR__ . '/extra-config.php');
+}
+
 require_once(__DIR__ . '/lib/setup.php'); // Do not edit
 
 // There is no php closing tag in this file,
