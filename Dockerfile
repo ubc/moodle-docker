@@ -32,10 +32,14 @@ RUN set -eux; \
 # lockstep with whatever lands on ubc/moodle:ltic-v4.5.11 without having to
 # enumerate which files changed.
 ARG MOODLE_LTIC_REF=ltic-v4.5.11
+COPY delete-dev-files.sh /tmp/delete-dev-files.sh
 RUN set -eux; \
     curl -fL "https://github.com/ubc/moodle/archive/${MOODLE_LTIC_REF}.tar.gz" \
       | tar xz --strip=1 -C /var/www/html; \
-    chown -R www-data:www-data /var/www/html
+    bash /tmp/delete-dev-files.sh; \
+    rm /tmp/delete-dev-files.sh; \
+    chown -R www-data:www-data /var/www/html; \
+    chmod 444 /var/www/html/config.php # Addresses "Writable config.php" moodle warning
 
 # Fetching and unzipping all plugins
 COPY plugins/ /plugins/
@@ -120,6 +124,9 @@ RUN set -eux; \
         chown -R www-data:www-data "$dest"; \
     done; \
     rm -rf /plugins
+
+COPY .htaccess /var/www/html/.htaccess
+RUN chown www-data:www-data /var/www/html/.htaccess
 
 COPY kalturapatch.sh /tmp/
 RUN sh /tmp/kalturapatch.sh && rm /tmp/kalturapatch.sh

@@ -1,0 +1,8 @@
+# Block direct web access to sensitive PHP files that must remain on disk.
+# Returns 404 to avoid revealing file existence.
+Redirect 404 /config.php
+Redirect 404 /config-dist.php
+Redirect 404 /install.php
+Redirect 404 /brokenfile.php
+Redirect 404 /register-redis-cache-store.php
+Redirect 404 /version.php
