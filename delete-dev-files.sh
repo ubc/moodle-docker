@@ -52,11 +52,6 @@ PATTERNS=(
     "upgrading-current.md"
 )
 
-# Path patterns matched recursively (use * as wildcard, e.g. "*/db/install.xml").
-PATH_PATTERNS=(
-    "*/db/install.xml"
-)
-
 for entry in "${REMOVE[@]}"; do
     target="${BASE}/${entry}"
     if [[ -e "$target" || -L "$target" ]]; then
@@ -69,8 +64,4 @@ done
 
 for pattern in "${PATTERNS[@]}"; do
     find "$BASE" -depth -iname "$pattern" -printf "Removing: %p\n" -exec rm -rf {} +
-done
-
-for path_pattern in "${PATH_PATTERNS[@]}"; do
-    find "$BASE" -depth -path "$path_pattern" -printf "Removing: %p\n" -exec rm -rf {} +
 done
