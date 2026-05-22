@@ -125,8 +125,7 @@ RUN set -eux; \
     done; \
     rm -rf /plugins
 
-COPY .htaccess /var/www/html/.htaccess
-RUN chown www-data:www-data /var/www/html/.htaccess
+COPY --chown=www-data:www-data .htaccess /var/www/html/.htaccess
 
 COPY kalturapatch.sh /tmp/
 RUN sh /tmp/kalturapatch.sh && rm /tmp/kalturapatch.sh
