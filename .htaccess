@@ -1,4 +1,4 @@
-# Block direct web access to sensitive files that must remain on disk.
+# Block direct web access to files that must remain on disk.
 # Returns 404 to avoid revealing file existence.
 Redirect 404 /config.php
 Redirect 404 /config-dist.php
@@ -6,6 +6,8 @@ Redirect 404 /install.php
 Redirect 404 /brokenfile.php
 Redirect 404 /register-redis-cache-store.php
 Redirect 404 /version.php
-
-# Block db/install.xml across all plugin paths.
 RedirectMatch 404 /install\.xml$
+RedirectMatch 404 \.htaccess$
+RedirectMatch 404 ^/lib/classes/$
+RedirectMatch 404 .*/fixtures/
+RedirectMatch 404 .*/behat/
