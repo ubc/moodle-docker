@@ -21,7 +21,7 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*
 
 # Overlay UBC's Moodle fork on top of the base image's upstream Moodle source.
-# See https://github.com/ubc/moodle/tree/ltic-v4.5.11. Extracting WITHOUT
+# See https://github.com/ubc/moodle/tree/ltic-v4.5.12. Extracting WITHOUT
 # wiping /var/www/html first preserves the deployment files placed there by
 # the base image (config.php, register-redis-cache-store.php, the heartbeat
 # plugin under admin/tool/heartbeat). The tarball overwrites the Moodle core
@@ -29,9 +29,9 @@ RUN set -eux; \
 #
 # Cost: ~250 MB extra in this layer — overlay-fs copy_up's every file written
 # by tar even if the content matches. Accepted to keep this Dockerfile in
-# lockstep with whatever lands on ubc/moodle:ltic-v4.5.11 without having to
+# lockstep with whatever lands on ubc/moodle:ltic-v4.5.12 without having to
 # enumerate which files changed.
-ARG MOODLE_LTIC_REF=ltic-v4.5.11
+ARG MOODLE_LTIC_REF=ltic-v4.5.12
 COPY delete-dev-files.sh /tmp/delete-dev-files.sh
 RUN set -eux; \
     curl -fL "https://github.com/ubc/moodle/archive/${MOODLE_LTIC_REF}.tar.gz" \
