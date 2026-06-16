@@ -8,7 +8,11 @@ BASE=/var/www/html
 # Exact paths (relative to $BASE) to remove.
 REMOVE=(
     "check_lang_sort.sh"
-    "admin/environment.xml"
+    # NOTE: do NOT delete admin/environment.xml — it is runtime-required, not a
+    # dev-only file. Moodle's environment check (admin "Environment" page and
+    # every web/CLI upgrade) reads it via get_latest_version_available(). Without
+    # it, check_moodle_environment() returns [false, []], which blanks the upgrade
+    # "server checks" page and aborts admin/cli/upgrade.php at exit 1.
     "composer.json"
     "composer.lock"
     "package.json"
