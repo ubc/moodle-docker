@@ -79,7 +79,7 @@ RUN set -eux; \
 
 # Layer 4 (volatile): Moodle source. Isolated so MOODLE_VERSION bumps don't
 # invalidate the apt/extensions layers above.
-ARG MOODLE_VERSION=4.5.11
+ARG MOODLE_VERSION=4.5.12
 ENV MOODLE_VERSION=${MOODLE_VERSION}
 RUN set -eux; \
     curl -fL "https://github.com/moodle/moodle/archive/v${MOODLE_VERSION}.tar.gz" | tar xz --strip=1; \
