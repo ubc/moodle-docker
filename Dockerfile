@@ -93,6 +93,10 @@ COPY customizations/certificate/certificate.php /var/www/html/mod/certificate/ty
 COPY customizations/themes/maker/favicon.ico /var/www/html/theme/maker/pix/
 COPY customizations/mergeuser/config.local.php /var/www/html/admin/tool/mergeusers/config/
 
+# Fix filter_mermaid using deprecated filter.php class naming (MDL-82427)
+COPY customizations/mermaid/text_filter.php /var/www/html/filter/mermaid/classes/text_filter.php
+RUN rm -f /var/www/html/filter/mermaid/filter.php
+
 RUN chown -R www-data /var/www/html
 
 # Installing odbc for shib sp
