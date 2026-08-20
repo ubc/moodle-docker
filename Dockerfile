@@ -31,7 +31,7 @@ RUN set -eux; \
 # by tar even if the content matches. Accepted to keep this Dockerfile in
 # lockstep with whatever lands on ubc/moodle:ltic-v4.5.12 without having to
 # enumerate which files changed.
-ARG MOODLE_LTIC_REF=ltic-v4.5.12
+ARG MOODLE_LTIC_REF=ltic-v4.5.13
 COPY delete-dev-files.sh /tmp/delete-dev-files.sh
 RUN set -eux; \
     curl -fL "https://github.com/ubc/moodle/archive/${MOODLE_LTIC_REF}.tar.gz" \
