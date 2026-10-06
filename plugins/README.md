@@ -13,7 +13,7 @@ The Dockerfile expects the plugin ZIP files to follow a specific naming pattern:
 - mod_arlo_2025093000.zip
 - block_quickmail_2025100100.zip
 
-> If you download a plugin from another source, make sure you rename the ZIP to follow this format. Otherwise, it will not be added to Moodle correctly.
+> Only the `type` prefix of the filename is used (to pick the install location). The plugin's folder name is read from `$plugin->component` in its `version.php`, so zips work whether the top-level folder is the plugin's short name (e.g. `course_modulenavigation/`) or a GitHub-style `moodle-block_completion_progress-2026083100/`.
 
 ## Plugin List
 

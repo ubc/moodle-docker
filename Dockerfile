@@ -103,11 +103,9 @@ RUN set -eux; \
     for zip in "$@"; do \
         echo "Processing $zip..."; \
         type="${zip%%_*}"; \
-        name="${zip#*_}"; \
-        name="${name%.zip}"; \
         \
         # Default destination (if type not matched below)
-        dest="/var/www/html/${type}/${name}"; \
+        dest="/var/www/html/${type}"; \
         \
         # Adjust destination for special cases
         case "$type" in \
@@ -169,10 +167,30 @@ RUN set -eux; \
             workshopform) dest="/var/www/html/mod/workshop/form";; \
         esac; \
         \
-        echo " → Installing into $dest"; \
-        mkdir -p "$dest"; \
-        unzip -q "$zip" -d "$dest"; \
-        chown -R www-data:www-data "$dest"; \
+        # Extract to a temp dir, then move each plugin folder into place using the
+        # name from version.php. Older zips use the plugin name as the top-level
+        # folder (e.g. course_modulenavigation/), newer GitHub-style zips use
+        # moodle-<component>-<version>/, so the folder name can't be trusted.
+        tmp="$(mktemp -d)"; \
+        unzip -q "$zip" -d "$tmp"; \
+        rm -rf "$tmp/__MACOSX"; \
+        found=0; \
+        for dir in "$tmp" "$tmp"/*/; do \
+            dir="${dir%/}"; \
+            [ -f "$dir/version.php" ] || continue; \
+            component="$(grep -oE "\\\$plugin->component[[:space:]]*=[[:space:]]*['\"][a-z0-9_]+['\"]" "$dir/version.php" | grep -oE "[a-z0-9]+_[a-z0-9_]+" | head -n1)"; \
+            [ -n "$component" ] || { echo "No \$plugin->component in $zip ($dir/version.php)"; exit 1; }; \
+            name="${component#*_}"; \
+            echo " → Installing $component into $dest/$name"; \
+            mkdir -p "$dest"; \
+            rm -rf "$dest/$name"; \
+            mv "$dir" "$dest/$name"; \
+            chown -R www-data:www-data "$dest/$name"; \
+            found=1; \
+            [ "$dir" != "$tmp" ] || break; \
+        done; \
+        [ "$found" = 1 ] || { echo "No plugin (version.php) found in $zip"; exit 1; }; \
+        rm -rf "$tmp"; \
     done; \
     rm -rf /plugins
 

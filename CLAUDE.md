@@ -34,7 +34,7 @@ CI (`.github/workflows/main.yml`) builds and pushes `lthub/moodle:<branch-or-tag
 - Moodle source comes from `https://github.com/moodle/moodle/archive/v${MOODLE_VERSION}.tar.gz` — bumping Moodle = bumping `MOODLE_VERSION` in the Dockerfile.
 - OPcache is pre-tuned for Moodle 4.5's ~15k PHP files: `memory_consumption=384`, `max_accelerated_files=24000`, `validate_timestamps=0`, tracing JIT with `jit_buffer_size=128M`. **`validate_timestamps=0` is intentional** — the image is immutable, every release rebuilds, and pod restart resets OPcache. Do not enable timestamp validation "for safety."
 - Apache: `remoteip`, `rewrite`, `expires` modules enabled; `RemoteIPHeader X-Forwarded-For` trusts RFC1918 ranges; `LogFormat %h → %a` so logs reflect the real client behind the proxy.
-- Plugins: every `plugins/*.zip` matching `<type>_<name>_<version>.zip` is extracted into the correct Moodle directory by a long `case "$type"` table in the Dockerfile. To add a plugin, drop the ZIP into `plugins/` named `<type>_<name>_<version>.zip` — the mapping must match Moodle's plugin layout (e.g. `mod_*` → `/var/www/html/mod/*`, `local_*` → `/var/www/html/local/*`, `theme_*` → `/var/www/html/theme/*`).
+- Plugins: every `plugins/*.zip` matching `<type>_<name>_<version>.zip` is extracted into the correct Moodle directory by a long `case "$type"` table in the Dockerfile. To add a plugin, drop the ZIP into `plugins/` named `<type>_<name>_<version>.zip` — the mapping must match Moodle's plugin layout (e.g. `mod_*` → `/var/www/html/mod/*`, `local_*` → `/var/www/html/local/*`, `theme_*` → `/var/www/html/theme/*`). Only `<type>` is taken from the filename; the plugin's folder name comes from `$plugin->component` in its `version.php`, because newer moodle.org zips use a GitHub-style top-level folder (`moodle-block_completion_progress-2026083100/`) instead of the short name. The build fails if a zip has no `version.php`.
 
 ### Runtime (`docker-entrypoint.sh`)
 Runs on every container start. The flow is:
@@ -76,6 +76,6 @@ Variables in the ini are substituted at container start by PHP's env interpolati
 
 ## Known operational gotchas
 - **NFS `/moodledata`** can produce `session data file is not created by your uid` because of UID-mapping drift between hosts. Workaround: use Redis sessions (set `REDIS_HOST`) — already enabled in production.
-- **Plugin renames**: zips downloaded from moodle.org are often named `tool_heartbeat.zip` without version. The Dockerfile's case table relies on the `type_name_version.zip` pattern; rename before committing or the plugin lands in the wrong directory.
+- **Plugin renames**: zips downloaded from moodle.org are often named `tool_heartbeat.zip` without version. The Dockerfile's case table relies on the `type_` prefix of the filename; rename before committing or the plugin lands in the wrong directory.
 - Do not turn on `opcache.validate_timestamps` "just in case" — see Architecture note above.
 - Do not move the install-time SMTP block back into the install-once branch — that regression has happened before.
