@@ -31,7 +31,7 @@ RUN set -eux; \
 # by tar even if the content matches. Accepted to keep this Dockerfile in
 # lockstep with whatever lands on ubc/moodle:ltic-v4.5.12 without having to
 # enumerate which files changed.
-ARG MOODLE_LTIC_REF=ltic-v4.5.14
+ARG MOODLE_LTIC_REF=ltic-v4.5.15
 COPY delete-dev-files.sh /tmp/delete-dev-files.sh
 RUN set -eux; \
     curl -fL "https://github.com/ubc/moodle/archive/${MOODLE_LTIC_REF}.tar.gz" \
@@ -50,11 +50,9 @@ RUN set -eux; \
         echo "Processing $zip..."; \
         type="${zip%%_*}"; \
         type=$(echo "$type" | tr '[:upper:]' '[:lower:]'); \
-        name="${zip#*_}"; \
-        name="${name%.zip}"; \
         \
         # Default destination (if type not matched below)
-        dest="/var/www/html/${type}/${name}"; \
+        dest="/var/www/html/${type}"; \
         \
         # Adjust destination for special cases
         case "$type" in \
@@ -118,9 +116,35 @@ RUN set -eux; \
             workshopform) dest="/var/www/html/mod/workshop/form";; \
         esac; \
         \
-        echo " → Installing into $dest"; \
-        mkdir -p "$dest"; \
-        unzip -q "$zip" -d "$dest"; \
+        if [ "$type" = kaltura ] || [ "$type" = lib ]; then \
+            # Multi-plugin packages laid out relative to $dest
+            # (no single version.php), so unzip them in place as-is.
+            echo " → Installing into $dest"; \
+            mkdir -p "$dest"; \
+            unzip -q "$zip" -d "$dest"; \
+        else \
+            # Extract to a temp dir, then move each plugin folder
+            # into place using the name from version.php.
+            tmp="$(mktemp -d)"; \
+            unzip -q "$zip" -d "$tmp"; \
+            rm -rf "$tmp/__MACOSX"; \
+            found=0; \
+            for dir in "$tmp" "$tmp"/*/; do \
+                dir="${dir%/}"; \
+                [ -f "$dir/version.php" ] || continue; \
+                component="$(grep -oE "\\\$plugin->component[[:space:]]*=[[:space:]]*['\"][a-z0-9_]+['\"]" "$dir/version.php" | grep -oE "[a-z0-9]+_[a-z0-9_]+" | head -n1)"; \
+                [ -n "$component" ] || { echo "No \$plugin->component in $zip ($dir/version.php)"; exit 1; }; \
+                name="${component#*_}"; \
+                echo " → Installing $component into $dest/$name"; \
+                mkdir -p "$dest"; \
+                rm -rf "$dest/$name"; \
+                mv "$dir" "$dest/$name"; \
+                found=1; \
+                [ "$dir" != "$tmp" ] || break; \
+            done; \
+            [ "$found" = 1 ] || { echo "No plugin (version.php) found in $zip"; exit 1; }; \
+            rm -rf "$tmp"; \
+        fi; \
         chown -R www-data:www-data "$dest"; \
     done; \
     rm -rf /plugins
