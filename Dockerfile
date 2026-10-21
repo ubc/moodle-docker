@@ -1,4 +1,4 @@
-FROM lthub/moodle:4.5.15
+FROM lthub/moodle:4.5.15-1
 LABEL maintainer="Tyler Cinkant <tyler.cinkant@ubc.ca>"
 
 # Fetching and unzipping all plugins
@@ -134,7 +134,7 @@ COPY 000-default.conf /etc/apache2/sites-available/
 RUN sed -i.bak '/public function lang_menu/ i\ public function get_language() {return current_language();}\n' /var/www/html/lib/outputrenderers.php
 
 # Supress "your site not registered" message
-RUN sed -i 's|echo $adminrenderer->warn_if_not_registered();|//echo $adminrenderer->warn_if_not_registered();|g' /var/www/html/admin/search.php 
+RUN sed -i 's|echo $adminrenderer->warn_if_not_registered();|//echo $adminrenderer->warn_if_not_registered();|g' /var/www/html/admin/search.php
 
 RUN sleep 3 && echo "\$THEME->removedprimarynavitems = ['courses'];" >> /var/www/html/theme/maker/config.php
 
