@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.7
-FROM php:8.3.36-apache
+FROM lthub/php:8.3-apache
 LABEL maintainer="Tyler Cinkant <tyler.cinkant@ubc.ca>"
 
 ENV UPLOAD_MAX_FILESIZE=20M
