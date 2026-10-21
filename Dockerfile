@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.7
-FROM php:8.3-fpm-bookworm
+FROM php:8.3.36-fpm-bookworm
 LABEL maintainer="Tyler Cinkant <tyler.cinkant@ubc.ca>"
 
 # Switched from php:8.3-apache (mod_php + mpm_prefork) to php:8.3-fpm + Apache
