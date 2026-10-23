@@ -17,7 +17,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /var/www/html
 
-# Layer 1 (stable across Moodle bumps): runtime tools, PHP extensions, pecl redis.
+# Layer 1 (stable across Moodle bumps): runtime tools, PHP extensions, pecl redis + timezonedb.
 # Dev/-dev packages are purged after compilation via the savedAptMark pattern:
 # runtime libs needed by the compiled .so files are discovered with ldd and
 # re-marked manual, then apt-get autoremove drops the build-only headers.
@@ -37,7 +37,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
         libssl-dev zlib1g-dev libjpeg-dev libfreetype6-dev libzip-dev; \
     docker-php-ext-configure gd --with-freetype --with-jpeg; \
     docker-php-ext-install -j"$(nproc)" pspell gd intl xml ldap zip soap mysqli opcache exif; \
-    pecl install redis && docker-php-ext-enable redis; \
+    pecl install redis timezonedb && docker-php-ext-enable redis timezonedb; \
     # Auto-mark everything, restore the runtime-tool manual list, then re-mark
     # any shared lib pulled in by a compiled extension so it survives autoremove.
     apt-mark auto '.*' > /dev/null; \
