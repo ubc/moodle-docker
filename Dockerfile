@@ -1,4 +1,4 @@
-FROM lthub/moodle:4.5.15-1
+FROM lthub/moodle:4.5.15-2
 LABEL maintainer="Tyler Cinkant <tyler.cinkant@ubc.ca>"
 
 # Fetching and unzipping all plugins
