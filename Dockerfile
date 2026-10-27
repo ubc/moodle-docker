@@ -96,6 +96,16 @@ RUN set -eux; \
     done; \
     rm -rf /plugins
 
+# theme_maker vendors the whole FlexSlider repo, including its dev/demo
+# dependencies: jQuery 1.11.3 (2015) in node_modules/ and bower_components/
+# plus static demo/ pages. Apache serves them from the dirroot, and scanners
+# flag CVE-2020-11023 (CISA KEV) and CVE-2019-11358. Nothing loads them: the
+# theme uses core jQuery 3.7 ($PAGE->requires->jquery()) and only fetches
+# plugins/flexslider/jquery.flexslider-min.js and flexslider.css.
+RUN rm -rf /var/www/html/theme/maker/plugins/flexslider/node_modules \
+           /var/www/html/theme/maker/plugins/flexslider/bower_components \
+           /var/www/html/theme/maker/plugins/flexslider/demo
+
 # Removing old favicon
 RUN cd /var/www/html/theme/maker/pix/ && rm favicon.ico
 
