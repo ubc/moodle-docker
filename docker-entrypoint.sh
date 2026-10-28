@@ -5,6 +5,7 @@ set -e
 : ${MOODLE_SITE_FULLNAME:=Moodle}
 : ${MOODLE_SITE_SHORTNAME:=Moodle}
 : ${MOODLE_SITE_LANG:=en}
+: ${MOODLE_SITE_TIMEZONE:=America/Vancouver}
 : ${MOODLE_ADMIN_USER:=admin}
 : ${MOODLE_ADMIN_PASS:=password}
 : ${MOODLE_ADMIN_EMAIL:=admin@example.com}
@@ -179,6 +180,11 @@ if [ ! -e "$MOODLE_SHARED/installed" -a ! -f "$MOODLE_SHARED/install.lock" ]; th
         --adminemail=$MOODLE_ADMIN_EMAIL \
         --fullname="$MOODLE_SITE_FULLNAME" \
         --shortname="$MOODLE_SITE_SHORTNAME"
+
+    # The installer takes the site timezone from PHP's default, which is UTC
+    # in this image, and Moodle swaps UTC for Europe/London. Set it here once;
+    # after install it's an admin setting, so don't re-push it on every start.
+    sudo -E -H -u www-data php admin/cli/cfg.php --name=timezone --set="$MOODLE_SITE_TIMEZONE"
 
     touch $MOODLE_SHARED/installed
     rm $MOODLE_SHARED/install.lock
