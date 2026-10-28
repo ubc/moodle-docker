@@ -40,7 +40,7 @@ CI (`.github/workflows/main.yml`) builds and pushes `lthub/moodle:<branch-or-tag
 Runs on every container start. The flow is:
 1. Resolve DB connection from `MOODLE_DB_*` env, falling back to legacy `--link`-style vars (`MYSQL_PORT_3306_TCP_*`, `POSTGRES_PORT_5432_TCP_*`). Defaults to `mariadb`, port auto-picked by DB type.
 2. Wait for the DB to be reachable via `nc`, then `CREATE DATABASE IF NOT EXISTS` for MySQL/MariaDB.
-3. **Install-once** (gated by `$MOODLE_SHARED/installed` and a sibling `install.lock`): run `admin/cli/install_database.php` as `www-data`.
+3. **Install-once** (gated by `$MOODLE_SHARED/installed` and a sibling `install.lock`): run `admin/cli/install_database.php` as `www-data`, then set the site `timezone` from `MOODLE_SITE_TIMEZONE` (default `America/Vancouver`). Without that, a fresh site lands on `Europe/London`: the installer uses PHP's default zone (UTC here) and Moodle swaps UTC for London. It's install-only on purpose; after that the timezone is an admin setting.
 4. **Every start** (gated by `$MOODLE_SHARED/installed`): push SMTP/noreply settings (`smtphosts`, `smtpuser`, `smtppass`, `smtpsecure`, `smtpauthtype`, `noreplyaddress`) into `mdl_config` via `admin/cli/cfg.php`. This was previously install-only, which silently dropped changes for existing deployments — keep these idempotent and outside the install block.
 5. If `REDIS_HOST` is set, run `register-redis-cache-store.php` to reconcile the `redis_app` MUC store (see below).
 6. Optionally run `admin/cli/upgrade.php` when `MOODLE_UPDATE=true` (gated by `update.lock`).
