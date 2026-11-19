@@ -36,7 +36,9 @@ jobs:
 
       - name: Set tag
         id: tag
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        run: |
+          REF="${GITHUB_REF#refs/*/}"
+          echo "tag=${REF//\//-}" >> "$GITHUB_OUTPUT"
 
       - name: Build and push
         id: docker_build
@@ -45,7 +47,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           context: ./
           file: ./Dockerfile
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: lthub/moodle:${{ steps.tag.outputs.tag }}
 
       - name: Image digest
