@@ -36,7 +36,9 @@ jobs:
 
       - name: Set tag
         id: tag
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        run: |
+          REF="${GITHUB_REF#refs/*/}"
+          echo "tag=${REF//\//-}" >> "$GITHUB_OUTPUT"
 
       - name: Build and push
         id: docker_build
