@@ -21,8 +21,8 @@ docker compose -f docker-compose.yml -f docker-compose.test-opcache.yml up --bui
 # Tear down + wipe local state
 docker compose down -v && rm -rf .data .data-fpm-test .data-opcache-test
 
-# Multi-arch build matching CI (linux/amd64 + linux/arm64)
-docker buildx build --platform linux/amd64,linux/arm64 -t lthub/moodle:<tag> .
+# Build matching CI (linux/amd64 only)
+docker buildx build --platform linux/amd64 -t lthub/moodle:<tag> .
 ```
 
 CI (`.github/workflows/main.yml`) builds and pushes `lthub/moodle:<branch-or-tag>` on every push. There is no test suite in this repo — verification is "stack comes up, Moodle installs, admin login works."
