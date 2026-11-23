@@ -2,20 +2,27 @@ name: CI to Docker Hub
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
+  # Triggers the workflow on pushes to branches and tags. "*" does not match "/",
+  # so branches like fix/foo get no push build and are built by pull_request instead.
   push:
     branches: [ "*" ]
     tags: [ "*" ]
   pull_request:
-    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+# Cancel an in-progress build when a newer commit is pushed to the same branch or tag
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
+    # Branches without a "/" already get a push build, so only PR-build the rest
+    if: github.event_name != 'pull_request' || contains(github.head_ref, '/')
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -44,7 +51,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v6
         with:
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           context: ./
           file: ./Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
