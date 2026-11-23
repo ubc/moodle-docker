@@ -2,11 +2,12 @@ name: CI to Docker Hub
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on pushes to any branch or tag. PRs are covered by the
-  # branch push build, so there is no separate pull_request trigger.
+  # Triggers the workflow on pushes to branches and tags. "*" does not match "/",
+  # so branches like fix/foo get no push build and are built by pull_request instead.
   push:
     branches: [ "*" ]
     tags: [ "*" ]
+  pull_request:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -20,6 +21,8 @@ concurrency:
 jobs:
   # This workflow contains a single job called "build"
   build:
+    # Branches without a "/" already get a push build, so only PR-build the rest
+    if: github.event_name != 'pull_request' || contains(github.head_ref, '/')
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
